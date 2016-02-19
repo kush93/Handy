@@ -52,7 +52,7 @@ public class NoteTaker extends Activity {
                 textNoteBL.create(editName, editLabel, editNote); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this, "data not inserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this, "data not inserted to arraylist", Toast.LENGTH_LONG).show();
 
 
                 }
@@ -60,7 +60,7 @@ public class NoteTaker extends Activity {
                 {
 
 
-                    Toast.makeText(NoteTaker.this,"data inserted",Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,"data inserted to arraylist",Toast.LENGTH_LONG).show();
                 }
 
             }
