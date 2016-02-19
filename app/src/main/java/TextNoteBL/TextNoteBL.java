@@ -1,4 +1,6 @@
-package com.example.kushal.Handy;
+package TextNoteBL;
+
+import com.example.kushal.Handy.TextNotePL;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.
