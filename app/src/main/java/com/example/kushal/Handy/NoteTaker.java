@@ -1,12 +1,13 @@
 package com.example.kushal.Handy;
 
+import TextNoteBL.TextNoteBL;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import TextNoteBL.TextNoteBL;
+import com.example.kushal.rihabhbhandari.R;
 
 /**
  * Created by rishabhbhandari on 2016-02-19.

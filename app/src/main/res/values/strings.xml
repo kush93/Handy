@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">RihabhBhandari</string>
+    <string name="app_name">Handy</string>
+    <string name="textnote">Text Note</string>
+    <string name="cam">Camera</string>
+    <string name="imprt">import photo</string>
+    <string name="handwrite">handwritten</string>
 </resources>
