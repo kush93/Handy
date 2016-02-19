@@ -1,4 +1,4 @@
-package com.example.kushal.rihabhbhandari;
+package com.example.kushal.Handy;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
