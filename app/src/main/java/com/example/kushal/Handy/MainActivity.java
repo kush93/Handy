@@ -1,4 +1,4 @@
-package com.example.kushal.rihabhbhandari;
+package com.example.kushal.Handy;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

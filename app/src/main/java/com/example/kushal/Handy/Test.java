@@ -1,4 +1,4 @@
-package com.example.kushal.rihabhbhandari;
+package com.example.kushal.Handy;
 
 /**
  * Created by rahul on 2/18/2016.

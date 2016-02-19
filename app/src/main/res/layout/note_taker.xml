@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="372dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_name"
+        android:layout_marginRight="250dp"
+        android:hint="Enter Name"
+        android:inputType="textCapSentences"/>
+
+    <EditText
+        android:layout_width="381dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText_label"
+        android:hint="Enter Label"
+        android:inputType="textCapSentences"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/editText_note"
+        android:layout_marginTop="15dp"
+        android:scrollIndicators="top"
+        android:inputType="textMultiLine"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/button_save_note"
+        android:onClick="setContentView" />
+
+
+</LinearLayout>
