@@ -7,4 +7,5 @@ public class Note {
 
 
     String name;
+    String noteName;
 }
