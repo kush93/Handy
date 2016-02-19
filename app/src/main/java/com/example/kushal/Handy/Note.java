@@ -8,7 +8,7 @@ public class Note {
     public String noteName;
     public String labelName;
     public String note;
-
+    public int x=0;
     public Note(String name, String label, String note)
     {
         this.noteName=name;
