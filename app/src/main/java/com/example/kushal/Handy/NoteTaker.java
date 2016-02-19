@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import TextNoteBL.TextNoteBL;
+
 /**
  * Created by rishabhbhandari on 2016-02-19.
  */
