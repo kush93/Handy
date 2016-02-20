@@ -37,7 +37,7 @@ import com.example.kushal.rihabhbhandari.R;
 // todo 8: Add "Save" button
 // todo 9: continue last work?
 
-public class AddPhotoUI extends Activity
+public class PhotonoteUI extends Activity
 {
 //    private boolean zoomOut = false;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
@@ -66,13 +66,13 @@ public class AddPhotoUI extends Activity
 
     public void onClickAcceptImageButton(View view)
     {
-        Toast.makeText(AddPhotoUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotonoteUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
     public void onClickCancelImageButton(View view)
     {
-        Toast.makeText(AddPhotoUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotonoteUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -80,7 +80,7 @@ public class AddPhotoUI extends Activity
     {
         final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AddPhotoUI.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotonoteUI.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -147,7 +147,7 @@ public class AddPhotoUI extends Activity
             e.printStackTrace();
         }
 
-        final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
+        final ImageView ivImage = new PhotoNoteBL().makeImageView(this, getApplicationContext(), bm);
         ivImage.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -185,7 +185,7 @@ public class AddPhotoUI extends Activity
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
-        final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
+        final ImageView ivImage = new PhotoNoteBL().makeImageView(this, getApplicationContext(), bm);
         ivImage.setOnLongClickListener(new View.OnLongClickListener()
         {
             @Override
@@ -226,7 +226,7 @@ public class AddPhotoUI extends Activity
     {
         final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(AddPhotoUI.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotonoteUI.this);
         builder.setTitle("Options for this image");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -235,12 +235,12 @@ public class AddPhotoUI extends Activity
             {
                 if (items[item].equals("Delete from my note"))
                 {
-                    Toast.makeText(AddPhotoUI.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotonoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
                 else if (items[item].equals("Rotate"))
                 {
-                    Toast.makeText(AddPhotoUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotonoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
                 else if (items[item].equals("Cancel"))

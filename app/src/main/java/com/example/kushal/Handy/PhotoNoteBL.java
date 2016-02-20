@@ -11,7 +11,7 @@ import android.widget.ImageView;
 /**
  * Created by Matthias on 16-02-19.
  */
-public class AddPhotoBL
+public class PhotoNoteBL
 {
     private boolean zoomOut = false;
 
