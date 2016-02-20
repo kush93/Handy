@@ -34,6 +34,7 @@ import com.example.kushal.rihabhbhandari.R;
 // todo 2. able to delete the last photo (or a list of all photos)
 // todo 3. perhaps rotation for each photo
 // todo 4. make them arraylist ... when open this page, show "last working section?" and show a sample list
+// todo 5: UI: make the screen scrollable, move button's position
 
 public class AddPhotoUI extends Activity
 {
