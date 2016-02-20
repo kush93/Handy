@@ -44,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        newNote=(Button)findViewById(R.id.button_open_photonote);
+        newNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(v.getContext(), AddPhotoUI.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

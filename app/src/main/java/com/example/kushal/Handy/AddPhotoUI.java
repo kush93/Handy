@@ -52,7 +52,7 @@ public class AddPhotoUI extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo_ui);
         btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
-        root = (LinearLayout) findViewById(R.id.LinearLayout1);
+        root = (LinearLayout) findViewById(R.id.LinearLayout_Items);
 
         // ivImage=new ImageView()
         btnSelect.setOnClickListener(new View.OnClickListener()
