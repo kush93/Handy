@@ -8,23 +8,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 
-import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.View;
 
 import android.widget.*;
@@ -35,17 +30,19 @@ import com.example.kushal.rihabhbhandari.R;
 // todo 3. perhaps rotation for each photo
 // todo 4. make them arraylist ... when open this page, show "last working section?" and show a sample list
 // todo 5: UI: make the screen scrollable, move button's position
-    // now after rotating screen some screen disappars, I guess it's due to scroll problem.
+    // now after rotating screen some screen disappears, I guess it's due to scroll problem.
+
+// todo 6: long click on photo will open dialog box for remove the photo (+ possibly adding a line next to it?)
+// todo 7: Change buttons to icons
+// todo 8: Add "Save" button
+// todo 9: continue last work?
 
 public class AddPhotoUI extends Activity
 {
 //    private boolean zoomOut = false;
-    int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    Button btnSelect;
-    Button btnRemove;
-    // ImageView ivImage;
+    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
-    LinearLayout root;
+    private LinearLayout root;
 
 
     // Database variables
@@ -61,37 +58,25 @@ public class AddPhotoUI extends Activity
         // root
         root = (LinearLayout) findViewById(R.id.LinearLayout_Items);
 
-        // btnSelect
-        btnSelect = (Button) findViewById(R.id.btnAddPhoto);
-
-        // ivImage=new ImageView()
-        btnSelect.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                selectImage();
-            }
-        });
-
-        // btnRemove
-        btnRemove = (Button) findViewById(R.id.btnRemoveLastPhoto);
-        btnRemove.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                removeLastImageView();
-            }
-        });
-
         // Database variables
         imageViews = new ArrayList<>();
         editTexts = new ArrayList<>();
 
     }
 
-    private void selectImage()
+    public void onClickAcceptImageButton(View view)
+    {
+        Toast.makeText(AddPhotoUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
+    }
+
+    public void onClickCancelImageButton(View view)
+    {
+        Toast.makeText(AddPhotoUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
+        super.onBackPressed();
+    }
+
+    public void onClickAddPhotoImageButton(View view)
     {
         final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
@@ -123,6 +108,20 @@ public class AddPhotoUI extends Activity
         });
         builder.show();
     }
+
+    /**
+     * remove last image if it exists, do nothing otherwise.
+     * @param view
+     */
+    public void onClickRemovePhotoImageButton(View view)
+    {
+        if (!imageViews.isEmpty())
+        {
+            ImageView removed = imageViews.remove(imageViews.size() - 1);
+            root.removeView(removed);
+        }
+    }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -221,11 +220,6 @@ public class AddPhotoUI extends Activity
 
     private void removeLastImageView()
     {
-        if (!imageViews.isEmpty())
-        {
-            ImageView removed = imageViews.remove(imageViews.size() - 1);
-            root.removeView(removed);
-        }
     }
 }
 
