@@ -4,4 +4,5 @@
     <string name="cam">Camera</string>
     <string name="imprt">import photo</string>
     <string name="handwrite">handwritten</string>
+    <string name="title_activity_add_photo_ui">AddPhotoUI</string>
 </resources>
