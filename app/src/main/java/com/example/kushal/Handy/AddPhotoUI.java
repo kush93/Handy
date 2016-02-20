@@ -162,6 +162,15 @@ public class AddPhotoUI extends Activity
         }
 
         final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
+        ivImage.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+
+                return true;
+            }
+        });
         addNewImageView(ivImage);
     }
 
@@ -191,6 +200,15 @@ public class AddPhotoUI extends Activity
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
         final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
+        ivImage.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View v)
+            {
+                showDialogOnLongClickImageButton((ImageView) v);
+                return true;
+            }
+        });
         addNewImageView(ivImage);
     }
 
@@ -216,6 +234,41 @@ public class AddPhotoUI extends Activity
         newEditText.setHint("Continue Your Notes Here");
         editTexts.add(newEditText);
         root.addView(newEditText);
+    }
+
+    private void showDialogOnLongClickImageButton(final ImageView imageView)
+    {
+        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(AddPhotoUI.this);
+        builder.setTitle("Options for this image");
+        builder.setItems(items, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialog, int item)
+            {
+                if (items[item].equals("Delete from my note"))
+                {
+                    Toast.makeText(AddPhotoUI.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    removeImageView(imageView);
+                }
+                else if (items[item].equals("Rotate"))
+                {
+                    Toast.makeText(AddPhotoUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                else if (items[item].equals("Cancel"))
+                {
+                    dialog.dismiss();
+                }
+            }
+        });
+        builder.show();
+    }
+
+    private void removeImageView(ImageView imageView)
+    {
+        root.removeView(imageView);
     }
 
     private void removeLastImageView()

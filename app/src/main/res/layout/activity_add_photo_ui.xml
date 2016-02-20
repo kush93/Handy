@@ -30,11 +30,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageButton_addPhoto_addPhoto"
                 android:background="@mipmap/ic_camera" android:onClick="onClickAddPhotoImageButton"/>
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/imageButton_addPhoto_removePhoto"
-                android:background="@mipmap/ic_no_camera" android:onClick="onClickRemovePhotoImageButton"/>
 
     </LinearLayout>
 
