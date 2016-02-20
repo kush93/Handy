@@ -10,6 +10,7 @@ import java.io.IOException;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -39,7 +40,7 @@ import com.example.kushal.rihabhbhandari.R;
 
 public class AddPhotoUI extends Activity
 {
-    private boolean zoomOut = false;
+//    private boolean zoomOut = false;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     Button btnSelect;
     // ImageView ivImage;
@@ -119,10 +120,10 @@ public class AddPhotoUI extends Activity
 
     private void onCaptureImageResult(Intent data)
     {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        Bitmap bm = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        // Bitmap resized = Bitmap.createScaledBitmap(thumbnail, 800, 150, true);
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        // Bitmap resized = Bitmap.createScaledBitmap(bm, 800, 150, true);
         File destination = new File(Environment.getExternalStorageDirectory(),
                                     System.currentTimeMillis() + ".jpg");
 
@@ -140,54 +141,9 @@ public class AddPhotoUI extends Activity
         {
             e.printStackTrace();
         }
-        final ImageView ivImage = new ImageView(this);
-        ivImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (zoomOut)
-                {
-                    Toast.makeText(getApplicationContext(), "NORMAL SIZE!", Toast.LENGTH_LONG).show();
-                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                                                                          LinearLayout.LayoutParams.WRAP_CONTENT));
-                    ivImage.setAdjustViewBounds(true);
-                    zoomOut = false;
-                } else
-                {
-                    Toast.makeText(getApplicationContext(), "FULLSCREEN!", Toast.LENGTH_LONG).show();
-                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                                                          LinearLayout.LayoutParams.MATCH_PARENT));
-                    ivImage.setScaleType(ImageView.ScaleType.FIT_XY);
-                    zoomOut = true;
-                }
-            }
-        });
-        // GradientDrawable gd = new GradientDrawable();
-        // gd.setColor(0xFF00FF00); // Changes this drawbale to use a single color instead of a gradient
-        //gd.setCornerRadius(5);
-        //gd.setStroke(1, 0xFF000000);
 
-        //ivImage.setBackgroundDrawable(gd);
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
-
-        ivImage.setMinimumWidth(width);
-        ivImage.setMinimumHeight(height);
-
-        ivImage.setMaxWidth(width);
-        ivImage.setMaxHeight(height);
-        //ivImage.getLayoutParams().width = 20;
-        //ivImage.getLayoutParams().height = 20;
-        ivImage.setLayoutParams(new ActionBar.LayoutParams(
-                GridLayout.LayoutParams.MATCH_PARENT,
-                GridLayout.LayoutParams.WRAP_CONTENT));
-        ivImage.setImageBitmap(thumbnail);
+        final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
         root.addView(ivImage);
-
-        //setContentView(root);
-        //ivImage.setImageBitmap(thumbnail);
     }
 
     @SuppressWarnings ("deprecation")
@@ -214,46 +170,9 @@ public class AddPhotoUI extends Activity
         options.inSampleSize = scale;
         options.inJustDecodeBounds = false;
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
-        final ImageView ivImage = new ImageView(this);
-        ivImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                if (zoomOut)
-                {
-                    Toast.makeText(getApplicationContext(), "NORMAL SIZE!", Toast.LENGTH_LONG).show();
-                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                                                                          LinearLayout.LayoutParams.WRAP_CONTENT));
-                    ivImage.setAdjustViewBounds(true);
-                    zoomOut = false;
-                } else
-                {
-                    Toast.makeText(getApplicationContext(), "FULLSCREEN!", Toast.LENGTH_LONG).show();
-                    ivImage.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                                                                          LinearLayout.LayoutParams.MATCH_PARENT));
-                    ivImage.setScaleType(ImageView.ScaleType.FIT_XY);
-                    zoomOut = true;
-                }
-            }
-        });
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
-        int height = display.getHeight();
 
-        ivImage.setMinimumWidth(width);
-        ivImage.setMinimumHeight(height);
-
-        ivImage.setMaxWidth(width);
-        ivImage.setMaxHeight(height);
-        ivImage.setLayoutParams(new ActionBar.LayoutParams(
-                1000,
-                1000));
-        ivImage.setImageBitmap(bm);
+        final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
         root.addView(ivImage);
-        //setContentView(root);
-        // ivImage.setImageBitmap(bm);
-
     }
 }
 
