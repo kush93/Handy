@@ -35,6 +35,7 @@ import com.example.kushal.rihabhbhandari.R;
 // todo 3. perhaps rotation for each photo
 // todo 4. make them arraylist ... when open this page, show "last working section?" and show a sample list
 // todo 5: UI: make the screen scrollable, move button's position
+    // now after rotating screen some screen disappars, I guess it's due to scroll problem.
 
 public class AddPhotoUI extends Activity
 {
@@ -61,7 +62,7 @@ public class AddPhotoUI extends Activity
         root = (LinearLayout) findViewById(R.id.LinearLayout_Items);
 
         // btnSelect
-        btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
+        btnSelect = (Button) findViewById(R.id.btnAddPhoto);
 
         // ivImage=new ImageView()
         btnSelect.setOnClickListener(new View.OnClickListener()
@@ -213,6 +214,7 @@ public class AddPhotoUI extends Activity
 
         // add EditText
         EditText newEditText = new EditText(this);
+        newEditText.setHint("Continue Your Notes Here");
         editTexts.add(newEditText);
         root.addView(newEditText);
     }

@@ -6,44 +6,63 @@
               android:orientation="vertical"
               android:padding="10dp" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="5dp" >
 
-            <Button
-                    android:id="@+id/btnSelectPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Select Photo" />
-
-
-            <Button
-                    android:id="@+id/btnRemoveLastPhoto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Remove Last Photo" />
-
-        </LinearLayout>
+    <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="0dip"
+    android:id="@+id/scrollView_Items"
+    android:layout_weight="1.00">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="10dp" android:id="@+id/LinearLayout_Items">
+            android:padding="10dp"
+            android:id="@+id/LinearLayout_Items">
 
-            <ImageView
-                    android:id="@+id/ivImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_camera" />
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText" android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/editText_addPhoto_title"
+                    android:singleLine="true"
+                    android:inputType="text" android:hint="Enter Title"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_addPhoto_label"
+                    android:hint="Enter Label"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_addPhoto_first_contents"
+                    android:hint="Type Your Notes Here"/>
         </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
+        <!--android:layout_height="wrap_content"-->
+
+        <Button
+                android:id="@+id/btnAddPhoto"
+                android:layout_width="145dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="Add Photo" />
+
+
+        <Button
+                android:id="@+id/btnRemoveLastPhoto"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:text="Delete Last Photo" />
+
+    </LinearLayout>
 
 </LinearLayout>
