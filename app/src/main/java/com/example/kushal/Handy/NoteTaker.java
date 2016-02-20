@@ -1,10 +1,13 @@
 package com.example.kushal.Handy;
 
-import TextNoteBL.TextNoteBL;
+import BusinessLayer.TextNoteBL;
+import PersistanceLayer.TextNotePL;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
@@ -18,9 +21,10 @@ public class NoteTaker extends Activity {
     Button addNote;
     //DataBaseHelper myDb;
     TextNoteBL textNoteBL=new TextNoteBL();
-    TextNotePL textnoteObj=new TextNotePL();
+   TextNotePL textnoteObj=new TextNotePL();
 
-    String editName,editLabel,editNote;
+
+    TextView editName,editLabel,editNote;
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -28,9 +32,9 @@ public class NoteTaker extends Activity {
         // myDb=new DataBaseHelper(this);
 
         // textNoteBL=new TextNoteBL();
-        editName=findViewById(R.id.editText_name).toString();
-        editLabel=findViewById(R.id.editText_label).toString();
-        editNote=findViewById(R.id.editText_note).toString();
+        editName=(TextView)findViewById(R.id.editText_name);
+        editLabel=(TextView)findViewById(R.id.editText_label);
+        editNote=(TextView)findViewById(R.id.editText_note);
         addNote=(Button)findViewById(R.id.button_save_note);
         addData();
 
@@ -52,15 +56,13 @@ public class NoteTaker extends Activity {
                 textNoteBL.create(editName, editLabel, editNote); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this, "data not inserted to arraylist", Toast.LENGTH_LONG).show();
-
-
+                    Toast.makeText(NoteTaker.this,editName.getText() , Toast.LENGTH_LONG).show();
                 }
                 else
                 {
 
 
-                    Toast.makeText(NoteTaker.this,"data inserted to arraylist",Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,editLabel.getText(),Toast.LENGTH_LONG).show();
                 }
 
             }
