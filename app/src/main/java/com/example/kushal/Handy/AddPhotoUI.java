@@ -27,11 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.View;
 
-import android.widget.Button;
-import android.widget.GridLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.*;
 import com.example.kushal.rihabhbhandari.R;
 
 // todo 1. add texts between photos
@@ -52,6 +48,7 @@ public class AddPhotoUI extends Activity
 
     // Database variables
     private ArrayList<ImageView> imageViews;
+    private ArrayList<EditText> editTexts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -88,6 +85,7 @@ public class AddPhotoUI extends Activity
 
         // Database variables
         imageViews = new ArrayList<>();
+        editTexts = new ArrayList<>();
 
     }
 
@@ -197,8 +195,25 @@ public class AddPhotoUI extends Activity
 
     private void addNewImageView(ImageView imageView)
     {
-        root.addView(imageView);
+        // add new ImageView
         imageViews.add(imageView);
+        root.addView(imageView);
+
+        // remove last EditText if it's not used
+        if (!editTexts.isEmpty())
+        {
+            EditText lastOne = editTexts.get(editTexts.size() - 1);
+
+            if (lastOne.getText().length() == 0)
+            {
+                root.removeView(lastOne);
+            }
+        }
+
+        // add EditText
+        EditText newEditText = new EditText(this);
+        editTexts.add(newEditText);
+        root.addView(newEditText);
     }
 
     private void removeLastImageView()
