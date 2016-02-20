@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -43,22 +44,30 @@ public class AddPhotoUI extends Activity
 //    private boolean zoomOut = false;
     int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     Button btnSelect;
+    Button btnRemove;
     // ImageView ivImage;
 
     LinearLayout root;
+
+
+    // Database variables
+    private ArrayList<ImageView> imageViews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo_ui);
-        btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
+
+        // root
         root = (LinearLayout) findViewById(R.id.LinearLayout_Items);
+
+        // btnSelect
+        btnSelect = (Button) findViewById(R.id.btnSelectPhoto);
 
         // ivImage=new ImageView()
         btnSelect.setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View v)
             {
@@ -66,14 +75,25 @@ public class AddPhotoUI extends Activity
             }
         });
 
-        // ivImage = (ImageView) findViewById(R.id.ivImage);
+        // btnRemove
+        btnRemove = (Button) findViewById(R.id.btnRemoveLastPhoto);
+        btnRemove.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                removeLastImageView();
+            }
+        });
+
+        // Database variables
+        imageViews = new ArrayList<>();
+
     }
 
     private void selectImage()
     {
-        final CharSequence[] items = {
-                "Take Photo", "Choose from Library",
-                "Cancel"};
+        final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(AddPhotoUI.this);
         builder.setTitle("Add Photo!");
@@ -143,7 +163,7 @@ public class AddPhotoUI extends Activity
         }
 
         final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
-        root.addView(ivImage);
+        addNewImageView(ivImage);
     }
 
     @SuppressWarnings ("deprecation")
@@ -172,7 +192,22 @@ public class AddPhotoUI extends Activity
         bm = BitmapFactory.decodeFile(selectedImagePath, options);
 
         final ImageView ivImage = new AddPhotoBL().makeImageView(this, getApplicationContext(), bm);
-        root.addView(ivImage);
+        addNewImageView(ivImage);
+    }
+
+    private void addNewImageView(ImageView imageView)
+    {
+        root.addView(imageView);
+        imageViews.add(imageView);
+    }
+
+    private void removeLastImageView()
+    {
+        if (!imageViews.isEmpty())
+        {
+            ImageView removed = imageViews.remove(imageViews.size() - 1);
+            root.removeView(removed);
+        }
     }
 }
 

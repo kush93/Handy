@@ -31,7 +31,7 @@ public class AddPhotoBL
         final ImageView ivImage = new ImageView(context);
 
         // Photo = {Bitmap source, Bitmap bigVersion, boolean isSmall
-        ivImage.setTag(new ClickableImage(ivImage, bitmap, 2));
+        ivImage.setTag(new ClickableImage(ivImage, bitmap, activity));
 
         ivImage.setOnClickListener(new View.OnClickListener()
         {

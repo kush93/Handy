@@ -7,16 +7,25 @@
               android:padding="10dp" >
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="5dp" >
 
-                <Button
-                        android:id="@+id/btnSelectPhoto"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Select Photo" />
+            <Button
+                    android:id="@+id/btnSelectPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Select Photo" />
+
+
+            <Button
+                    android:id="@+id/btnRemoveLastPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Remove Last Photo" />
+
         </LinearLayout>
 
         <LinearLayout

@@ -1,8 +1,10 @@
 package com.example.kushal.Handy;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 /**
@@ -16,18 +18,22 @@ public class ClickableImage
     private ImageView imageView;        // tag. ImageView contains ClickableImage
     private Bitmap source;
     private Bitmap bigVersion;
-//    private int scale;
     private boolean isSourceSize;
 
-    public ClickableImage(ImageView imageView, Bitmap source, int scale)
+    public ClickableImage(ImageView imageView, Bitmap source, Activity activity)
     {
         this.imageView = imageView;
         this.source = source;
 //        this.scale = scale;
         this.isSourceSize = true;
 
-        int reqWidth = source.getWidth() * scale;
-        int reqHeight = source.getHeight() * scale;
+        // build bigVersion
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        int reqWidth = displayMetrics.widthPixels;
+        int reqHeight = displayMetrics.heightPixels;
+
         this.bigVersion = makeScaledBitmap(source, reqWidth, reqHeight);
     }
 
