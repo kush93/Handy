@@ -4,12 +4,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.view.Display;
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 /**
  * Created by Matthias on 16-02-19.
@@ -31,14 +28,14 @@ public class AddPhotoBL
         final ImageView ivImage = new ImageView(context);
 
         // Photo = {Bitmap source, Bitmap bigVersion, boolean isSmall
-        ivImage.setTag(new ClickableImage(ivImage, bitmap, activity));
+        ivImage.setTag(new ClickableImageBL(ivImage, bitmap, activity));
 
         ivImage.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                ((ClickableImage) ivImage.getTag()).performClick();
+                ((ClickableImageBL) ivImage.getTag()).performClick();
             }
         });
         // GradientDrawable gd = new GradientDrawable();

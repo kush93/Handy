@@ -109,20 +109,6 @@ public class AddPhotoUI extends Activity
         builder.show();
     }
 
-    /**
-     * remove last image if it exists, do nothing otherwise.
-     * @param view
-     */
-    public void onClickRemovePhotoImageButton(View view)
-    {
-        if (!imageViews.isEmpty())
-        {
-            ImageView removed = imageViews.remove(imageViews.size() - 1);
-            root.removeView(removed);
-        }
-    }
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
@@ -269,10 +255,6 @@ public class AddPhotoUI extends Activity
     private void removeImageView(ImageView imageView)
     {
         root.removeView(imageView);
-    }
-
-    private void removeLastImageView()
-    {
     }
 }
 

@@ -13,18 +13,17 @@ import android.widget.ImageView;
  * Used for ImageView in AddPhoto.
  * Contains three variables: // Photo / Image / Handwriting = {Bitmap source, Bitmap bigVersion, boolean isSourceSize
  */
-public class ClickableImage
+public class ClickableImageBL
 {
-    private ImageView imageView;        // tag. ImageView contains ClickableImage
+    private ImageView imageView;        // tag. ImageView contains ClickableImageBL
     private Bitmap source;
     private Bitmap bigVersion;
     private boolean isSourceSize;
 
-    public ClickableImage(ImageView imageView, Bitmap source, Activity activity)
+    public ClickableImageBL(ImageView imageView, Bitmap source, Activity activity)
     {
         this.imageView = imageView;
         this.source = source;
-//        this.scale = scale;
         this.isSourceSize = true;
 
         // build bigVersion
