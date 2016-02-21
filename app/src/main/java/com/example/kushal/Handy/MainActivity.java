@@ -1,7 +1,6 @@
 package com.example.kushal.Handy;
 
 
-
 import com.example.kushal.rihabhbhandari.R;
 
 import android.app.Activity;
@@ -9,16 +8,19 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-       // import android.support.design.widget.FloatingActionButton;
-        //import android.support.design.widget.Snackbar;
-        import android.support.v7.app.AppCompatActivity;
-        import android.support.v7.widget.Toolbar;
-        import android.view.View;
-        import android.view.Menu;
-        import android.view.MenuItem;
+// import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
     int alSize = 0;// arraylist size
+    ArrayAdapter<String> arrayAdapter;
    // Note noteObj1=new Note();
 
     @Override
@@ -43,7 +46,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         populateListView();
-        //textNotePL.getNoteList().add()
+
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -91,19 +94,42 @@ public class MainActivity extends Activity {
         noteList.addAll(Arrays.asList(noteName) );
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>
+        arrayAdapter = new ArrayAdapter<String>
                 (this, R.layout.view_note_data , R.id.textView_notename,noteList );
 
 
         listView.setAdapter(arrayAdapter);
 
 
-        //listView.setOnItemClickListener();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+            }
+        });
     }
 
 
+    private void dataAdded()
+    {
+        EditText nameET=(EditText)findViewById(R.id.editText_name);
+        String name=nameET.getText().toString();
+
+        if(!name.isEmpty() && name.length()>0)
+        {
+            arrayAdapter.add(name);
+
+            arrayAdapter.notifyDataSetChanged();
+
+            Toast.makeText(getApplicationContext(), "Note Added" + name, Toast.LENGTH_SHORT).show();
+        }
+
+
 
     }
+}
+
 //@Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
