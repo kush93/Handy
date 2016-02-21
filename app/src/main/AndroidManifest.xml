@@ -20,9 +20,10 @@
         <activity
                 android:name="com.example.kushal.Handy.PhotoNoteUI"
                 android:label="@string/title_activity_add_photo_ui"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="com.example.kushal.Handy.PhotoNoteBL"/>
+        <activity android:name="com.example.kushal.Handy.PhotoNoteBL"
+                  android:theme="@android:style/Theme.Translucent"/>
     </application>
 
 </manifest>

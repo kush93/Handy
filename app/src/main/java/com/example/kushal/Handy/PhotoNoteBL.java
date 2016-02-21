@@ -71,17 +71,26 @@ public class PhotoNoteBL extends Activity
 			}
 		});
 
-		builder.setOnKeyListener(new DialogInterface.OnKeyListener()
+//		builder.setOnKeyListener(new DialogInterface.OnKeyListener()
+//		{
+//			@Override
+//			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event)
+//			{
+//				if (keyCode == KeyEvent.KEYCODE_BACK)
+//				{
+//					dialog.dismiss();
+//					finishOnCancel();
+//				}
+//				return true;
+//			}
+//		});
+
+		builder.setOnCancelListener(new DialogInterface.OnCancelListener()
 		{
 			@Override
-			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event)
+			public void onCancel(DialogInterface dialog)
 			{
-				if (keyCode == KeyEvent.KEYCODE_BACK)
-				{
-					dialog.dismiss();
-					finishOnCancel();
-				}
-				return true;
+				finishOnCancel();
 			}
 		});
 
