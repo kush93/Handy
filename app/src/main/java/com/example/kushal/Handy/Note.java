@@ -17,4 +17,7 @@ public class Note {
         this.labelName=label;
         this.note=note;
     }
+    public boolean equalsNote(Note mynote){
+        return (this.noteName.equals(mynote.noteName))&&(this.note.equals(mynote.note));
+    }
 }

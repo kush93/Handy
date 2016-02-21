@@ -57,7 +57,8 @@ public class NoteTaker extends Activity {
                 textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this,editName.getText().toString() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,"List Empty" , Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {

@@ -7,6 +7,7 @@ import com.example.kushal.Handy.DataInterface;
 import com.example.kushal.Handy.Note;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.
@@ -23,6 +24,18 @@ public class TextNotePL implements DataInterface
 
     }
 
+
+    public boolean containsNote(Note myNote){
+        boolean result=false;
+        for(int i=0;i<getNoteList().size()&&!result;i++)
+        {
+            if(((Note)getNoteList().get(i)).equalsNote(myNote)){
+                result=true;
+            }
+        }
+        return result;
+    }
+
     public ArrayList<Note> getNoteList() {
         return noteList;
     }
@@ -32,11 +45,10 @@ public class TextNotePL implements DataInterface
         noteList.add(noteObj);
 
     }
-
-    public static int getSIZE()
-    {
-        return SIZE;
+    public void clearNoteList(){
+        noteList.clear();
     }
+
 
     public static void setSIZE(int SIZE) {
         TextNotePL.SIZE = SIZE;
