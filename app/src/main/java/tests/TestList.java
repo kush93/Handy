@@ -31,7 +31,7 @@ public class TestList extends TestCase
 
             blObj.create("testbl", "1","testingBLcreate");
             assertTrue("create method:list is empty",!blObj.getTextNoteObj().getNoteList().isEmpty());
-            assertTrue("the size is not 1, which is not right", blObj.getTextNoteObj().getNoteList().size()==1);
+            assertTrue("the size is not 1, which is not right", blObj.getTextNoteObj().getNoteList().size() == 1);
         }
 
         public void testaddData()
@@ -43,12 +43,12 @@ public class TestList extends TestCase
             assertTrue("this is not the right size",tObj.getNoteList().size()==1);
         }
 
-        protected void tearDown()
-        {
-            tObj=null;
-            blObj=null;
-            note=null;
-        }
+    protected void tearDown()
+    {
+        tObj=null;
+        blObj=null;
+        note=null;
+    }
 
 
 }
