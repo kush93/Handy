@@ -8,5 +8,5 @@ import android.widget.TextView;
 public interface DataInterface {
 
 
-    public void addData(TextView noteName, TextView labelName,TextView note);
+    public void addData(String noteName, String labelName,String note);
 }

@@ -25,6 +25,7 @@ public class NoteTaker extends Activity {
 
 
     TextView editName,editLabel,editNote;
+
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -53,16 +54,16 @@ public class NoteTaker extends Activity {
 //                    Toast.makeText(NoteTaker.this,"Data Inserted",Toast.LENGTH_LONG).show();
 //                else
 //                    Toast.makeText(NoteTaker.this,"Data NOT Inserted",Toast.LENGTH_LONG).show();
-                textNoteBL.create(editName, editLabel, editNote); //calls the business logic class for text notes
+                textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this,editName.getText() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,editName.getText().toString() , Toast.LENGTH_LONG).show();
                 }
                 else
                 {
 
 
-                    Toast.makeText(NoteTaker.this,editLabel.getText(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,editLabel.getText().toString(),Toast.LENGTH_LONG).show();
                 }
 
             }

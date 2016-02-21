@@ -7,11 +7,11 @@ import android.widget.TextView;
  */
 public class Note {
 
-    public TextView noteName;
-    public TextView labelName;
-    public TextView note;
+    public String noteName;
+    public String labelName;
+    public String note;
     public int x=0;
-    public Note(TextView name, TextView label, TextView note)
+    public Note(String name, String label, String note)
     {
         this.noteName=name;
         this.labelName=label;

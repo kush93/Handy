@@ -17,7 +17,7 @@ public class TextNoteBL
 
 
 
-    public void create(TextView noteName, TextView noteLabel, TextView note)
+    public void create(String  noteName, String noteLabel, String note)
     {
         //textNoteObj= new TextNotePL(noteName,noteLabel,note);
         textNoteObj.addData(noteName,noteLabel,note);
