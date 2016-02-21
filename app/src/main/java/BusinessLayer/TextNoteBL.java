@@ -24,4 +24,8 @@ public class TextNoteBL
         //System.out.printf("11111 %s %s %s ",notename,notelabel,noteit);
     }
 
+    public TextNotePL getTextNoteObj()
+    {
+        return textNoteObj;
+    }
 }
