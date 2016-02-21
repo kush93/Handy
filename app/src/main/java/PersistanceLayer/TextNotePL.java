@@ -16,6 +16,7 @@ public class TextNotePL implements DataInterface
 
     static ArrayList<Note> noteList= new ArrayList<Note>();
     public Note myNote;
+    static int SIZE=0;
 
     public TextNotePL()
     {
@@ -26,17 +27,25 @@ public class TextNotePL implements DataInterface
         return noteList;
     }
 
-    public void setNoteList(Note noteObj){
-
+    public void setNoteList(Note noteObj)
+    {
         noteList.add(noteObj);
 
-}
+    }
 
+    public static int getSIZE()
+    {
+        return SIZE;
+    }
+
+    public static void setSIZE(int SIZE) {
+        TextNotePL.SIZE = SIZE;
+    }
 
     public void addData(String noteName, String labelName, String note)
     {
         myNote= new Note(noteName,labelName,note);
-        noteList.add(myNote) ;
+        noteList.add(myNote);
     }
 
 }
