@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
     private void populateListView() {
          listView = (ListView) findViewById(R.id.list);
 
-        Note note1=new Note("Rahul","Bhandari","firstNote");
+        Note note1=new Note("Rahul","LabelName","firstNote");
 //
        textNotePL.setNoteList(note1);
 
