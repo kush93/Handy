@@ -28,12 +28,12 @@ import com.example.kushal.rihabhbhandari.R;
 // todo: perhaps rotation for each photo
 
 /**
- * UI Layer: PhotoNoteUI_Rename
+ * UI Layer: PhotoNoteUI
  * BL: ClickableImageBL, PhotoNoteBL
  * PL: Android Library Functions
  */
 
-public class PhotoNoteUI_Rename extends Activity
+public class PhotoNoteUI extends Activity
 {
 //    private boolean zoomOut = false;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
@@ -62,13 +62,13 @@ public class PhotoNoteUI_Rename extends Activity
 
     public void onClickAcceptImageButton(View view)
     {
-        Toast.makeText(PhotoNoteUI_Rename.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotoNoteUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
     public void onClickCancelImageButton(View view)
     {
-        Toast.makeText(PhotoNoteUI_Rename.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotoNoteUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -76,7 +76,7 @@ public class PhotoNoteUI_Rename extends Activity
     {
         final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI_Rename.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -222,7 +222,7 @@ public class PhotoNoteUI_Rename extends Activity
     {
         final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI_Rename.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI.this);
         builder.setTitle("Options for this image");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -231,12 +231,12 @@ public class PhotoNoteUI_Rename extends Activity
             {
                 if (items[item].equals("Delete from my note"))
                 {
-                    Toast.makeText(PhotoNoteUI_Rename.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoNoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
                 else if (items[item].equals("Rotate"))
                 {
-                    Toast.makeText(PhotoNoteUI_Rename.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
                 else if (items[item].equals("Cancel"))
