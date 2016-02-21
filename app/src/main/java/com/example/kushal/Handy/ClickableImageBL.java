@@ -10,7 +10,7 @@ import android.widget.ImageView;
 /**
  * Created by Matthias on 16-02-20.
  *
- * Used for ImageView in AddPhoto.
+ * Used for ImageView in AddPhoto. Tagged in ImageView by PhotoNoteBL.makeImageView().
  * Contains three variables: // Photo / Image / Handwriting = {Bitmap source, Bitmap bigVersion, boolean isSourceSize
  */
 public class ClickableImageBL
