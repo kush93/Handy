@@ -2,6 +2,12 @@
     <string name="app_name">Handy</string>
     <string name="textnote">Text Note</string>
     <string name="cam">Photo Note</string>
-    <string name="handwrite">handwritten</string>
+    <string name="handwrite">Handwriting</string>
     <string name="title_activity_add_photo_ui">AddPhotoUI</string>
+    <string name="title_activity_handwriting">Handwriting</string>
+    <string name="newNote">New</string>
+    <string name="pencil">Pencil</string>
+    <string name="erase">Erase</string>
+    <string name="save">Save</string>
+    <string name="color">Colour</string>
 </resources>

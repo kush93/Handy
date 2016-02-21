@@ -22,6 +22,12 @@
                 android:label="@string/title_activity_add_photo_ui"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name="com.example.kushal.Handy.HandwritingUI"
+            android:label="@string/title_activity_handwriting"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

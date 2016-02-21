@@ -3,4 +3,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <!-- Pen sizes -->
+    <dimen name="largePen">30dp</dimen>
+    <integer name="largeSize">30</integer>
+    <dimen name="mediumPen">20dp</dimen>
+    <integer name="mediumSize">20</integer>
+    <dimen name="smallPen">10dp</dimen>
+    <integer name="smallSize">10</integer>
+
+    <!-- Button sizes -->
+    <dimen name="buttonSize">30dp</dimen>
 </resources>
