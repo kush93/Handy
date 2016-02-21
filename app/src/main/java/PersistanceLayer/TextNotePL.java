@@ -1,13 +1,9 @@
 package PersistanceLayer;
 
-import android.util.Log;
-import android.widget.TextView;
-
 import com.example.kushal.Handy.DataInterface;
 import com.example.kushal.Handy.Note;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.
@@ -40,7 +36,7 @@ public class TextNotePL implements DataInterface
         return noteList;
     }
 
-    public void setNoteList(Note noteObj)
+    public void createNoteList(Note noteObj)
     {
         noteList.add(noteObj);
 

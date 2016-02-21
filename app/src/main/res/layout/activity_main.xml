@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/textnote"
         android:id="@+id/button_take_note"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@+id/button2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -41,16 +41,20 @@
         android:layout_height="wrap_content"
         android:text="@string/handwrite"
         android:id="@+id/button4"
-        android:layout_alignTop="@+id/button3"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/list"
+        android:layout_toRightOf="@+id/button3"
+        android:layout_toEndOf="@+id/button3" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/list"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:clickable="true"
+        android:textAlignment="viewStart"
+        android:textFilterEnabled="false"
         android:layout_above="@+id/button_take_note"
-        android:layout_alignParentEnd="false" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="50dp"
+        android:smoothScrollbar="true" />
 </RelativeLayout>

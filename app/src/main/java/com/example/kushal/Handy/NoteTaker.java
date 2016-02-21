@@ -1,8 +1,5 @@
 package com.example.kushal.Handy;
 
-import BusinessLayer.TextNoteBL;
-import PersistanceLayer.TextNotePL;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +9,9 @@ import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
+import BusinessLayer.TextNoteBL;
+import PersistanceLayer.TextNotePL;
+
 /**
  * Created by rishabhbhandari on 2016-02-19.
  */
@@ -19,6 +19,7 @@ import com.example.kushal.rihabhbhandari.R;
 public class NoteTaker extends Activity {
 
     Button addNote;
+    MainActivity mobj=new MainActivity();
     //DataBaseHelper myDb;
     TextNoteBL textNoteBL=new TextNoteBL();
    TextNotePL textnoteObj=new TextNotePL();
@@ -57,14 +58,15 @@ public class NoteTaker extends Activity {
                 textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this,"List Empty" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,"Note was not saved" , Toast.LENGTH_LONG).show();
 
                 }
                 else
                 {
 
 
-                    Toast.makeText(NoteTaker.this,editLabel.getText().toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTaker.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
+                    mobj.dataAdded(editName);
                 }
 
             }
