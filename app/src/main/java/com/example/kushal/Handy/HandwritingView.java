@@ -23,7 +23,7 @@ import android.view.View;
 
 public class HandwritingView extends View {
 
-    private HandwritingBL handwritingBL;
+    private HandwritingBL handwritingBL = new HandwritingBL();
     private int selectedColor = Color.parseColor("#ff000000"); // Default initial color (black)
     private boolean eraseState=false;
     private Paint penPaint;
@@ -55,9 +55,9 @@ public class HandwritingView extends View {
     public void changeColor(String newColor){
         invalidate();
         //FOR BLL
-        //selectedColor = handwritingBL.changeColor(newColor);
+        selectedColor = handwritingBL.changeColor(newColor);
         //Following is in place of BLL
-        selectedColor = Color.parseColor(newColor);
+        //selectedColor = Color.parseColor(newColor);
         penPaint.setColor(selectedColor);
     }
 
@@ -66,16 +66,16 @@ public class HandwritingView extends View {
         // Set eraseState
         eraseState=isErase;
         //FOR BLL
-        //penPaint.setColor(handwritingBL.setErase(selectedColor, eraseState));
+        penPaint.setColor(handwritingBL.setErase(selectedColor, eraseState));
         //Following is in place of BLL
-        if(eraseState){
+        /**if(eraseState){
             penPaint.setColor(Color.parseColor("#ffffffff")); // Note that changeColor is not used
             // so as to maintain original
             // selectedColor
         }
         else {
             penPaint.setColor(selectedColor);
-        }
+        }**/
     }
 
     public void newNote(){
