@@ -26,7 +26,14 @@ public class TextNotePL implements DataInterface
         return noteList;
     }
 
-    public void addData(TextView noteName, TextView labelName, TextView note)
+    public void setNoteList(Note noteObj){
+
+        noteList.add(noteObj);
+
+}
+
+
+    public void addData(String noteName, String labelName, String note)
     {
         myNote= new Note(noteName,labelName,note);
         noteList.add(myNote) ;

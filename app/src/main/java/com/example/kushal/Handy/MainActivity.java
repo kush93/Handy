@@ -16,6 +16,7 @@ import android.os.Bundle;
         import android.view.View;
         import android.view.Menu;
         import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -64,6 +65,7 @@ public class MainActivity extends Activity {
                 Intent intent = new Intent(v.getContext(), NoteTaker.class);
                 startActivityForResult(intent, 0);
 
+
             }
         });
 
@@ -98,7 +100,16 @@ public class MainActivity extends Activity {
         listView.setAdapter(arrayAdapter);
 
 
-        //listView.setOnItemClickListener();
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                
+            }
+        });
+
+
+
+        }
     }
 
 
