@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(v.getContext(), PhotoNoteUI.class);
+                Intent intent=new Intent(v.getContext(), PhotoNoteUI_Rename.class);
                 startActivity(intent);
             }
         });

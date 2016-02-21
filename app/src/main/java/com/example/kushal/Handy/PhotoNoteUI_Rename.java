@@ -25,19 +25,15 @@ import android.view.View;
 import android.widget.*;
 import com.example.kushal.rihabhbhandari.R;
 
-// todo 1. add texts between photos
-// todo 2. able to delete the last photo (or a list of all photos)
-// todo 3. perhaps rotation for each photo
-// todo 4. make them arraylist ... when open this page, show "last working section?" and show a sample list
-// todo 5: UI: make the screen scrollable, move button's position
-    // now after rotating screen some screen disappears, I guess it's due to scroll problem.
+// todo: perhaps rotation for each photo
 
-// todo 6: long click on photo will open dialog box for remove the photo (+ possibly adding a line next to it?)
-// todo 7: Change buttons to icons
-// todo 8: Add "Save" button
-// todo 9: continue last work?
+/**
+ * UI Layer: PhotoNoteUI_Rename
+ * BL: ClickableImageBL, PhotoNoteBL
+ * PL: Android Library Functions
+ */
 
-public class PhotonoteUI extends Activity
+public class PhotoNoteUI_Rename extends Activity
 {
 //    private boolean zoomOut = false;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
@@ -66,13 +62,13 @@ public class PhotonoteUI extends Activity
 
     public void onClickAcceptImageButton(View view)
     {
-        Toast.makeText(PhotonoteUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotoNoteUI_Rename.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
     public void onClickCancelImageButton(View view)
     {
-        Toast.makeText(PhotonoteUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotoNoteUI_Rename.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -80,7 +76,7 @@ public class PhotonoteUI extends Activity
     {
         final CharSequence[] items = {"Take Photo", "Choose from Library", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(PhotonoteUI.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI_Rename.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -226,7 +222,7 @@ public class PhotonoteUI extends Activity
     {
         final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(PhotonoteUI.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI_Rename.this);
         builder.setTitle("Options for this image");
         builder.setItems(items, new DialogInterface.OnClickListener()
         {
@@ -235,12 +231,12 @@ public class PhotonoteUI extends Activity
             {
                 if (items[item].equals("Delete from my note"))
                 {
-                    Toast.makeText(PhotonoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoNoteUI_Rename.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
                 else if (items[item].equals("Rotate"))
                 {
-                    Toast.makeText(PhotonoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhotoNoteUI_Rename.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
                 else if (items[item].equals("Cancel"))
