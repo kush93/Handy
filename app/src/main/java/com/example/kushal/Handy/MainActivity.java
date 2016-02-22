@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
@@ -27,9 +26,12 @@ public class MainActivity extends AppCompatActivity {
     TextNotePL textNotePL = new TextNotePL();
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
+    static MainActivity mainObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mainObj = this;
         setContentView(R.layout.activity_main);
         populateListView();
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -67,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public static MainActivity getInstance(){
+        return mainObj;
+    }
 
     private void populateListView() {
 
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
             arrayAdapter.notifyDataSetChanged();
 
-            Toast.makeText(getApplicationContext(), "Note Added" + name, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Note Added" + name, Toast.LENGTH_SHORT).show();
         }
 
 
