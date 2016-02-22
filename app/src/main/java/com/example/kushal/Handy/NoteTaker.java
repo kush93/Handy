@@ -1,3 +1,6 @@
+
+
+
 package com.example.kushal.Handy;
 
 import android.app.Activity;
@@ -45,18 +48,14 @@ public class NoteTaker extends Activity {
 
     }
 
-    public void addData()
+    public void addData() //calls the onClick method for Save button
     {
         addNote.setOnClickListener(new View.OnClickListener(){
 
 
             @Override
             public void onClick(View v) {
-//                boolean isInserted=myDb.insertData(editName.getText().toString(),editLabel.getText().toString(),editNote.getText().toString());
-//                if (isInserted==true)
-//                    Toast.makeText(NoteTaker.this,"Data Inserted",Toast.LENGTH_LONG).show();
-//                else
-//                    Toast.makeText(NoteTaker.this,"Data NOT Inserted",Toast.LENGTH_LONG).show();
+              
                 textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
@@ -69,7 +68,7 @@ public class NoteTaker extends Activity {
 
                     Toast.makeText(NoteTaker.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
                     //mobj.dataAdded(editName);
-                    MainActivity.getInstance().dataAdded(editName);
+                    MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
                 }
 
                 finish();
