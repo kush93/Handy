@@ -1,0 +1,94 @@
+Meeting summaries and participation is going to be noted here 
+
+-----Iteration 0----
+Jan 9   (0.5 hr)
+- Formed group 
+
+Jan 11  (0.75 hr)
+- Met after the class
+- Everyone was present.
+- Everyone presented their ideas about the project
+- Shorlisted a few ideas to be discussed with the professor to confirm the scope 
+
+Jan 13  (1 hr)
+- After the class, very shorlty discussed the ideas with the professor 
+- Everyone was present 
+- Finalized the app and dicussed the possible features that can be implemented
+
+Jan 18  (2-3 hrs)
+- Kushal , Matthias , Rahul and Rishabh met outside, Ian and Hadi were not informed about the meeting
+- Dicussed the user stories and the vision statement 
+- Rahul was assigned to make Vision statement
+- Kushal and Matthias were assigned for making the big user stories 
+- Rishabh was assigned to make detailed user stories 
+
+Jan 19  (1 hr)
+- After the class, everyone was present 
+- Explained big and detailed user stories to Ian and Hadi
+- Kushal went to professors office and confirmed with him the user stories 
+
+Jan 20 (1 hr)
+- Kushal , Rahul and Rishabh interviewed the customer
+- Explained him the idea asked him about finalised the features with him.
+
+
+					Iteration 0 Work Summary 
+-Kushal wrote 5 big user stories(1 hr) and Matthias wrote 6 big user stories(1 hr) and finally Kushal wrote all the user stories(1 hr) in a proper form for submission
+-Rahul wrote the Vision statement as discussed(1 hr)
+-Rishabh did the detailed user stories (1 hr)
+
+--------Iteration 0 submitted successfully on Jan 25th --------
+
+---------------------Iteration 1---------------------- 
+Jan 25 (0.5hr)
+- Meeting took place after the class to divide the features into groups 
+- divided into groups of 2 for following tasks
+- Matthias and Rahul will do the "add photo feature "
+- Kushal and Rishabh will do the "take note feature"
+- Ian and Hadi will do the "Handwritten note feature"
+- Hadi uploaded the link for the "Android studio tutorial on Facebook group account"
+- Everyone started working on their features 
+
+Feb 2 (1 hr)
+- Change in the decision in terms of what task will each one will do for the features 
+- Matthias and Rishabh suggested that they will completely do their features, other member in group not required as features seemed to be trivial and they 
+  were almost done with their work and work Re-assigned as follows 
+- "Add photo" -> Matthias, "Take note" ->Rishabh, "Rahul and Kushal"-> testing and documentation(maintain log and make architecture)
+  "Handwritten Notes"->Ian and Hadi
+- After the meeting,everyone suggested to start taking a look a git and github
+
+Feb 15 (1 hr)
+- Everyone was present 
+- Discussed on UI design, Architecture and which features needs to be tested 
+- Went to the TA office and got further explanation on how to divide the components for proper Architecture design (TA for comp4350 helped us out with this part)
+- Ian and Mathias finished their parts of the code and were only left with dividing it into the three architecture layers
+- Rishabh finished his feature using an SQLite database but had to change it to stub implementation and divide it into layers/packages
+ 
+Feb 17(1 hr)
+- Kushal , Rahul , Hadi and Rishabh met the TA for COMP 3350 and he guided us for working with github.
+- Had a lot of problems setting up git repository as it often used to work for the creator but not for the contributors. 
+
+Feb 18
+- After spending some more time, Rishabh, Kushal and Rahul finally got familiar with using github provided help to others with it on our Facebook group.
+- Although a little late, we all started making commits with whatever progress we made in our parts of code
+
+Feb 19(0.5 hrs)
+-Met with the Professor Hadi and discussed issues related to the biffurcation of code in to the three architecture layers, database interface and testing of code.
+-Turns out we don't require testing for Handwriting feature and add photo feature as per Professor Hadi as they use android's inbuilt features.
+
+
+						-Iteration 1 Work Summary-
+    Main Problems faced
+-There was a lot of problem in understanding how the github works and this took some time that otherwise we could have been spent on the features and other aspects 
+ of the project
+-After the initial change in the workload distribution, there was problem in defining what and how much work each one is going to do.
+-In terms of attending the meetings and participating in the discussions of the project on the Facebook group , Rishabh ,Rahul ,Matthias and Kushal were pretty 
+ frequent.
+
+    Work Done by Each Indiviual (DEVELOPER TASKS)
+-Matthias did the "Add Photo" feature and divided it into different layers.(Expected time: 4 days. Delivered in 2 days)
+-Ian did the "handwriting" feature and divided it into different layers.(Expected Time: 5 days. Delivered in 4 days)
+-Rishabh did the "Add note" feature and divided it into different layers. Kushal and Rahul helped him with implementing his feature 
+ it.(Expected Time: 4-5 days. Delivered in 3 days)
+-Kushal and Rahul did the testing for the "add note" feature(Expected Time: 2 days. Delivered in 1 day)
+-Rahul and Kushal wrote the architecture for the app(currently with 3 features)(Expected Time: 1 day.Delivered in 1 day)
