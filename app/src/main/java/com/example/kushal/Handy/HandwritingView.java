@@ -19,8 +19,8 @@ import businesslayer.HandwritingBL;
  * changeColor() -- For when a different color is selected.
  * setErase() -- For when Erase button has been pressed.
  * newNote() -- For when New Note button has been pressed.
- *
- * TODO: Find a way to draw a single dot (drawing is done with paths, thus needs a change in X and Y pos)
+ * 
+ * FOR ITERATION 2: Implement functionality of changing brush and pen sizes.
  */
 
 public class HandwritingView extends View {
