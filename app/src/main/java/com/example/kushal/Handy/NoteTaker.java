@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.kushal.rihabhbhandari.R;
 
 import BusinessLayer.TextNoteBL;
@@ -19,16 +20,17 @@ import PersistanceLayer.TextNotePL;
 public class NoteTaker extends Activity {
 
     Button addNote;
-    MainActivity mobj=new MainActivity();
     //DataBaseHelper myDb;
     TextNoteBL textNoteBL=new TextNoteBL();
    TextNotePL textnoteObj=new TextNotePL();
-
+    MainActivity mobj = new MainActivity();;
 
     TextView editName,editLabel,editNote;
 
     public void onCreate(Bundle savedInstanceState)
     {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.note_taker);
         // myDb=new DataBaseHelper(this);
@@ -66,7 +68,8 @@ public class NoteTaker extends Activity {
 
 
                     Toast.makeText(NoteTaker.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
-                   // mobj.dataAdded(editName);
+                    //mobj.dataAdded(editName);
+                    MainActivity.getInstance().dataAdded(editName);
                 }
 
                 finish();
