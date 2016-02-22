@@ -11,13 +11,16 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+// android.graphics.* classes are used for drawing/writing functionality
+// android.view.MotionEvent is used to detect the movement of the user's touch input
+
 import businesslayer.HandwritingBL;
 
 /**
  * View class for handwriting functionality.
  * notepadCreate() -- Creation of writing area.
- * changeColor() -- For when a different color is selected.
- * setErase() -- For when Erase button has been pressed.
+ * changeColor(String newColor) -- For when a different color is selected.
+ * setErase(boolean isErase) -- For when Erase button has been pressed.
  * newNote() -- For when New Note button has been pressed.
  * 
  * FOR ITERATION 2: Implement functionality of changing brush and pen sizes.
