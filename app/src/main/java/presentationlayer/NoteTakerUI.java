@@ -20,7 +20,7 @@ import persistancelayer.TextNotePL;
  * Created by rishabhbhandari on 2016-02-19.
  */
 
-public class NoteTaker extends Activity {
+public class NoteTakerUI extends Activity {
 
     Button addNote;
     //DataBaseHelper myDb;
@@ -59,14 +59,14 @@ public class NoteTaker extends Activity {
                 textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())
                 {
-                    Toast.makeText(NoteTaker.this,"Note was not saved" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTakerUI.this,"Note was not saved" , Toast.LENGTH_LONG).show();
 
                 }
                 else
                 {
 
 
-                    Toast.makeText(NoteTaker.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTakerUI.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
                     //mobj.dataAdded(editName);
                     MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
                 }

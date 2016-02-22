@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="presentationlayer.NoteTaker"/>
+        <activity android:name="presentationlayer.NoteTakerUI"/>
         <activity
                 android:name="presentationlayer.PhotoNoteUI"
                 android:label="@string/title_activity_add_photo_ui"

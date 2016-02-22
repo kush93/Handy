@@ -26,4 +26,10 @@ public class TextNoteBL
     {
         return textNoteObj;
     }
+
+    public void getSavedData()
+    {
+        textNoteObj.addData("Rahul","Bhandari","first note");
+        textNoteObj.addData("Itr1","comp3350","wiki second note");
+    }
 }

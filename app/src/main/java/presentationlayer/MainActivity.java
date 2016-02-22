@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
-import domain.Note;
+import businesslayer.TextNoteBL;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
@@ -22,11 +22,12 @@ import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
 
-    private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;
+    private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;     // is used in requestStoragePermission()
 
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
+    TextNoteBL textNoteBL = new TextNoteBL();
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     static MainActivity mainObj;
@@ -43,24 +44,12 @@ public class MainActivity extends AppCompatActivity {
         mainObj = this;
         setContentView(R.layout.activity_main);
         populateListView();
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//
-//
-//            }
-//        });
 
         newNote = (Button) findViewById(R.id.button_take_note);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), NoteTaker.class);
+                Intent intent = new Intent(v.getContext(), NoteTakerUI.class);
                 startActivityForResult(intent, 0);
 
             }
@@ -93,13 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-
-        Note note1=new Note("Rahul","LabelName","firstNote");
-        Note note2 =new Note("Itr1","comp 3350","iteration 1 description");
-        Note note3=new Note("Handy","comp 3350","TextNote feature description");
-        textNotePL.createNoteList(note1);
-        textNotePL.createNoteList(note2);
-        textNotePL.createNoteList(note3);
+        textNoteBL.getSavedData();
 
         listView= (ListView) findViewById(R.id.listView);;
 
@@ -170,28 +153,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-
-
-//@Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
