@@ -69,6 +69,8 @@ public class NoteTaker extends Activity {
                    // mobj.dataAdded(editName);
                 }
 
+                finish();
+
             }
         });
     }
