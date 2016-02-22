@@ -28,7 +28,7 @@ import com.example.kushal.rihabhbhandari.R;
  * - AndroidManifest.xml
  *
  * colorClicked(View view) - Detects if a different color has been selected.
- *
+ *k
  * FOR ITERATION 2: Implement actual save functionality
  * FOR ITERATION 2: Implement multiple pencil and eraser sizes (strings already found in dimens.xml)
  */
