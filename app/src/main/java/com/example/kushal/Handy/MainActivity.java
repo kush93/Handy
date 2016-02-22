@@ -1,8 +1,12 @@
 package com.example.kushal.Handy;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +25,8 @@ import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;
+
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
@@ -31,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // request permission ... required for API 23 or above
+        requestStoragePermission();
+
+
         mainObj = this;
         setContentView(R.layout.activity_main);
         populateListView();
@@ -142,6 +154,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    // request permission ... required for API 23 or above
+    private void requestStoragePermission()
+    {
+        if((ContextCompat.checkSelfPermission(MainActivity.this,
+                                              Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+           || (ContextCompat.checkSelfPermission(MainActivity.this,
+                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
+
+        {
+            ActivityCompat.requestPermissions
+                    (MainActivity.this, new String[]{
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    }, MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE);
+        }
+    }
+
 }
 
 

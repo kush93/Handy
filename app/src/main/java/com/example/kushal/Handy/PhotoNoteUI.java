@@ -26,7 +26,6 @@ public class PhotoNoteUI extends Activity
 {
     private LinearLayout root;
 
-
     // Database variables
     private ArrayList<ImageView> imageViews;
     private ArrayList<EditText> editTexts;
@@ -43,7 +42,6 @@ public class PhotoNoteUI extends Activity
         // Database variables
         imageViews = new ArrayList<>();
         editTexts = new ArrayList<>();
-
     }
 
     // ================================================================
