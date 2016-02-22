@@ -1,4 +1,4 @@
-package PersistanceLayer1;
+package persistancelayer;
 
 import com.example.kushal.Handy.DataInterface;
 import com.example.kushal.Handy.Note;

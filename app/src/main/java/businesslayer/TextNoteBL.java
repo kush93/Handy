@@ -1,6 +1,6 @@
-package BusinessLayer1;
+package businesslayer;
 
-import PersistanceLayer1.TextNotePL;
+import persistancelayer.TextNotePL;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.
