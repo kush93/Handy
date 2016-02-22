@@ -30,6 +30,9 @@ public class PhotoNoteUI extends Activity
     private ArrayList<ImageView> imageViews;
     private ArrayList<EditText> editTexts;
 
+	// Default Fields
+	private EditText editText_title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -42,6 +45,9 @@ public class PhotoNoteUI extends Activity
         // Database variables
         imageViews = new ArrayList<>();
         editTexts = new ArrayList<>();
+
+	    // Default Fields
+	    editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
     }
 
     // ================================================================
@@ -50,13 +56,21 @@ public class PhotoNoteUI extends Activity
 
     public void onClickAcceptImageButton(View view)
     {
-        Toast.makeText(PhotoNoteUI.this, "Photo Note is saved (not yet implemented).", Toast.LENGTH_SHORT).show();
-        super.onBackPressed();
+	    if (editText_title.getText().toString().isEmpty())
+	    {
+		    Toast.makeText(PhotoNoteUI.this, "Title is not specified", Toast.LENGTH_SHORT).show();
+	    }
+	    else
+	    {
+		    Toast.makeText(PhotoNoteUI.this, "Photo Note is saved", Toast.LENGTH_SHORT).show();
+		    MainActivity.getInstance().dataAdded(editText_title);
+		    super.onBackPressed();
+	    }
     }
 
     public void onClickCancelImageButton(View view)
     {
-        Toast.makeText(PhotoNoteUI.this, "Photo Note is deleted.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PhotoNoteUI.this, "Photo Note is deleted", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
@@ -94,12 +108,12 @@ public class PhotoNoteUI extends Activity
         final ImageView ivImage = new PhotoNoteBL().makeImageView(this, getApplicationContext(), bitmap);
         ivImage.setOnLongClickListener(new View.OnLongClickListener()
         {
-            @Override
-            public boolean onLongClick(View v)
-            {
-				showDialogOnLongClickImageButton(ivImage);
-                return true;
-            }
+	        @Override
+	        public boolean onLongClick(View v)
+	        {
+		        showDialogOnLongClickImageButton(ivImage);
+		        return true;
+	        }
         });
         addNewImageView(ivImage);
     }
@@ -130,7 +144,8 @@ public class PhotoNoteUI extends Activity
 
     private void showDialogOnLongClickImageButton(final ImageView imageView)
     {
-        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
+        final CharSequence[] items = {"Delete from my note", "Cancel"};
+//        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI.this);
         builder.setTitle("Options for this image");
@@ -144,11 +159,11 @@ public class PhotoNoteUI extends Activity
                     Toast.makeText(PhotoNoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
-                else if (items[item].equals("Rotate"))
-                {
-                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
-                }
+//                else if (items[item].equals("Rotate"))
+//                {
+//                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+//                    dialog.dismiss();
+//                }
                 else if (items[item].equals("Cancel"))
                 {
                     dialog.dismiss();

@@ -20,6 +20,7 @@
         <activity
                 android:name="com.example.kushal.Handy.PhotoNoteUI"
                 android:label="@string/title_activity_add_photo_ui"
+                android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
         <activity android:name="businesslayer.PhotoNoteBL"
