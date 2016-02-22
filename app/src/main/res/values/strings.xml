@@ -4,4 +4,10 @@
     <string name="cam">Photo Note</string>
     <string name="handwrite">handwritten</string>
     <string name="title_activity_add_photo_ui">AddPhotoUI</string>
+    <string name="title_activity_handwriting">Handwriting</string>
+    <string name="newNote">New</string>
+    <string name="pencil">Pencil</string>
+    <string name="erase">Erase</string>
+    <string name="save">Save</string>
+    <string name="color">Colour</string>
 </resources>

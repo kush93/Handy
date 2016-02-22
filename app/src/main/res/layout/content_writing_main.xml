@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEEEEEE"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/pencilBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/pencil"
+            android:src="@drawable/pen" />
+
+        <ImageButton
+            android:id="@+id/eraseBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/erase"
+            android:src="@drawable/eraser" />
+
+        <ImageButton
+            android:id="@+id/saveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/save"
+            android:src="@drawable/save" />
+
+        <ImageButton
+            android:id="@+id/newBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/newNote"
+            android:src="@drawable/new_pic" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <!-- Top Row -->
+        <LinearLayout
+            android:id="@+id/colourOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <!-- Black -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/black"
+                android:tag="#000000" />
+            <!-- Red -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/red"
+                android:tag="#FF0000" />
+            <!-- Blue -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/blue"
+                android:tag="#0000FF" />
+            <!-- Yellow -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/yellow"
+                android:tag="#FFF200" />
+            <!-- Grey -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/grey"
+                android:tag="#7F7F7F" />
+        </LinearLayout>
+        <!-- Bottom Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <!-- White -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/white"
+                android:tag="#FFFFFF" />
+            <!-- Green -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/green"
+                android:tag="#22B14C" />
+            <!-- Orange -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/orange"
+                android:tag="#FF7F27" />
+            <!-- Purple -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/purple"
+                android:tag="#A349A4" />
+            <!-- Pink -->
+            <ImageButton
+                android:layout_width="@dimen/buttonSize"
+                android:layout_height="@dimen/buttonSize"
+                android:layout_margin="2dp"
+                android:contentDescription="@string/color"
+                android:onClick="colorClicked"
+                android:src="@drawable/pink"
+                android:tag="#FFAEC9" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.example.kushal.Handy.HandwritingView
+        android:id="@+id/handwriting"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF" />
+</LinearLayout>
