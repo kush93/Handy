@@ -1,31 +1,20 @@
 package com.example.kushal.Handy;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
+import BusinessLayer.PhotoNoteBL;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 
 import android.view.View;
 
 import android.widget.*;
 import com.example.kushal.rihabhbhandari.R;
-
-// todo: perhaps rotation for each photo
 
 /**
  * UI Layer: PhotoNoteUI
@@ -35,9 +24,6 @@ import com.example.kushal.rihabhbhandari.R;
 
 public class PhotoNoteUI extends Activity
 {
-//    private boolean zoomOut = false;
-    private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-
     private LinearLayout root;
 
 
