@@ -1,8 +1,6 @@
-package BusinessLayer;
+package BusinessLayer1;
 
-import android.widget.TextView;
-
-import PersistanceLayer.TextNotePL;
+import PersistanceLayer1.TextNotePL;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.

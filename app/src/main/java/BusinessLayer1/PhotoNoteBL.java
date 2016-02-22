@@ -1,4 +1,4 @@
-package BusinessLayer;
+package BusinessLayer1;
 
 
 import android.app.ActionBar;
@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.KeyEvent;               // handling back-key is not sufficient for handling exiting dialog
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
