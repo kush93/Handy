@@ -20,7 +20,7 @@ import com.example.kushal.rihabhbhandari.R;
  * - MainActivity.manifest
  *
  * res files:
- * - Various drawables (TODO: Find more efficient way of displaying colors)
+ * - Various drawables (some work for later: Find more efficient way of displaying colors)
  * - content_writing_main.xml
  * - activity_writing_main.xml (however, these two layout .xml can probably be condensed)
  * - dimens.xml
