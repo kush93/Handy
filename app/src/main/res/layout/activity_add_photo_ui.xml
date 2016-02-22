@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/LinearLayout1"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp" >
+
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|bottom"
+            android:orientation="horizontal">
+        <!--android:layout_height="wrap_content"-->
+
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton_addPhoto_accept"
+                android:background="@mipmap/ic_accept" android:onClick="onClickAcceptImageButton"/>
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton_addPhoto_cancel"
+                android:background="@mipmap/ic_cancel" android:onClick="onClickCancelImageButton"/>
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton_addPhoto_addPhoto"
+                android:background="@mipmap/ic_camera" android:onClick="onClickAddPhotoImageButton"/>
+
+    </LinearLayout>
+
+    <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="0dip"
+    android:id="@+id/scrollView_Items"
+    android:layout_weight="1.00">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:id="@+id/LinearLayout_Items">
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_addPhoto_title"
+                    android:singleLine="true"
+                    android:inputType="text" android:hint="Enter Title" android:textStyle="bold"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_addPhoto_label"
+                    android:hint="Enter Label" android:singleLine="true"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/editText_addPhoto_first_contents"
+                    android:hint="Type Your Notes Here"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
