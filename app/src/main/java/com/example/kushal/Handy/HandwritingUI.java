@@ -17,6 +17,7 @@ import com.example.kushal.rihabhbhandari.R;
  * - HandwritingUI.java
  * - HandwritingView.java
  * - HandwritingBL.java
+ * - MainActivity.manifest
  *
  * res files:
  * - Various drawables (TODO: Find more efficient way of displaying colors)
@@ -28,8 +29,8 @@ import com.example.kushal.rihabhbhandari.R;
  *
  * colorClicked(View view) - Detects if a different color has been selected.
  *
- * TODO: Implement actual save functionality
- * TODO: Implement multiple pencil and eraser sizes (strings already found in dimens.xml)
+ * FOR ITERATION 2: Implement actual save functionality
+ * FOR ITERATION 2: Implement multiple pencil and eraser sizes (strings already found in dimens.xml)
  */
 
 public class HandwritingUI extends Activity implements OnClickListener {
@@ -63,6 +64,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
         saveBtn.setOnClickListener(this);
     }
 
+    // When user presses one of the top row buttons
     @Override
     public void onClick(View view){
         if(view.getId()==R.id.pencilBtn){
@@ -110,6 +112,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
         }
     }
 
+    // When user presses one of the color buttons
     public void colorClicked(View view) {
         //Selecting a colour
         if(view != currColor) {
