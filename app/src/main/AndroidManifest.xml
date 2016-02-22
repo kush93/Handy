@@ -22,8 +22,7 @@
                 android:label="@string/title_activity_add_photo_ui"
                 android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="com.example.kushal.Handy.PhotoNoteBL"
-                  android:theme="@android:style/Theme.Translucent"/>
+        <activity android:name="BusinessLayer.PhotoNoteBL"/>
     </application>
 
 </manifest>

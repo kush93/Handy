@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import BusinessLayer.PhotoNoteBL;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

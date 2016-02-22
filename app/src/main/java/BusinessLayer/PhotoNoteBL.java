@@ -1,4 +1,5 @@
-package com.example.kushal.Handy;
+package BusinessLayer;
+
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -13,7 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.view.KeyEvent;
+import android.view.KeyEvent;               // handling back-key is not sufficient for handling exiting dialog
 import android.view.View;
 import android.widget.GridLayout;
 import android.widget.ImageView;
@@ -70,20 +71,6 @@ public class PhotoNoteBL extends Activity
 				}
 			}
 		});
-
-//		builder.setOnKeyListener(new DialogInterface.OnKeyListener()
-//		{
-//			@Override
-//			public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event)
-//			{
-//				if (keyCode == KeyEvent.KEYCODE_BACK)
-//				{
-//					dialog.dismiss();
-//					finishOnCancel();
-//				}
-//				return true;
-//			}
-//		});
 
 		builder.setOnCancelListener(new DialogInterface.OnCancelListener()
 		{
@@ -189,34 +176,34 @@ public class PhotoNoteBL extends Activity
 
 
 	/**
-     * Assign the given bitmap to a new ImageView, and sets onClick() method for zoom in/out for the bitmap,
-     *
-     * @param activity of the callee
-     * @param context of the callee
-     * @param bitmap
-     * @return
-     */
-    public final ImageView makeImageView(Activity activity, final Context context, Bitmap bitmap)
-    {
-        final ImageView ivImage = new ImageView(context);
+	 * Assign the given bitmap to a new ImageView, and sets onClick() method for zoom in/out for the bitmap,
+	 *
+	 * @param activity of the callee
+	 * @param context of the callee
+	 * @param bitmap
+	 * @return
+	 */
+	public final ImageView makeImageView(Activity activity, final Context context, Bitmap bitmap)
+	{
+		final ImageView ivImage = new ImageView(context);
 
-        // Photo = {Bitmap source, Bitmap bigVersion, boolean isSmall
-        ivImage.setTag(new ClickableImageBL(ivImage, bitmap, activity));
+		// Photo = {Bitmap source, Bitmap bigVersion, boolean isSmall
+		ivImage.setTag(new ClickableImageBL(ivImage, bitmap, activity));
 
-        ivImage.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                ((ClickableImageBL) ivImage.getTag()).performClick();
-            }
-        });
+		ivImage.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				((ClickableImageBL) ivImage.getTag()).performClick();
+			}
+		});
 
-        ivImage.setLayoutParams(new ActionBar.LayoutParams(
-                GridLayout.LayoutParams.WRAP_CONTENT,
-                GridLayout.LayoutParams.WRAP_CONTENT));
-        ivImage.setImageBitmap(bitmap);
+		ivImage.setLayoutParams(new ActionBar.LayoutParams(
+				GridLayout.LayoutParams.WRAP_CONTENT,
+				GridLayout.LayoutParams.WRAP_CONTENT));
+		ivImage.setImageBitmap(bitmap);
 
-        return ivImage;
-    }
+		return ivImage;
+	}
 }
