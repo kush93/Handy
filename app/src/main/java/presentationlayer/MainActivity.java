@@ -1,4 +1,4 @@
-package com.example.kushal.Handy;
+package presentationlayer;
 
 
 import android.Manifest;
@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
+import domain.Note;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;

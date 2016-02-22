@@ -1,6 +1,6 @@
 package tests;
 
-import com.example.kushal.Handy.Note;
+import domain.Note;
 
 import junit.framework.*;
 

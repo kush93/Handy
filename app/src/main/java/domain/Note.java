@@ -1,6 +1,4 @@
-package com.example.kushal.Handy;
-
-import android.widget.TextView;
+package domain;
 
 /**
  * Created by rishabhbhandari on 2016-02-18.

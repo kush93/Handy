@@ -1,7 +1,6 @@
 package persistancelayer;
 
-import com.example.kushal.Handy.DataInterface;
-import com.example.kushal.Handy.Note;
+import domain.Note;
 
 import java.util.ArrayList;
 
