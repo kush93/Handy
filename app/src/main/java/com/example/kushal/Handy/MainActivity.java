@@ -17,7 +17,7 @@ import com.example.kushal.rihabhbhandari.R;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import PersistanceLayer.TextNotePL;
+import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
-import BusinessLayer.TextNoteBL;
-import PersistanceLayer.TextNotePL;
+import businesslayer.TextNoteBL;
+import persistancelayer.TextNotePL;
 
 /**
  * Created by rishabhbhandari on 2016-02-19.

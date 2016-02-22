@@ -4,8 +4,8 @@ import com.example.kushal.Handy.Note;
 
 import junit.framework.*;
 
-import BusinessLayer.TextNoteBL;
-import PersistanceLayer.TextNotePL;
+import businesslayer.TextNoteBL;
+import persistancelayer.TextNotePL;
 
 /**
  * Created by kushal on 2016-02-21.

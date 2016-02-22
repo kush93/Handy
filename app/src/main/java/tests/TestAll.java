@@ -1,8 +1,8 @@
 package tests;
 import junit.framework.*;
 
-import BusinessLayer.TextNoteBL;
-import PersistanceLayer.TextNotePL;
+import businesslayer.TextNoteBL;
+import persistancelayer.TextNotePL;
 
 import static junit.framework.Assert.assertTrue;
 

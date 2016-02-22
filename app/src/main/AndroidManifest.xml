@@ -22,7 +22,8 @@
                 android:label="@string/title_activity_add_photo_ui"
                 android:theme="@style/AppTheme">
         </activity>
-        <activity android:name="BusinessLayer.PhotoNoteBL"/>
+        <activity android:name="businesslayer.PhotoNoteBL"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>
