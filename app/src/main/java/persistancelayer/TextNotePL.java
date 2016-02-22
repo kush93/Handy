@@ -6,7 +6,8 @@ import com.example.kushal.Handy.Note;
 import java.util.ArrayList;
 
 /**
- * Created by rishabhbhandari on 2016-02-18.
+ * Created by rishabhbhandari on 2016-02-18
+ * 
  */
 public class TextNotePL implements DataInterface
 {
@@ -50,7 +51,7 @@ public class TextNotePL implements DataInterface
         TextNotePL.SIZE = SIZE;
     }
 
-    public void addData(String noteName, String labelName, String note)
+    public void addData(String noteName, String labelName, String note) //add Note objects to noteList(ArrayList)
     {
         myNote= new Note(noteName,labelName,note);
         noteList.add(myNote);
