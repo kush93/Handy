@@ -66,7 +66,7 @@ public class NoteTaker extends Activity {
 
 
                     Toast.makeText(NoteTaker.this,editName.getText().toString() + " Note was saved",Toast.LENGTH_LONG).show();
-                    mobj.dataAdded(editName);
+                   // mobj.dataAdded(editName);
                 }
 
             }
