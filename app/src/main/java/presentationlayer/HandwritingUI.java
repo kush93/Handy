@@ -8,6 +8,9 @@ import android.widget.LinearLayout;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
+import java.util.UUID;
+import android.provider.MediaStore;
+import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
@@ -97,14 +100,33 @@ public class HandwritingUI extends Activity implements OnClickListener {
             // Save button has been clicked
             AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
             saveDialog.setTitle("Save Note");
-            saveDialog.setMessage("Save note to device Gallery?");
-            saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int which){
+            saveDialog.setMessage("Would you like to save note to Gallery?");
+            saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
                     // Saves
+                    handwritingView.setDrawingCacheEnabled(true);
+                    String imageName = UUID.randomUUID().toString() + ".png";
+                    String savedImg = MediaStore.Images.Media.insertImage(
+                            getContentResolver(), handwritingView.getDrawingCache(),
+                            imageName, "Note");
+
+                    if (savedImg == null) {
+                        String popupMsg = "Note could not be saved.";
+                        Toast popupWindow = Toast.makeText(getApplicationContext(),
+                                popupMsg, Toast.LENGTH_SHORT);
+                        popupWindow.show();
+                    } else {
+                        String popupMsg = "Note has been saved!";
+                        Toast popupWindow = Toast.makeText(getApplicationContext(),
+                                popupMsg, Toast.LENGTH_SHORT);
+                        popupWindow.show();
+                    }
+
+                    handwritingView.destroyDrawingCache();
                 }
             });
-            saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int which){
+            saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
             });
