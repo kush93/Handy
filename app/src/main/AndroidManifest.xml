@@ -23,14 +23,22 @@
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme">
         </activity>
+
         <activity android:name="businesslayer.PhotoNoteBL"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
         <activity
             android:name="presentationlayer.HandwritingUI"
             android:label="@string/title_activity_handwriting"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
+
+
+        <activity android:name="presentationlayer.ChecklistUI"
+            android:theme="@style/AppTheme"/>
+
+
     </application>
 
 </manifest>

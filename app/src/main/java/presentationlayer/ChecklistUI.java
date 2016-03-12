@@ -66,4 +66,5 @@ public class ChecklistUI extends Activity
                 return false;
         }
     }
+
 }
