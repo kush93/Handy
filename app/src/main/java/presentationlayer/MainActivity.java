@@ -111,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
         }
 //        noteList.addAll(SampleNote.getSampleNotes());
 
-        listView.setAdapter(new NoteListAdapter(this, noteList));
+
+        noteListAdapter = new NoteListAdapter(this, noteList);
+        listView.setAdapter(noteListAdapter);
+        noteListAdapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

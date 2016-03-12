@@ -82,6 +82,6 @@ public class NoteListAdapter extends BaseAdapter
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
 
-		return null;
+		return view;
 	}
 }

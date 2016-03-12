@@ -39,7 +39,7 @@ public class SampleNote implements NoteInterface
 		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", tags, "2014", true));
 
 		tags.add("boo");
-		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
+		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, null, true));
 
 		tags.add("NA");
 		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
