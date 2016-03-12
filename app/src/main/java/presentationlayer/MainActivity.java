@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
-    TextNoteBL textNoteBL = new TextNoteBL();
+    TextNoteBL textNoteBL = new TextNoteBL(this);
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     static MainActivity mainObj;

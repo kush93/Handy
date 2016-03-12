@@ -119,6 +119,7 @@ public class PhotoNoteBL extends Activity
 		}
 	}
 
+// the filepath can be fonud from here
 	@SuppressWarnings ("deprecation")
 	private Bitmap onSelectFromGalleryResult(Intent data)
 	{
@@ -146,6 +147,7 @@ public class PhotoNoteBL extends Activity
 		return bm;
 	}
 
+// the filepath can be fonud from here
 	private Bitmap onCaptureImageResult(Intent data)
 	{
 		Bitmap bm = (Bitmap) data.getExtras().get("data");
