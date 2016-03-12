@@ -73,6 +73,19 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        newNote = (Button) findViewById(R.id.button_checklist);
+        newNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ChecklistUI.class);
+                startActivityForResult(intent, 0);
+
+            }
+        });
+
+
     }
 
 
@@ -84,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         textNoteBL.getSavedData();
 
-        listView= (ListView) findViewById(R.id.listView);;
+        listView= (ListView) findViewById(R.id.listView);
 
         alSize = textNotePL.getNoteList().size();
         String noteName[] = new String[alSize];
