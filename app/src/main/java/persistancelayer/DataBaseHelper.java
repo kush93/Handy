@@ -14,11 +14,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "Notes.db";
     public static final String TABLE_NAME = "note_table";
     public static final String COL_1 = "ID";
-    public static final String COL_2 = "time";
-    public static final String COL_3 = "name";
-    public static final String COL_4 = "label";
-    public static final String COL_5 = "textNote";
-    public static final String COL_6 = "imagePath";
+    public static final String COL_2 = "Time";
+    public static final String COL_3 = "Name";
+    public static final String COL_4 = "Label";
+    public static final String COL_5 = "TextNote";
+    public static final String COL_6 = "FilePath";
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -27,7 +27,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,TIME TEXT,NAME TEXT,LABEL TEXT,TEXTNOTE TEXT, IMAGEPATH TEXT)");//executes whatever query is passed method as an arg
+        db.execSQL("create table " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT,TIME TEXT,NAME TEXT,LABEL TEXT,TEXTNOTE TEXT, FILEPATH TEXT)");//executes whatever query is passed method as an arg
     }
 
     @Override
@@ -36,14 +36,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String name, String label,String textNote, String imagePath)
+    public boolean insertData(String time , String name, String label , String textNote , String imagePath)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
-        contentValues.put(COL_2, name);
-        contentValues.put(COL_3, label);
-        contentValues.put(COL_4, textNote);
-        contentValues.put(COL_5, imagePath);
+        contentValues.put(COL_2, time);
+        contentValues.put(COL_3, name);
+        contentValues.put(COL_4, label);
+        contentValues.put(COL_5, textNote);
+        contentValues.put(COL_6, imagePath);
 
 
         long result=db.insert(TABLE_NAME,null,contentValues);
