@@ -31,16 +31,25 @@ public class SampleNote implements NoteInterface
 		List<SampleNote> sampleNotes = new ArrayList<>();
 
 		sampleNotes.add(new SampleNote(null, null, null, null, false));
+		sampleNotes.add(new SampleNote(null, null, null, null, true));
 
 		List<String> tags = new ArrayList<>();
-		sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", tags, "2014", false));
+		sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", tags, "2014 2014201420142014", false));
 
+		tags = new ArrayList<>();
+		sampleNotes.add(new SampleNote("My Sample Note 1.b", "And Some Contents 1", tags, "2014 2014201420142014", true));
+
+		tags = new ArrayList<>(tags);
 		tags.add("foo");
-		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", tags, "2014", true));
+		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Long Contents 2 :" +
+		                                                   " Foo Foo Foo Foo Foo Foo Foo Boo Foo Foo Foo Foo Foo Foo" +
+		                                                   " Foo Foo Foo Foo Foo Foo Foo ", tags, "2014", true));
 
+		tags = new ArrayList<>(tags);
 		tags.add("boo");
 		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, null, true));
 
+		tags = new ArrayList<>(tags);
 		tags.add("NA");
 		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
 
@@ -74,7 +83,7 @@ public class SampleNote implements NoteInterface
 	@Override
 	public String getTitle()
 	{
-		return null;
+		return title;
 	}
 
 	@Override

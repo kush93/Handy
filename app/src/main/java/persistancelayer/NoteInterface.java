@@ -9,7 +9,6 @@ import java.util.List;
  */
 public interface NoteInterface
 {
-
 	// required for main listview
 	boolean         hasImages();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
 	List<Bitmap>    getImages();

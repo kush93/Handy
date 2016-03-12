@@ -54,18 +54,33 @@ public class NoteListAdapter extends BaseAdapter
 		ImageView iv_thumbnail  = (ImageView) view.findViewById(R.id.main_list_item_iv_thumbnail);
 		ImageView iv_pin        = (ImageView) view.findViewById(R.id.main_list_item_iv_pin);
 		TextView  tv_title      = (TextView)  view.findViewById(R.id.main_list_item_tv_title);
-		TextView  tv_content    = (TextView)  view.findViewById(R.id.main_list_item_tv_content);
+		TextView  tv_content    = (TextView)  view.findViewById(R.id.main_list_item_tv_content_line);
 		TextView  tv_editTime   = (TextView)  view.findViewById(R.id.main_list_item_tv_edit_time);
 		TextView  tv_tags       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
+		TextView  tv_tags_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
 
 		tv_title.setText(note.hasTitle() ? note.getTitle() : "Empty Title");
-		tv_content.setText(note.hasContents() ? note.getContents() : "");
-		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "");
+		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "Unknown Edit Time");
+
+		if (!note.hasContents())
+		{
+			tv_content.setVisibility(View.GONE);
+		}
+		else
+		{
+			tv_content.setVisibility(View.VISIBLE);
+			tv_content.setText(note.getContents());
+		}
 
 		if (note.hasImages())
 			iv_thumbnail.setImageBitmap(note.getImages().get(0));
 
-		if (note.hasTag())
+		if (!note.hasTag())
+		{
+			tv_tags.setVisibility(View.GONE);
+			tv_tags_const.setVisibility(View.GONE);
+		}
+		else
 		{
 			Iterator<String> itr = note.getTags().iterator();
 
