@@ -41,7 +41,7 @@
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:textSize="15sp"
+				android:textSize="18sp"
 				android:text="Tag:"/>
 
 			<TextView
@@ -62,6 +62,6 @@
 		android:scaleType="centerCrop"
 		android:adjustViewBounds="true"
 		android:id="@+id/main_list_item_iv_pin"
-		android:src="@mipmap/ic_pin"/>
+		android:src="@mipmap/ic_pin" android:visibility="visible"/>
 
 </LinearLayout>
