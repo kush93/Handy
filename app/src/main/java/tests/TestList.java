@@ -21,7 +21,7 @@ public class TestList extends TestCase
         protected  void setUp()
         {
                 tObj = new TextNotePL();
-                blObj=new TextNoteBL();
+                blObj=new TextNoteBL(null);
                 note= new Note("testnote1","test1","this is test1");
                 note2= new Note("testnote2","test2","this is test2");
                 note3= new Note ("testnote3","test3","this is test3");

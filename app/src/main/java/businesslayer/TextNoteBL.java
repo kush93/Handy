@@ -2,6 +2,8 @@ package businesslayer;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+
 import persistancelayer.DataBaseHelper;
 import persistancelayer.TextNotePL;
 /**
