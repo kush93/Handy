@@ -17,13 +17,18 @@ public interface DataInterface {
 
     // required for main listview
     boolean hasThumbnail();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
-    boolean isPinned();             // pin / favourite
-    boolean hasTag();
     Bitmap getThumbnail();
-    String getTitle();
-    String getContents();
-    List<String> getTags();
-    String getLastEditedTime();
 
+    boolean isPinned();             // pin / favourite
+    String getTitle();
+
+    boolean hasContents();
+    String getContents();
+
+    boolean hasTag();
+    List<String> getTags();
+
+    String getLastEditedTime();
+    // end of requirements
 
 }
