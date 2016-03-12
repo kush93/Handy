@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content">
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:scaleType="centerCrop"
+		android:adjustViewBounds="true"
+		android:id="@+id/main_list_item_iv_thumbnail"
+		android:src="@mipmap/ic_pencil"/>
+
+	<LinearLayout
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:hint="Title"
+			android:id="@+id/main_list_item_tv_title"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textSize="15sp"
+			android:hint="Content"
+			android:id="@+id/main_list_item_tv_content"/>
+
+		<LinearLayout
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="15sp"
+				android:text="Tag:"/>
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textSize="15sp"
+				android:hint="foo, boo"
+				android:id="@+id/main_list_item_tv_tag"/>
+
+		</LinearLayout>
+
+
+	</LinearLayout>
+
+	<ImageView
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:scaleType="centerCrop"
+		android:adjustViewBounds="true"
+		android:id="@+id/main_list_item_iv_pin"
+		android:src="@mipmap/ic_pin"/>
+
+</LinearLayout>
