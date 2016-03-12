@@ -76,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        newNote = (Button) findViewById(R.id.button_checklist);
+        newNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ChecklistUI.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
