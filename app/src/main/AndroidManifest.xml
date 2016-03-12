@@ -31,6 +31,12 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity android:name="presentationlayer.ChecklistUI"
+            android:theme="@style/AppTheme"
+            android:label="Check List"/>
+
+
     </application>
 
 </manifest>
