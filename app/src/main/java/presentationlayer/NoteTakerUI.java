@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.kushal.rihabhbhandari.R;
 
 import businesslayer.TextNoteBL;
@@ -24,7 +23,7 @@ public class NoteTakerUI extends Activity {
 
     Button addNote;
     //DataBaseHelper myDb;
-    TextNoteBL textNoteBL=new TextNoteBL();
+    TextNoteBL textNoteBL=new TextNoteBL(this);
    TextNotePL textnoteObj=new TextNotePL();
     MainActivity mobj = new MainActivity();;
 
@@ -43,6 +42,8 @@ public class NoteTakerUI extends Activity {
         editLabel=(TextView)findViewById(R.id.editText_label);
         editNote=(TextView)findViewById(R.id.editText_note);
         addNote=(Button)findViewById(R.id.button_save_note);
+        //editName.setTypeface(null, Typeface.BOLD_ITALIC);
+
         addData();
 
 
@@ -55,6 +56,7 @@ public class NoteTakerUI extends Activity {
 
             @Override
             public void onClick(View v) {
+
               
                 textNoteBL.create(editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString()); //calls the business logic class for text notes
                 if(textnoteObj.getNoteList().isEmpty())

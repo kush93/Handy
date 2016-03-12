@@ -1,20 +1,24 @@
 package presentationlayer;
 
 
-import java.util.ArrayList;
-
-import businesslayer.PhotoNoteBL;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import android.widget.*;
 import com.example.kushal.rihabhbhandari.R;
+
+
+import java.util.ArrayList;
+
+import businesslayer.PhotoNoteBL;
 
 /**
  * UI Layer: PhotoNoteUI

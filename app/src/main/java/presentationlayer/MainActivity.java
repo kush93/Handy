@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
-    TextNoteBL textNoteBL = new TextNoteBL();
+    TextNoteBL textNoteBL = new TextNoteBL(this);
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     static MainActivity mainObj;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         populateListView();
 
-        newNote = (Button) findViewById(R.id.button_take_note);
+        newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        newNote = (Button) findViewById(R.id.button_open_photonote);
+        newNote = (Button) findViewById(R.id.button_main_open_photo_note);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        newNote = (Button) findViewById(R.id.button_handwrite);
+        newNote = (Button) findViewById(R.id.button_main_open_hand_writing);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
         textNoteBL.getSavedData();
 
-        listView= (ListView) findViewById(R.id.listView);;
+        listView= (ListView) findViewById(R.id.listView_main_note_list);;
 
         alSize = textNotePL.getNoteList().size();
         String noteName[] = new String[alSize];
