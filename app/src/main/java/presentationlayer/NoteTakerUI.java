@@ -74,7 +74,7 @@ public class NoteTakerUI extends Activity {
 
                     Toast.makeText(NoteTakerUI.this, editName.getText().toString() + " Note was saved", Toast.LENGTH_LONG).show();
                     //mobj.dataAdded(editName);
-                    MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
+                   // MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
                 }
 
                 finish();

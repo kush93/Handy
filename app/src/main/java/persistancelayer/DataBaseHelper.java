@@ -75,13 +75,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
 
 
-                data.concat(cursor.getString(0));   //id
-                data.concat(cursor.getString(1));   //time
-                data.concat(cursor.getString(2));   //name
-                data.concat(cursor.getString(3));   //label
-                data.concat(cursor.getString(4));   //textNote
-                data.concat(cursor.getString(5));   //filePath
-                data.concat(cursor.getString(6));   //noteType
+                data.concat(cursor.getString(0)+" ");   //id
+                data.concat(cursor.getString(1)+" ");   //time
+                data.concat(cursor.getString(2)+" ");   //name
+                data.concat(cursor.getString(3)+" ");   //label
+                data.concat(cursor.getString(4)+" ");   //textNote
+                data.concat(cursor.getString(5)+" ");   //filePath
+                data.concat(cursor.getString(6)+" ");   //noteType
 
                 // Adding contact to list
                 dataList.add(data);

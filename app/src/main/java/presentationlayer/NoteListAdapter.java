@@ -59,7 +59,7 @@ public class NoteListAdapter extends BaseAdapter
 		TextView  tv_tags       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
 		TextView  tv_tags_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
 
-		tv_title.setText(note.hasTitle() ? note.getTitle() : "Empty Title");
+		tv_title.setText(note.hasNoteTitle() ? note.getNoteTitle() : "Empty Title");
 		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "Unknown Edit Time");
 
 		if (!note.hasContents())
