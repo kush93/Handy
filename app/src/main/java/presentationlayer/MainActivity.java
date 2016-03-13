@@ -10,20 +10,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import businesslayer.TextNoteBL;
-import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainObj = this;
         setContentView(R.layout.activity_main);
-        populateListView();
+//        populateListView();
 
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -97,48 +91,48 @@ public class MainActivity extends AppCompatActivity {
         return mainObj;
     }
 
-    private void populateListView() {
-
-        //textNoteBL.getSavedData(this);
-
-        listView= (ListView) findViewById(R.id.listView_main_note_list);;
-
-//        previous version
-//        alSize = textNotePL.getNoteList().size();
-//        String noteName[] = new String[alSize];
-//        for (int i = 0; i < alSize; i++) {
-//            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
+//    private void populateListView() {
+//
+//        //textNoteBL.getSavedData(this);
+//
+//        listView= (ListView) findViewById(R.id.listView_main_note_list);;
+//
+////        previous version
+////        alSize = textNotePL.getNoteList().size();
+////        String noteName[] = new String[alSize];
+////        for (int i = 0; i < alSize; i++) {
+////            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
+////        }
+////        ArrayList<String> noteList = new ArrayList<String>();
+////        noteList.addAll(Arrays.asList(noteName) );
+////        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
+//
+//        // with NoteInterface
+//        List<NoteInterface> noteList = new ArrayList<>();
+//
+//        int size = 0;
+//
+//        for (SampleNote sampleNote : SampleNote.getSampleNotes())
+//        {
+//            System.out.println("OUTPUT: size: " + (++size));
+//            noteList.add(sampleNote);
 //        }
-//        ArrayList<String> noteList = new ArrayList<String>();
-//        noteList.addAll(Arrays.asList(noteName) );
-//        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
-
-        // with NoteInterface
-        List<NoteInterface> noteList = new ArrayList<>();
-
-        int size = 0;
-
-        for (SampleNote sampleNote : SampleNote.getSampleNotes())
-        {
-            System.out.println("OUTPUT: size: " + (++size));
-            noteList.add(sampleNote);
-        }
-//        noteList.addAll(SampleNote.getSampleNotes());
-
-
-        noteListAdapter = new NoteListAdapter(this, noteList);
-        listView.setAdapter(noteListAdapter);
-        noteListAdapter.notifyDataSetChanged();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
-                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
+////        noteList.addAll(SampleNote.getSampleNotes());
+//
+//
+//        noteListAdapter = new NoteListAdapter(this, noteList);
+//        listView.setAdapter(noteListAdapter);
+//        noteListAdapter.notifyDataSetChanged();
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+//
+//                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
 
 
     public void dataAdded(TextView noteName)
