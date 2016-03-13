@@ -109,7 +109,7 @@ public class SampleNote extends Activity implements NoteInterface {
 	}
 
 	@Override
-	public String getTags() {
+	public String getTag() {
 		return tags;
 	}
 

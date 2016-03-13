@@ -45,6 +45,8 @@ public class PhotoNoteBL extends Activity {
         callDialogBox();
     }
 
+    public PhotoNoteBL() {}     // null constructor
+
     public PhotoNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
 

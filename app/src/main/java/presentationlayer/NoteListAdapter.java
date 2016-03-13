@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.example.kushal.rihabhbhandari.R;
 import persistancelayer.NoteInterface;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -56,8 +55,8 @@ public class NoteListAdapter extends BaseAdapter
 		TextView  tv_title      = (TextView)  view.findViewById(R.id.main_list_item_tv_title);
 		TextView  tv_content    = (TextView)  view.findViewById(R.id.main_list_item_tv_content_line);
 		TextView  tv_editTime   = (TextView)  view.findViewById(R.id.main_list_item_tv_edit_time);
-		TextView  tv_tags       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
-		TextView  tv_tags_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
+		TextView  tv_tag       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
+		TextView  tv_tag_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
 
 		tv_title.setText(note.hasNoteTitle() ? note.getNoteTitle() : "Empty Title");
 		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "Unknown Edit Time");
@@ -77,22 +76,14 @@ public class NoteListAdapter extends BaseAdapter
 
 		if (!note.hasTag())
 		{
-			tv_tags.setVisibility(View.GONE);
-			tv_tags_const.setVisibility(View.GONE);
+			tv_tag.setVisibility(View.GONE);
+			tv_tag_const.setVisibility(View.GONE);
 		}
 		else
 		{
-			Iterator<String> itr = note.getTags().iterator();
-
-			while (itr.hasNext())
-			{
-				String tag = itr.next();
-
-				tv_tags.setText(tv_tags.getText() + tag);
-
-				if (itr.hasNext())
-					tv_tags.setText(tv_tags.getText() + ", ");
-			}
+			tv_tag.setVisibility(View.VISIBLE);
+			tv_tag_const.setVisibility(View.VISIBLE);
+			tv_tag.setText(note.getTag());
 		}
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
