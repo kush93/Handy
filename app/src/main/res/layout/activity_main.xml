@@ -54,6 +54,11 @@
             android:layout_toEndOf="@+id/button_handwrite"
             android:layout_below="@+id/listView" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
         <Button
             android:layout_width="59dp"
             android:layout_height="match_parent"
@@ -64,12 +69,8 @@
             android:layout_alignParentEnd="true"
             android:layout_toRightOf="@+id/button_handwrite"
             android:layout_toEndOf="@+id/button_handwrite"
-            android:layout_below="@+id/listView" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:layout_below="@+id/listView"
+            android:layout_weight="1.66" />
 
         <Space
             android:layout_width="0dp"
