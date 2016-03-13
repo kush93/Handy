@@ -9,21 +9,21 @@ import java.util.List;
  */
 public interface NoteInterface
 {
-
 	// required for main listview
 	boolean         hasImages();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
 	List<Bitmap>    getImages();
 
 	boolean         isPinned();             // pin / favourite
 
-	boolean         hasTitle();
-	String          getTitle();
+	boolean         hasNoteTitle();
+	String         getNoteTitle();
+
 
 	boolean         hasContents();
 	String          getContents();
 
 	boolean         hasTag();
-	List<String>    getTags();
+	String 			getTag();
 
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();

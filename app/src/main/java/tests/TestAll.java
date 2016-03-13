@@ -11,14 +11,23 @@ import static junit.framework.Assert.assertTrue;
  */
 import android.test.suitebuilder.TestSuiteBuilder;
 
-public class TestAll extends TestSuite
+//public class TestAll extends TestSuite
+//{
+  //  public static Test suite()
+    //{
+      //  return  new TestSuiteBuilder(TestAll.class).includeAllPackagesUnderHere().build();
+    //}
+    //public TestAll()
+    //{
+      //  super();
+    //}
+//}
+public class TestAll
 {
     public static Test suite()
     {
-        return  new TestSuiteBuilder(TestAll.class).includeAllPackagesUnderHere().build();
-    }
-    public TestAll()
-    {
-        super();
+        TestSuite suite= new TestSuite();
+        suite.addTestSuite(TestList.class);
+        return suite;
     }
 }

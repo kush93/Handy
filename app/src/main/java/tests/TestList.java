@@ -1,10 +1,9 @@
 package tests;
 
-import domain.Note;
-
-import junit.framework.*;
+import junit.framework.TestCase;
 
 import businesslayer.TextNoteBL;
+import domain.Note;
 import persistancelayer.TextNotePL;
 
 /**
@@ -21,7 +20,7 @@ public class TestList extends TestCase
         protected  void setUp()
         {
                 tObj = new TextNotePL();
-                blObj=new TextNoteBL(null);
+                blObj=new TextNoteBL();
                 note= new Note("testnote1","test1","this is test1");
                 note2= new Note("testnote2","test2","this is test2");
                 note3= new Note ("testnote3","test3","this is test3");
@@ -29,15 +28,22 @@ public class TestList extends TestCase
                 tObj.clearNoteList();
         }
 
+
         public void testcreate()
         {
-            blObj.create("testbl", "1", "testingBLcreate1");
+            boolean result=blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2","notetextAssign1","root/user/gallery1","textNote1");
             assertTrue("create method:list is empty", !blObj.getTextNoteObj().getNoteList().isEmpty());
-            blObj.create("testb2", "2", "testingBLcreate2");
-            blObj.create("testb3", "3","testingBLcreate3");
-            blObj.create("testb4", "4","testingBLcreate4");
-            assertTrue("the size is not 1, which is not right", blObj.getTextNoteObj().getNoteList().size() == 4);
+            blObj.create("April 27/03/2017 12:08PM", "notename2", "Itr_2","notetextAssign2","root/user/gallery2","textNote2");
+            blObj.create("May 26/03/2016 12:09PM", "notename3", "Itr.2","notetextAssign3","root/user/gallery3","textNote3");
+            assertTrue("the size is not right", blObj.getTextNoteObj().getNoteList().size() == 3);
         }
+
+        public void testgetTextNoteObj()
+        {
+            blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2","notetextAssign1","root/user/gallery1","textNote1");
+            assertTrue("Text note object is null", blObj.getTextNoteObj()!=null);
+        }
+
 
         public void testaddData()
         {
@@ -50,6 +56,7 @@ public class TestList extends TestCase
             assertTrue("this is not the right size",tObj.getNoteList().size()==3);
 
         }
+
 
     protected void tearDown()
     {

@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.kushal.rihabhbhandari.R;
-import persistancelayer.NoteInterface;
 
-import java.util.Iterator;
+import com.example.kushal.rihabhbhandari.R;
+
 import java.util.List;
+
+import persistancelayer.NoteInterface;
 
 /**
  * Created by Matthias on 16-03-12.
@@ -54,30 +55,37 @@ public class NoteListAdapter extends BaseAdapter
 		ImageView iv_thumbnail  = (ImageView) view.findViewById(R.id.main_list_item_iv_thumbnail);
 		ImageView iv_pin        = (ImageView) view.findViewById(R.id.main_list_item_iv_pin);
 		TextView  tv_title      = (TextView)  view.findViewById(R.id.main_list_item_tv_title);
-		TextView  tv_content    = (TextView)  view.findViewById(R.id.main_list_item_tv_content);
+		TextView  tv_content    = (TextView)  view.findViewById(R.id.main_list_item_tv_content_line);
 		TextView  tv_editTime   = (TextView)  view.findViewById(R.id.main_list_item_tv_edit_time);
 		TextView  tv_tags       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
+		TextView  tv_tags_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
 
-		tv_title.setText(note.hasTitle() ? note.getTitle() : "Empty Title");
-		tv_content.setText(note.hasContents() ? note.getContents() : "");
-		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "");
+		tv_title.setText(note.hasNoteTitle() ? note.getNoteTitle() : "Empty Title");
+		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "Unknown Edit Time");
+
+		if (!note.hasContents())
+		{
+			tv_content.setVisibility(View.GONE);
+		}
+		else
+		{
+			tv_content.setVisibility(View.VISIBLE);
+			tv_content.setText(note.getContents());
+		}
 
 		if (note.hasImages())
 			iv_thumbnail.setImageBitmap(note.getImages().get(0));
 
-		if (note.hasTag())
+		if (!note.hasTag())
 		{
-			Iterator<String> itr = note.getTags().iterator();
-
-			while (itr.hasNext())
-			{
-				String tag = itr.next();
-
-				tv_tags.setText(tv_tags.getText() + tag);
-
-				if (itr.hasNext())
-					tv_tags.setText(tv_tags.getText() + ", ");
-			}
+			tv_tags.setVisibility(View.GONE);
+			tv_tags_const.setVisibility(View.GONE);
+		}
+		else
+		{
+			tv_tags.setVisibility(View.VISIBLE);
+			tv_tags_const.setVisibility(View.VISIBLE);
+			tv_tags.setText(note.getTag());
 		}
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
