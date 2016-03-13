@@ -37,6 +37,7 @@ public class SampleNote extends Activity implements NoteInterface {
 
 		// Date date = new Date();
 		sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
+		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", "COMP3380", "2015", false));
 
 		/*returnedNotes=SampleNote.textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
 
