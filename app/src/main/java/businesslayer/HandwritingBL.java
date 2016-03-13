@@ -1,6 +1,9 @@
 package businesslayer;
 
 import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.os.Environment;
+import java.io.*;
 
 /**
  * Created by Ian on 21/02/2016.
@@ -31,5 +34,41 @@ public class HandwritingBL {
         }
 
         return returnColor;
+    }
+
+    public String saveImage(Bitmap sourceImage) {
+        // Saves to picture directory, under a subfolder called "Handy"
+        String fileLocation = null;
+        boolean folderExists = true;
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy";
+        File outputDir = new File(path);
+
+        // Creates subfolder "Handy" if it does not exist
+        if(!outputDir.exists()){
+            folderExists = outputDir.mkdir();
+        }
+
+        if(folderExists) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            sourceImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            File destination = new File(path, System.currentTimeMillis() + ".jpg");
+
+            FileOutputStream fo;
+            try
+            {
+                destination.createNewFile();
+                fo = new FileOutputStream(destination);
+                fo.write(bytes.toByteArray());
+                fo.close();
+                fileLocation = destination.getCanonicalPath();
+            } catch (FileNotFoundException e)
+            {
+                e.printStackTrace();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        return fileLocation;
     }
 }

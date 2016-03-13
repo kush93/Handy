@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+
 // android.graphics.* classes are used for drawing/writing functionality
 // android.view.MotionEvent is used to detect the movement of the user's touch input
 
@@ -57,22 +58,27 @@ public class HandwritingView extends View {
     }
 
     // Found in HandwritingBL
-    public void changeColor(String newColor){
+    public void changeColor(String newColor) {
         invalidate();
         selectedColor = handwritingBL.changeColor(newColor);
         penPaint.setColor(selectedColor);
     }
 
     // Found in HandwritingBL
-    public void setErase(boolean isErase){
+    public void setErase(boolean isErase) {
         // Set eraseState
         eraseState=isErase;
         penPaint.setColor(handwritingBL.setErase(selectedColor, eraseState));
     }
 
-    public void newNote(){
+    public void newNote() {
         notepadCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public String saveImage(Bitmap savedImg) {
+        String fileLoc = handwritingBL.saveImage(savedImg);
+        return fileLoc;
     }
 
     @Override
@@ -84,7 +90,7 @@ public class HandwritingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //super.onDraw(canvas);
+        super.onDraw(canvas);
         canvas.drawBitmap(notepadBitmap, 0, 0, notepadPaint);
         canvas.drawPath(penPath, penPaint);
     }
