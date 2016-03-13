@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
-
 import java.util.ArrayList;
 
 import businesslayer.PhotoNoteBL;
@@ -26,20 +25,23 @@ import businesslayer.PhotoNoteBL;
  * PL: Android Library Functions
  */
 
-public class PhotoNoteUI extends Activity
-{
+public class PhotoNoteUI extends Activity {
     private LinearLayout root;
 
     // Database variables
     private ArrayList<ImageView> imageViews;
     private ArrayList<EditText> editTexts;
 
-	// Default Fields
-	private EditText editText_title;
+    // Default Fields
+    private EditText editText_title, editText_label;
+    private EditText editText_textNote;
+    PhotoNoteBL photoNoteBL = new PhotoNoteBL(this);
+
+    final String noteType = "photoNote";
+    final String filePath = null;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_photo_ui);
 
@@ -50,27 +52,55 @@ public class PhotoNoteUI extends Activity
         imageViews = new ArrayList<>();
         editTexts = new ArrayList<>();
 
-	    // Default Fields
-	    editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
+
+        // Default Fields
+        editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
+
     }
 
     // ================================================================
     // Methods for Click Listeners
     // ================================================================
 
-    public void onClickAcceptImageButton(View view)
-    {
-	    if (editText_title.getText().toString().isEmpty())
-	    {
-		    Toast.makeText(PhotoNoteUI.this, "Title is not specified", Toast.LENGTH_SHORT).show();
-	    }
-	    else
-	    {
-		    Toast.makeText(PhotoNoteUI.this, "Photo Note is saved", Toast.LENGTH_SHORT).show();
-		    MainActivity.getInstance().dataAdded(editText_title);
-		    super.onBackPressed();
-	    }
+    public void onClickAcceptImageButton(View view) {
+        if (editText_title.getText().toString().isEmpty()) {
+            Toast.makeText(PhotoNoteUI.this, "Title is not specified", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(PhotoNoteUI.this, "Photo Note is saved", Toast.LENGTH_SHORT).show();
+
+            //add to blPhoto and then it passes to the persistence layer
+            int size = editTexts.size();
+
+//            ArrayList<String> photoNote=new ArrayList<String>();
+            String photoNoteText = null;
+//            photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
+//
+//            for (int i = 0; i < size; i++) {
+//                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
+//
+//                //editTexts.add();
+//                photoNoteText=(editTexts.get(i).getText().toString() + "\\" + 1);
+//
+//
+//            }
+
+            editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
+
+            editText_label = (EditText) findViewById(R.id.editText_addPhoto_label);
+            // passing data to PhotoNoteBL
+            boolean isInserted = photoNoteBL.create(editText_title.getText().toString(), editText_label.getText().toString(), photoNoteText, noteType);
+
+
+            if (isInserted == true)
+                Toast.makeText(PhotoNoteUI.this, "Note was saved", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(PhotoNoteUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
+
+            MainActivity.getInstance().dataAdded(editText_title);// not being used
+            super.onBackPressed();
+        }
     }
+
 
     public void onClickCancelImageButton(View view)
     {
@@ -109,7 +139,7 @@ public class PhotoNoteUI extends Activity
 
     private void onSuccessfulAddPhoto(Bitmap bitmap)
     {
-        final ImageView ivImage = new PhotoNoteBL().makeImageView(this, getApplicationContext(), bitmap);
+        final ImageView ivImage = new PhotoNoteBL(this).makeImageView(this, getApplicationContext(), bitmap);
         ivImage.setOnLongClickListener(new View.OnLongClickListener()
         {
 	        @Override
