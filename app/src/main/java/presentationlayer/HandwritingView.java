@@ -37,6 +37,7 @@ public class HandwritingView extends View {
     private Path penPath;
     private Canvas notepadCanvas;
     private Bitmap notepadBitmap;
+    private Bitmap bgBitmap;
 
     public HandwritingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -81,6 +82,11 @@ public class HandwritingView extends View {
         return fileLoc;
     }
 
+    // If it has been specified that a background is to be used for note
+    public void loadImage(byte[] byteArray) {
+        bgBitmap = handwritingBL.processImage(byteArray);
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -91,6 +97,9 @@ public class HandwritingView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if(bgBitmap != null) {
+            canvas.drawBitmap(bgBitmap, 0, 0, null);
+        }
         canvas.drawBitmap(notepadBitmap, 0, 0, notepadPaint);
         canvas.drawPath(penPath, penPaint);
     }

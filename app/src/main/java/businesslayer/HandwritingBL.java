@@ -2,6 +2,7 @@ package businesslayer;
 
 import android.graphics.Color;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Environment;
 import java.io.*;
 
@@ -70,5 +71,10 @@ public class HandwritingBL {
             }
         }
         return fileLocation;
+    }
+
+    public Bitmap processImage(byte[] byteArray) {
+        Bitmap bmpImg = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        return bmpImg;
     }
 }

@@ -54,6 +54,11 @@ public class HandwritingUI extends Activity implements OnClickListener {
         newBtn = (ImageButton)findViewById(R.id.newBtn);
         saveBtn = (ImageButton)findViewById(R.id.saveBtn);
 
+        byte[] byteArray = getIntent().getByteArrayExtra("image");
+        if(byteArray != null) {
+            handwritingView.loadImage(byteArray);
+        }
+
         // By default, black is selected color.
         // Makes black button slightly transparent to indicate that it is selected.
         LinearLayout colorBox = (LinearLayout)findViewById(R.id.colourOptions);
