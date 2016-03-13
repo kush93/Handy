@@ -23,7 +23,7 @@ public interface NoteInterface
 	String          getContents();
 
 	boolean         hasTag();
-	String		    getTags();
+	String 			getTag();
 
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();
