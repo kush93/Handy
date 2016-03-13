@@ -4,20 +4,30 @@ package presentationlayer;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import businesslayer.TextNoteBL;
+import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,19 +99,22 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
-    public static MainActivity getInstance(){
+    public static MainActivity getInstance() {
         return mainObj;
     }
 
-//    private void populateListView() {
-//
-//        //textNoteBL.getSavedData(this);
-//
-//        listView= (ListView) findViewById(R.id.listView_main_note_list);;
-//
+    private void populateListView() {
+
+        textNoteBL.getSavedData("textNote");
+
+        listView = (ListView) findViewById(R.id.listView_main_note_list);
+
 ////        previous version
 ////        alSize = textNotePL.getNoteList().size();
 ////        String noteName[] = new String[alSize];
@@ -106,44 +124,42 @@ public class MainActivity extends AppCompatActivity {
 ////        ArrayList<String> noteList = new ArrayList<String>();
 ////        noteList.addAll(Arrays.asList(noteName) );
 ////        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
-//
-//        // with NoteInterface
-//        List<NoteInterface> noteList = new ArrayList<>();
-//
-//        int size = 0;
-//
-//        for (SampleNote sampleNote : SampleNote.getSampleNotes())
-//        {
-//            System.out.println("OUTPUT: size: " + (++size));
-//            noteList.add(sampleNote);
-//        }
-////        noteList.addAll(SampleNote.getSampleNotes());
-//
-//
-//        noteListAdapter = new NoteListAdapter(this, noteList);
-//        listView.setAdapter(noteListAdapter);
-//        noteListAdapter.notifyDataSetChanged();
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-//
-//                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//    }
+        // with NoteInterface
+
+        // with NoteInterface
+        List<NoteInterface> noteList = new ArrayList<>();
+
+        int size = 0;
+
+        for (SampleNote sampleNote : SampleNote.getSampleNotes()) {
+            System.out.println("OUTPUT: size: " + (++size));
+            noteList.add(sampleNote);
+        }
+//        noteList.addAll(SampleNote.getSampleNotes());
 
 
-    public void dataAdded(TextView noteName)
-    {
+        noteListAdapter = new NoteListAdapter(this, noteList);
+        listView.setAdapter(noteListAdapter);
+        noteListAdapter.notifyDataSetChanged();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+
+                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+
+    public void dataAdded(TextView noteName) {
         //TextView nameET=(TextView)findViewById(R.id.);
-        String name=noteName.getText().toString();
-        Log.d("my tag", name) ;
+        String name = noteName.getText().toString();
+        Log.d("my tag", name);
 //        Toast.makeText(getApplicationContext(),  name, Toast.LENGTH_SHORT).show();
 
-        if(!name.isEmpty() && name.length()>0)
-        {
+        if (!name.isEmpty() && name.length() > 0) {
             arrayAdapter.add(name);
 
             arrayAdapter.notifyDataSetChanged();
@@ -152,17 +168,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
     }
 
     // request permission ... required for API 23 or above
-    private void requestStoragePermission()
-    {
-        if((ContextCompat.checkSelfPermission(MainActivity.this,
-                                              Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-           || (ContextCompat.checkSelfPermission(MainActivity.this,
-                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
+    private void requestStoragePermission() {
+        if ((ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                || (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
 
         {
             ActivityCompat.requestPermissions
@@ -173,4 +186,43 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://presentationlayer/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://presentationlayer/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }

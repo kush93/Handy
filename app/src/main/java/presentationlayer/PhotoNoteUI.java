@@ -73,7 +73,7 @@ public class PhotoNoteUI extends Activity {
 
 //            ArrayList<String> photoNote=new ArrayList<String>();
             String photoNoteText = null;
-//            photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
+          photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
 //
 //            for (int i = 0; i < size; i++) {
 //                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
@@ -96,7 +96,7 @@ public class PhotoNoteUI extends Activity {
             else
                 Toast.makeText(PhotoNoteUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
-            MainActivity.getInstance().dataAdded(editText_title);// not being used
+           // MainActivity.getInstance().dataAdded(editText_title);// not being used
             super.onBackPressed();
         }
     }
