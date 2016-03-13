@@ -35,7 +35,7 @@ public class PhotoNoteBL extends Activity {
     public static final String KEY_BITMAP = "bitmap";
     DataBaseHelper dataBaseHelper = null;
 
-    String filePath = null;
+    private static String filePath = "boo";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     @Override
@@ -57,7 +57,6 @@ public class PhotoNoteBL extends Activity {
         //textNoteObj= new TextNotePL(noteName,noteLabel,note);
 
         String editedTime = DateFormat.getDateTimeInstance().format(new Date());
-
 
         boolean isInserted = dataBaseHelper.insertData(editedTime, noteName, noteLabel, noteText, filePath, noteType); // calling DataBaseHelper Method passing data
         return isInserted;
@@ -115,7 +114,6 @@ public class PhotoNoteBL extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
         if (resultCode == Activity.RESULT_OK && (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA)) {
             Bitmap bm;
