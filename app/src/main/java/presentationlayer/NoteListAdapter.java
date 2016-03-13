@@ -85,7 +85,7 @@ public class NoteListAdapter extends BaseAdapter
 		{
 			tv_tags.setVisibility(View.VISIBLE);
 			tv_tags_const.setVisibility(View.VISIBLE);
-			tv_tags.setText(note.getTags());
+			tv_tags.setText(note.getTag());
 		}
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
