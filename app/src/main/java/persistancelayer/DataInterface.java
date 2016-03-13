@@ -15,20 +15,4 @@ public interface DataInterface {
 
     void addData(String noteName, String labelName,String note);
 
-    // required for main listview
-    boolean hasThumbnail();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
-    Bitmap getThumbnail();
-
-    boolean isPinned();             // pin / favourite
-    String getTitle();
-
-    boolean hasContents();
-    String getContents();
-
-    boolean hasTag();
-    List<String> getTags();
-
-    String getLastEditedTime();
-    // end of requirements
-
 }

@@ -17,7 +17,9 @@ import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TextNoteBL textNoteBL = new TextNoteBL(this);
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
+    NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
 
     @Override
@@ -73,6 +76,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        newNote = (Button) findViewById(R.id.button_checklist);
+        newNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ChecklistUI.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
@@ -86,22 +99,32 @@ public class MainActivity extends AppCompatActivity {
 
         listView= (ListView) findViewById(R.id.listView_main_note_list);;
 
-        alSize = textNotePL.getNoteList().size();
-        String noteName[] = new String[alSize];
+//        previous version
+//        alSize = textNotePL.getNoteList().size();
+//        String noteName[] = new String[alSize];
+//        for (int i = 0; i < alSize; i++) {
+//            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
+//        }
+//        ArrayList<String> noteList = new ArrayList<String>();
+//        noteList.addAll(Arrays.asList(noteName) );
+//        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
 
-        for (int i = 0; i < alSize; i++) {
+        // with NoteInterface
+        List<NoteInterface> noteList = new ArrayList<>();
 
-            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
+        int size = 0;
 
+        for (SampleNote sampleNote : SampleNote.getSampleNotes())
+        {
+            System.out.println("OUTPUT: size: " + (++size));
+            noteList.add(sampleNote);
         }
-
-        ArrayList<String> noteList = new ArrayList<String>();
-        noteList.addAll(Arrays.asList(noteName) );
+//        noteList.addAll(SampleNote.getSampleNotes());
 
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
-
-        listView.setAdapter(arrayAdapter);
+        noteListAdapter = new NoteListAdapter(this, noteList);
+        listView.setAdapter(noteListAdapter);
+        noteListAdapter.notifyDataSetChanged();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
