@@ -4,7 +4,6 @@ package presentationlayer;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
-    TextNoteBL textNoteBL = new TextNoteBL(this);
+    TextNoteBL textNoteBL;
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     NoteListAdapter noteListAdapter;
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        textNoteBL = new TextNoteBL(this);
 
         // request permission ... required for API 23 or above
         requestStoragePermission();
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainObj = this;
         setContentView(R.layout.activity_main);
-        populateListView();
+//        populateListView();
 
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-        textNoteBL.getSavedData("textNote");
+        List<String> textNoteData = new ArrayList<String>();
+ //       textNoteData = textNoteBL.getSavedData("textNote");
 
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
@@ -187,42 +186,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // @Override
-    // public void onStart() {
-    //     super.onStart();
+    /*public void onStart() {
+        super.onStart();
 
-    //     // ATTENTION: This was auto-generated to implement the App Indexing API.
-    //     // See https://g.co/AppIndexing/AndroidStudio for more information.
-    //     client.connect();
-    //     Action viewAction = Action.newAction(
-    //             Action.TYPE_VIEW, // TODO: choose an action type.
-    //             "Main Page", // TODO: Define a title for the content shown.
-    //             // TODO: If you have web page content that matches this app activity's content,
-    //             // make sure this auto-generated web page URL is correct.
-    //             // Otherwise, set the URL to null.
-    //             Uri.parse("http://host/path"),
-    //             // TODO: Make sure this auto-generated app deep link URI is correct.
-    //             Uri.parse("android-app://presentationlayer/http/host/path")
-    //     );
-    //     AppIndex.AppIndexApi.start(client, viewAction);
-    // }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://presentationlayer/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
 
-    // @Override
-    // public void onStop() {
-    //     super.onStop();
+    @Override
+    public void onStop() {
+        super.onStop();
 
-    //     // ATTENTION: This was auto-generated to implement the App Indexing API.
-    //     // See https://g.co/AppIndexing/AndroidStudio for more information.
-    //     Action viewAction = Action.newAction(
-    //             Action.TYPE_VIEW, // TODO: choose an action type.
-    //             "Main Page", // TODO: Define a title for the content shown.
-    //             // TODO: If you have web page content that matches this app activity's content,
-    //             // make sure this auto-generated web page URL is correct.
-    //             // Otherwise, set the URL to null.
-    //             Uri.parse("http://host/path"),
-    //             // TODO: Make sure this auto-generated app deep link URI is correct.
-    //             Uri.parse("android-app://presentationlayer/http/host/path")
-    //     );
-    //     AppIndex.AppIndexApi.end(client, viewAction);
-    //     client.disconnect();
-    // }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app deep link URI is correct.
+                Uri.parse("android-app://presentationlayer/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }*/
 }
