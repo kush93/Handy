@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:layout_margin="10dp"
-    >
+    android:orientation="vertical">
 
 
     <ListView
@@ -18,51 +17,33 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="376dp"
         android:layout_height="wrap_content"
-        android:weightSum="5.5"
-        android:layout_weight="0"
-        >
+        android:weightSum="5.5">
 
 
         <Button
-            android:layout_width="85dp"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:text="@string/textnote"
             android:id="@+id/button_main_open_text_note"
-            android:layout_weight="1"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:layout_weight="1.11" />
 
         <Button
-            android:layout_width="85dp"
+            android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:text="@string/cam"
-            android:id="@+id/button_main_open_photo_note"
-            android:layout_weight="1"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:id="@+id/button_main_open_photo_note" />
 
         <Button
-            android:layout_width="85dp"
+            android:layout_width="79dp"
             android:layout_height="wrap_content"
             android:text="@string/handwrite"
             android:id="@+id/button_main_open_hand_writing"
-            android:layout_weight="1"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.58" />
 
         <Button
-            android:layout_width="90dp"
+            android:layout_width="73dp"
             android:layout_height="57dp"
             android:text="CHECK LIST"
             android:id="@+id/button_checklist"
@@ -73,6 +54,32 @@
             android:layout_toEndOf="@+id/button_handwrite"
             android:layout_below="@+id/listView" />
 
+        <Button
+            android:layout_width="59dp"
+            android:layout_height="match_parent"
+            android:text="PDF"
+            android:id="@+id/button_pdf"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/button_handwrite"
+            android:layout_toEndOf="@+id/button_handwrite"
+            android:layout_below="@+id/listView" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
 
 
     </LinearLayout>
