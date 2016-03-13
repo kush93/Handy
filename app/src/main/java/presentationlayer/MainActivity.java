@@ -10,15 +10,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import businesslayer.TextNoteBL;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
@@ -95,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-        textNoteBL.getSavedData();
+        //textNoteBL.getSavedData(this);
 
         listView= (ListView) findViewById(R.id.listView_main_note_list);;
 
