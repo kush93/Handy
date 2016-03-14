@@ -13,7 +13,8 @@ import java.util.List;
 
 import businesslayer.PhotoNoteBL;
 import businesslayer.TextNoteBL;
-import businesslayer.TextNoteWrapper;
+import persistancelayer.NoteInterface;
+import presentationlayer.MainActivity;
 
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
@@ -27,7 +28,7 @@ public class TestIT
     @Mock
     TextNoteBL obj;
     PhotoNoteBL pobj;
-    TextNoteWrapper Wobj;
+    MainActivity mobj;
 
     
     @Before
@@ -35,7 +36,7 @@ public class TestIT
     {
         obj= mock(TextNoteBL.class);
         pobj=mock(PhotoNoteBL.class);
-        Wobj= mock(TextNoteWrapper.class);
+        mobj = mock(MainActivity.class);
         // expectations
         when(obj.create("time","noteName","noteLabel","noteText","filepath","type")).thenReturn(true);
         when(pobj.create("note","label","text","fpath","type")).thenReturn(true);
@@ -46,18 +47,18 @@ public class TestIT
     {
         obj=null;
         pobj=null;
-        Wobj=null;
+        mobj =null;
     }
 
     @Test
-    public void testRetreval()
+    public void testRetrieval()
     {
-        List<TextNoteWrapper> noteW= Wobj.getSampleNotes("noteTpe");
+        List<NoteInterface> noteW= mobj.getNotesFromDB("noteTpe");
         assertTrue("nothing is being retrieved!",!noteW.isEmpty());//verification
     }
 
     @Test
-    public void testDBcreation()
+    public void testDBCreation()
     {
         boolean result=obj.create("time","Nname","Nlabel","Ntext","fpath","typ");
         assertTrue("object not inserted to DB properly",!result);//verification

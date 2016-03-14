@@ -13,11 +13,17 @@ public interface NoteInterface
 	String OPEN_SAVED  = "OPEN_SAVED";
 	String DATA        = "DATA";
 
+	String textNoteType        = "textNote";
+	String handWritingNoteType = "handwritingNote";
+
+
 	// required for main listview
 	boolean         hasImages();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
 	List<Bitmap>    getImages();
 
 	boolean         isPinned();             // pin / favourite
+
+	String          getNoteID();        // auto-incremented in DB
 
 	boolean         hasNoteTitle();
 	String          getNoteTitle();

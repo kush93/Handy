@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +22,8 @@ import android.app.Activity;
 import businesslayer.TextNoteWrapper;
 import businesslayer.HandwritingWrapper;
 import com.example.kushal.rihabhbhandari.R;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import businesslayer.TextNoteBL;
-import businesslayer.TextNoteWrapper;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
@@ -54,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         // request permission ... required for API 23 or above
         requestStoragePermission();
+
+        textNoteBL = new TextNoteBL(this);
 
         mainObj = this;
         setContentView(R.layout.activity_main);
@@ -141,10 +137,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
-
-        List<TextNoteWrapper> textNoteData = new ArrayList<TextNoteWrapper>();
-        List<HandwritingWrapper> handwritingData = new ArrayList<HandwritingWrapper>();
-
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
         // with NoteInterface
@@ -152,22 +144,14 @@ public class MainActivity extends AppCompatActivity {
 
         TextNoteWrapper textNoteWrapper =new TextNoteWrapper(this);
 
-        textNoteData= textNoteWrapper.getSampleNotes("textNote");
+        List<NoteInterface> textNoteData= getNotesFromDB("all");
+
         int listSize=textNoteData.size();
         for(int i=0; i<listSize;i++)
         {
             noteList.add(textNoteData.get(i));
         }
         
-        HandwritingWrapper handwritingWrapper = new HandwritingWrapper(this);
-
-        handwritingData = handwritingWrapper.getSampleNotes("handwritingNote");
-        int listSize2 = handwritingData.size();
-        for(int i=0; i<listSize2;i++)
-        {
-            noteList.add(handwritingData.get(i));
-        }
-
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
         noteListAdapter.notifyDataSetChanged();
@@ -222,4 +206,38 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public List<NoteInterface> getNotesFromDB(String noteType) {
+
+        List<NoteInterface> noteInterfaces = new ArrayList<>();
+        List<String> returnedNotesRawData = textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
+
+        int listSize = returnedNotesRawData.size();
+        if (listSize > 0) {
+            for (int i = 0; i < listSize; i++) {
+                //String noteName=
+
+                String singleNote = returnedNotesRawData.get(i);
+                String token[] = singleNote.trim().split("\\?");
+
+                //id?time?name?label?textNote?filePaths?noteType
+                // textNote1/textNote2/textNote3/...... = token[4]
+                // filePath1^filePath2^filePath3^......= token[5]
+
+                String currNoteType = token[6];
+
+                switch (currNoteType)
+                {
+                    case NoteInterface.textNoteType:
+                        noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        break;
+                    case NoteInterface.handWritingNoteType:
+                        noteInterfaces.add(new HandwritingWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        break;
+                }
+            }
+        }
+
+        return noteInterfaces;
+    }
 }
