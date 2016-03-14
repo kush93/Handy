@@ -12,13 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import businesslayer.TextNoteWrapper;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.text.DateFormat;
 import java.util.Date;
 
 import businesslayer.TextNoteBL;
+import businesslayer.TextNoteWrapper;
 import persistancelayer.TextNotePL;
 
 /**
@@ -106,7 +106,7 @@ public class NoteTakerUI extends Activity {
                 // long representation of current time
 
                 textNoteBL.create(editedTime,editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
-                if (textnoteObj.getNoteList().isEmpty()) {
+                if (textnoteObj.getData("note").isEmpty()) {
                     Toast.makeText(NoteTakerUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
                 } else {

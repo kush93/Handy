@@ -5,17 +5,33 @@ package domain;
  */
 public class Note {
 
+    public int id;
+    public String time;
     public String noteName;
     public String labelName;
-    public String note;
-    public int x=0;
-    public Note(String name, String label, String note)
-    {
-        this.noteName=name;
-        this.labelName=label;
-        this.note=note;
+    public String noteText;
+    public String filePath;
+    public String type;
+    public int x = 0;
+
+    public Note(int id,String time, String noteName, String noteLabel, String noteText, String filePath, String type) {
+        this.id=id;
+        this.noteName = noteName;
+        this.labelName = noteLabel;
+        this.noteText = noteText;
+        this.filePath = filePath;
+        this.type = type;
+
     }
-    public boolean equalsNote(Note mynote){
-        return (this.noteName.equals(mynote.noteName))&&(this.note.equals(mynote.note));
+
+    public boolean equalsNote(Note mynote) {
+        return (this.noteName.equals(mynote.noteName)) && (this.noteText.equals(mynote.noteText));
+    }
+
+
+
+    @Override
+    public String toString() {
+        return id+'/'+noteName+'/'+labelName+'/'+noteText+'/'+filePath+'/'+type;
     }
 }

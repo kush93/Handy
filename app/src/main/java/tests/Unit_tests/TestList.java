@@ -21,10 +21,10 @@ public class TestList extends TestCase
         {
                 tObj = new TextNotePL();
                 blObj=new TextNoteBL();
-                note= new Note("testnote1","test1","this is test1");
-                note2= new Note("testnote2","test2","this is test2");
-                note3= new Note ("testnote3","test3","this is test3");
-                note4= new Note ("testnote4","test4","this is test4");
+                note= new Note(1,"Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
+                note2= new Note(2,"Mar 14/2016, 12:22PM ", "Comp 3350", "ITR4", "second note", "", "textNote");
+                note3= new Note (3,"Mar 14/2016, 12:28PM ", "Comp 3350", "ITR3", "third note", "", "textNote");
+                note4= new Note (4,"Mar 14/2016, 12:38PM ", "Comp 3350", "ITR0", "fourth note", "", "textNote");
                 tObj.clearNoteList();
         }
 
@@ -47,9 +47,9 @@ public class TestList extends TestCase
 
         public void testaddData()
         {
-            tObj.addData("testnote1", "test1", "this is test1");
-            tObj.addData("testnote2", "test2", "this is test2");
-            tObj.addData("testnote3", "test3", "this is test3");
+            tObj.insertData("Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
+            tObj.insertData("Mar 14/2016, 12:38PM ", "Comp 3250", "ITR3", "first sec note", "", "textNote");
+            tObj.insertData("Mar 14/2016, 12:48PM ", "Comp 3150", "ITR4", "first third note", "", "textNote");
             assertTrue("Your list is still empty", !tObj.getNoteList().isEmpty());
             assertTrue("same note doesn't exists", tObj.containsNote(note2));
             assertTrue("same note doesn't exists", !tObj.containsNote(note4));

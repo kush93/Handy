@@ -35,7 +35,7 @@ public class PhotoNoteBL extends Activity {
     public static final String KEY_BITMAP = "bitmap";
     DataBaseHelper dataBaseHelper = null;
 
-    static String filePath = "boo";
+    public static String filePath = "boo";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     @Override
@@ -52,13 +52,13 @@ public class PhotoNoteBL extends Activity {
 
     }
 
-    public boolean create(String noteName, String noteLabel, String noteText, String noteType) {
+    public boolean create(String noteName, String noteLabel, String noteText,String allFilePath, String noteType) {
         //textNoteObj= new TextNotePL(noteName,noteLabel,note);
 
         String editedTime = DateFormat.getDateTimeInstance().format(new Date());
 
 
-        boolean isInserted = dataBaseHelper.insertData(editedTime, noteName, noteLabel, noteText, filePath, noteType); // calling DataBaseHelper Method passing data
+        boolean isInserted = dataBaseHelper.insertData(editedTime, noteName, noteLabel, noteText, allFilePath, noteType); // calling DataBaseHelper Method passing data
         return isInserted;
         //textNoteObj.addData(noteName, noteLabel, note);
         //System.out.printf("11111 %s %s %s ",notename,notelabel,noteit);

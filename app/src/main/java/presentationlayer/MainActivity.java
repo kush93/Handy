@@ -16,7 +16,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.net.Uri;
+import java.util.ArrayList;
+import java.util.List;
+import android.app.Activity;
 import businesslayer.TextNoteWrapper;
 import businesslayer.HandwritingWrapper;
 import com.example.kushal.rihabhbhandari.R;
@@ -31,7 +34,7 @@ import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int PICKFILE_RESULT_CODE = 1;
     private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;     // is used in requestStoragePermission()
 
     ListView listView;
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NoteTakerUI.class);
-	            startActivityForResult(intent, REQUEST_NEW_NOTE);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -83,6 +86,15 @@ public class MainActivity extends AppCompatActivity {
 	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
+        newNote=(Button) findViewById(R.id.button_pdf);
+        newNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+                startActivityForResult(intent, PICKFILE_RESULT_CODE);
+            }
+        });
 
         newNote = (Button) findViewById(R.id.button_checklist);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +109,21 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE) {
 
-	@Override
+            String Fpath = data.getDataString();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(Fpath), "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+
+        }
+    }
+
+        @Override
 	protected void onResume()
 	{
 		super.onResume();
