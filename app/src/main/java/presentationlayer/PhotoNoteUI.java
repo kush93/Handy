@@ -37,7 +37,7 @@ public class PhotoNoteUI extends Activity {
     PhotoNoteBL photoNoteBL = new PhotoNoteBL(this);
 
     final String noteType = "photoNote";
-    final String filePath = null;
+     String allFilePath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +93,7 @@ public class PhotoNoteUI extends Activity {
 
             editText_label = (EditText) findViewById(R.id.editText_addPhoto_label);
             // passing data to PhotoNoteBL
-            boolean isInserted = photoNoteBL.create(editText_title.getText().toString(), editText_label.getText().toString(), photoNoteText, noteType);
+            boolean isInserted = photoNoteBL.create(editText_title.getText().toString(), editText_label.getText().toString(), photoNoteText,allFilePath, noteType);
 
 
             if (isInserted == true)
@@ -137,7 +137,10 @@ public class PhotoNoteUI extends Activity {
         }
     }
 
+    /*String allPath = "";*/
+
     private void onSuccessfulAddPhoto(Bitmap bitmap) {
+        allFilePath += PhotoNoteBL.filePath + "?";
         final ImageView ivImage = new PhotoNoteBL(this).makeImageView(this, getApplicationContext(), bitmap);
         ivImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
