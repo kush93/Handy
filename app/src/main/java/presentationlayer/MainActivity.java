@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         {
             noteList.add(textNoteData.get(i));
         }
-
+        
         HandwritingWrapper handwritingWrapper = new HandwritingWrapper(this);
 
         handwritingData = handwritingWrapper.getSampleNotes("handwritingNote");
