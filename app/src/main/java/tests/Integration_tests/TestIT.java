@@ -19,25 +19,6 @@ import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-
-import junit.framework.*;
-
-import org.junit.*;
-import org.junit.Test;
-import org.mockito.*;
-import org.junit.Assert.*;
-
-import java.util.List;
-
-import businesslayer.PhotoNoteBL;
-import businesslayer.TextNoteBL;
-import businesslayer.TextNoteWrapper;
-
-import static junit.framework.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.initMocks;
-
 /**
  * Created by kushal on 2016-03-13.
  */
@@ -48,8 +29,7 @@ public class TestIT
     PhotoNoteBL pobj;
     TextNoteWrapper Wobj;
 
-
-
+    
     @Before
     public void create()
     {
@@ -84,7 +64,5 @@ public class TestIT
         boolean result2 = pobj.create("Time","Name","LAbel","Text") ;
         assertTrue("object for photonote not inserted",!result2);//verification
     }
-
-
 
 }
