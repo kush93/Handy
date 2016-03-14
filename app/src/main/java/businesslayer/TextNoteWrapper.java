@@ -19,18 +19,20 @@ public class TextNoteWrapper extends Activity implements NoteInterface, Serializ
     private String contents;
     private String tags;
     private String time;
+    private String filePath;
     private boolean isPinned;
 
     //static TextNoteBL textNoteBL;
     TextNoteBL textNoteBL;
     private static String noteType = "textNote";
 
-    public TextNoteWrapper(String title, String contents, String tags, String time, boolean isPinned) {
+    public TextNoteWrapper(String title, String contents, String tags, String time, String filePath, boolean isPinned) {
         this.title = title;
         this.contents = contents;
         this.tags = tags;
         this.time = time;
         this.isPinned = isPinned;
+        this.filePath=filePath;
 
     }
 
@@ -50,8 +52,15 @@ public class TextNoteWrapper extends Activity implements NoteInterface, Serializ
                 //String noteName=
 
                 String singleNote = returnedNotes.get(i);
-                String token[] = singleNote.trim().split("/");
-                textNoteWrappers.add(new TextNoteWrapper(token[2], token[4], token[3], token[1], false));
+                String token[] = singleNote.trim().split("\\?");
+
+                //id?time?name?label?textNote?filePath?noteType
+                // textNote1/textNote2/textNote3...... = token[4]
+                // filePath1^filePath2^filePath3......= token[5]
+
+                textNoteWrappers.add(new TextNoteWrapper(token[2], token[4], token[3], token[1], token[5], false));
+
+
             }
 
         }
