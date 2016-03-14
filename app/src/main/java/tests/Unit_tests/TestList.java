@@ -1,4 +1,4 @@
-package tests;
+package tests.Unit_tests;
 
 import junit.framework.TestCase;
 
@@ -40,7 +40,7 @@ public class TestList extends TestCase
 
         public void testgetTextNoteObj()
         {
-            blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2","notetextAssign1","root/user/gallery1","textNote1");
+            blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2", "notetextAssign1", "root/user/gallery1", "textNote1");
             assertTrue("Text note object is null", blObj.getTextNoteObj()!=null);
         }
 

@@ -2,7 +2,6 @@ package presentationlayer;
 
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import businesslayer.TextNoteWrapper;
 import com.example.kushal.rihabhbhandari.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -37,18 +37,11 @@ public class MainActivity extends AppCompatActivity {
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
     TextNoteBL textNoteBL;
-    int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
 
-	private int REQUEST_NEW_NOTE = 1;
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+	public static final int REQUEST_NEW_NOTE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         // request permission ... required for API 23 or above
         requestStoragePermission();
-
 
         mainObj = this;
         setContentView(R.layout.activity_main);
@@ -105,12 +97,18 @@ public class MainActivity extends AppCompatActivity {
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-
 	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == REQUEST_NEW_NOTE) notifyDataSetChanged();
+	protected void onResume()
+	{
+		super.onResume();
+		notifyDataSetChanged();
 	}
+//
+//	@Override
+//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if (requestCode == REQUEST_NEW_NOTE) notifyDataSetChanged();
+//	}
 
     public static MainActivity getInstance() {
         return mainObj;
@@ -123,11 +121,11 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
         // with NoteInterface
-        List<NoteInterface> noteList = new ArrayList<>();
+        final List<NoteInterface> noteList = new ArrayList<>();
 
-        TextNoteWrapper sampleNote=new TextNoteWrapper(this);
+        TextNoteWrapper textNoteWrapper =new TextNoteWrapper(this);
 
-        textNoteData=sampleNote.getSampleNotes("textNote");
+        textNoteData= textNoteWrapper.getSampleNotes("textNote");
         int listSize=textNoteData.size();
         for(int i=0; i<listSize;i++)
         {
@@ -142,7 +140,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
+	            noteList.get(position).openNote(MainActivity.this);
+//	            ((NoteInterface) parent.getSelectedItem()).openNote();
+//                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
 
             }
         });

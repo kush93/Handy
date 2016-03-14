@@ -90,6 +90,16 @@ public class NoteListAdapter extends BaseAdapter
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
 
+//		view.setOnClickListener(new View.OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View v)
+//			{
+//				System.out.printf("view is clicked but openNote() is not working!");
+//				note.openNote();
+//			}
+//		});
+
 		return view;
 	}
 }
