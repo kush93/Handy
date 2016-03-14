@@ -16,21 +16,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.Activity;
 import com.example.kushal.rihabhbhandari.R;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
-
+import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslayer.PdfrendererUI;
+
 import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int PICKFILE_RESULT_CODE = 1;
     private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;     // is used in requestStoragePermission()
 
     ListView listView;
@@ -91,9 +91,9 @@ public class MainActivity extends AppCompatActivity {
         newNote.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PdfrendererUI.class);
-                startActivity(intent);
-
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+                startActivityForResult(intent, PICKFILE_RESULT_CODE);
             }
         });
 
@@ -110,7 +110,20 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE) {
 
+            String Fpath = data.getDataString();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(Fpath), "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+
+        }
+
+    }
 
     public static MainActivity getInstance() {
         return mainObj;
