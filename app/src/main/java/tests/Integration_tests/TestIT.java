@@ -38,7 +38,7 @@ public class TestIT
         Wobj= mock(TextNoteWrapper.class);
         // expectations
         when(obj.create("time","noteName","noteLabel","noteText","filepath","type")).thenReturn(true);
-        when(pobj.create("note","label","text","type")).thenReturn(true);
+        when(pobj.create("note","label","text","fpath","type")).thenReturn(true);
     }
 
     @After
@@ -61,7 +61,7 @@ public class TestIT
     {
         boolean result=obj.create("time","Nname","Nlabel","Ntext","fpath","typ");
         assertTrue("object not inserted to DB properly",!result);//verification
-        boolean result2 = pobj.create("Time","Name","LAbel","Text") ;
+        boolean result2 = pobj.create("Nname","Nlabel","Ntext","fpath","typ") ;
         assertTrue("object for photonote not inserted",!result2);//verification
     }
 
