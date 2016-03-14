@@ -75,10 +75,10 @@ public class DataBaseHelper extends SQLiteOpenHelper implements DataInterface {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.getCount() == 0) {
+        /*if (cursor.getCount() == 0) {
             showMessage("No Notes exist", "");
             //return;
-        }
+        }*/
 
         String data = new String();
 
