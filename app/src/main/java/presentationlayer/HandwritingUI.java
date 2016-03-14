@@ -86,6 +86,8 @@ public class HandwritingUI extends Activity implements OnClickListener {
             if (wrapper.hasImages())
                 handwritingView.loadImage(wrapper.getImages().get(0));
 
+            fileName = wrapper.getContents();
+
             System.out.printf("SYSOUT: HandwritingUI.onCreate(): if boolean == true\n");
             System.out.printf("SYSOUT: wrapper.getTitle() == \n");
             System.out.printf("SYSOUT: wrapper.getTitle() == %s\n", wrapper.getNoteTitle());

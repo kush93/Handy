@@ -67,7 +67,6 @@ public class HandwritingBL {
 
     public String saveImage(Bitmap sourceImage, String existingFile) {
         // Saves to picture directory, under a subfolder called "Handy"
-        //String fileLocation = null;
         String fileName = null;
         boolean folderExists = true;
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy";
@@ -83,6 +82,7 @@ public class HandwritingBL {
             sourceImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             File destination;
             if(existingFile != null) {
+                fileName = existingFile;
                 destination = new File(path, existingFile);
             }
             else {
@@ -116,7 +116,19 @@ public class HandwritingBL {
     }
 
     public List<String> getSavedData(String type) {
-        List<String> handwritingList=new ArrayList<String>();
+        List<String> handwritingList;
+        /**
+        List<String> tempList = new ArrayList<String>();
+        tempList = dataBaseHelper.getData(type);
+        int listSize = tempList.size();
+        String tempStr;
+
+        for(int i=0; i<listSize;i++) {
+            tempStr = tempList.get(i);
+            if(tempStr.contains("handwritingNote")) {
+                handwritingList.add(tempStr);
+            }
+        }**/
         handwritingList=dataBaseHelper.getData(type);
         return handwritingList;
     }
