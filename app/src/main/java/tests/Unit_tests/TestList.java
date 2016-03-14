@@ -1,6 +1,8 @@
 
 package tests.Unit_tests;
 
+import android.app.Activity;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +16,7 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by kushal on 2E016-02-21.
  */
-public class TestList {
+public class TestList extends Activity {
 
     TextNotePL tObj;
     Note note, note2, note3, note4;
@@ -24,7 +26,7 @@ public class TestList {
     @Before
     protected void setUp() {
         tObj = new TextNotePL();
-        blObj = new TextNoteBL();
+        blObj = new TextNoteBL(this);
         note = new Note(1, "Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
         note2 = new Note(2, "Mar 14/2016, 12:22PM ", "Comp 3350", "ITR4", "second note", "", "textNote");
         note3 = new Note(3, "Mar 14/2016, 12:28PM ", "Comp 3350", "ITR3", "third note", "", "textNote");
