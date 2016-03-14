@@ -29,7 +29,7 @@ import businesslayer.HandwritingBL;
 
 public class HandwritingView extends View {
 
-    private HandwritingBL handwritingBL = new HandwritingBL();
+    private HandwritingBL handwritingBL;
     private int selectedColor = Color.parseColor("#ff000000"); // Default initial color (black)
     private boolean eraseState=false;
     private Paint penPaint;
@@ -41,6 +41,7 @@ public class HandwritingView extends View {
 
     public HandwritingView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        handwritingBL = new HandwritingBL(context);
         notepadCreate();
     }
 
@@ -85,6 +86,10 @@ public class HandwritingView extends View {
     // If it has been specified that a background is to be used for note
     public void loadImage(byte[] byteArray) {
         bgBitmap = handwritingBL.processImage(byteArray);
+    }
+
+    public HandwritingBL getHandwritingBL() {
+        return handwritingBL;
     }
 
     @Override

@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import businesslayer.TextNoteBL;
+import businesslayer.TextNoteWrapper;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
@@ -117,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-        List<SampleNote> textNoteData = new ArrayList<SampleNote>();
+        List<TextNoteWrapper> textNoteData = new ArrayList<TextNoteWrapper>();
 
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
         // with NoteInterface
         List<NoteInterface> noteList = new ArrayList<>();
 
-        SampleNote sampleNote=new SampleNote(this);
+        TextNoteWrapper sampleNote=new TextNoteWrapper(this);
 
         textNoteData=sampleNote.getSampleNotes("textNote");
         int listSize=textNoteData.size();

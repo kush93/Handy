@@ -5,13 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View.OnClickListener;
 import android.graphics.Bitmap;
 import android.widget.Toast;
+import android.text.InputType;
+import java.io.*;
 
 import com.example.kushal.rihabhbhandari.R;
+import businesslayer.HandwritingBL;
 
 /**
  * Main activity for the handwriting functionality.
@@ -38,11 +42,14 @@ import com.example.kushal.rihabhbhandari.R;
 public class HandwritingUI extends Activity implements OnClickListener {
 
     private HandwritingView handwritingView;
+    private HandwritingBL handwritingBL;
     ImageButton currColor;
     ImageButton writingBtn;
     ImageButton eraserBtn;
     ImageButton newBtn;
     ImageButton saveBtn;
+    static String emptyString = "";
+    final String noteType = "handwritingNote";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,8 @@ public class HandwritingUI extends Activity implements OnClickListener {
         if(byteArray != null) {
             handwritingView.loadImage(byteArray);
         }
+
+        handwritingBL = handwritingView.getHandwritingBL();
 
         // By default, black is selected color.
         // Makes black button slightly transparent to indicate that it is selected.
@@ -104,11 +113,14 @@ public class HandwritingUI extends Activity implements OnClickListener {
             // Save button has been clicked
             AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
             saveDialog.setTitle("Save Note");
-            saveDialog.setMessage("Would you like to save the note?");
+            saveDialog.setMessage("Would you like to save? Please enter a title.");
+            final EditText input = new EditText(this);
+            input.setInputType(InputType.TYPE_CLASS_TEXT);
+            saveDialog.setView(input);
             saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     // Saves
-
+                    String handwrittenTitle = input.getText().toString();
                     handwritingView.setDrawingCacheEnabled(true);
                     Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
                     String savedLocation = handwritingView.saveImage(currentImage);
@@ -118,6 +130,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
                         Toast popupWindow = Toast.makeText(getApplicationContext(),
                                 popupMsg, Toast.LENGTH_SHORT);
                         popupWindow.show();
+                        boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedLocation, noteType);
                     } else {
                         String popupMsg = "Note could not be saved.";
                         Toast popupWindow = Toast.makeText(getApplicationContext(),

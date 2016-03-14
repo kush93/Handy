@@ -1,10 +1,17 @@
 package businesslayer;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import java.io.*;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import persistancelayer.DataBaseHelper;
 
 /**
  * Created by Ian on 21/02/2016.
@@ -17,6 +24,27 @@ import java.io.*;
  * FOR ITERATION 2: Look into possibly implementing brush/eraser size BL methods for when they are implemented
  */
 public class HandwritingBL {
+
+    DataBaseHelper dataBaseHelper = null;
+    //String filePath = "placeholder";
+
+    public HandwritingBL() {} // null constructor
+
+    public HandwritingBL(Context context) {
+        dataBaseHelper = new DataBaseHelper(context);
+    }
+
+    public boolean create(String noteName, String noteLabel, String noteText, String filePath, String noteType) {
+        //textNoteObj= new TextNotePL(noteName,noteLabel,note);
+
+        String editedTime = DateFormat.getDateTimeInstance().format(new Date());
+
+
+        boolean isInserted = dataBaseHelper.insertData(editedTime, noteName, noteLabel, noteText, filePath, noteType); // calling DataBaseHelper Method passing data
+        return isInserted;
+        //textNoteObj.addData(noteName, noteLabel, note);
+        //System.out.printf("11111 %s %s %s ",notename,notelabel,noteit);
+    }
 
     // Business Logic implementation of changing color
     // Returns int of color that has been parsed from the string newColor
@@ -76,5 +104,17 @@ public class HandwritingBL {
     public Bitmap processImage(byte[] byteArray) {
         Bitmap bmpImg = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
         return bmpImg;
+    }
+
+    public List<String> getSavedData(String type) {
+        List<String> handwritingList=new ArrayList<String>();
+        handwritingList=dataBaseHelper.getData(type);
+
+
+
+        //textNoteObj.addData("Rahul", "Bhandari", "first note");
+
+        //textNoteObj.addData("Itr1", "comp3350", "wiki second note");
+        return handwritingList;
     }
 }
