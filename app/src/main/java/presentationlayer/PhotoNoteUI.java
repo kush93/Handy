@@ -34,7 +34,6 @@ public class PhotoNoteUI extends Activity {
 
     // Default Fields
     private EditText editText_title, editText_label;
-    private EditText editText_textNote;
     PhotoNoteBL photoNoteBL = new PhotoNoteBL(this);
 
     final String noteType = "photoNote";
@@ -51,6 +50,7 @@ public class PhotoNoteUI extends Activity {
         // Database variables
         imageViews = new ArrayList<>();
         editTexts = new ArrayList<>();
+        editTexts.add((EditText) findViewById(R.id.editText_addPhoto_first_contents));
 
 
         // Default Fields
@@ -73,7 +73,7 @@ public class PhotoNoteUI extends Activity {
 
 //            ArrayList<String> photoNote=new ArrayList<String>();
             String photoNoteText = null;
-          photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
+            photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
 //
 //            for (int i = 0; i < size; i++) {
 //                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
