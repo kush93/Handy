@@ -138,4 +138,7 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
     public String getLastEditedTime() {
         return time;
     }
+
+    @Override
+    public void openNote(Context context){}
 }
