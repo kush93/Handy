@@ -19,14 +19,11 @@ import persistancelayer.DataBaseHelper;
  * Business Layer for Handwriting functionality
  * Implements the "Business Logic" of the Handwriting functionality
  * HandwritingView.java calls these methods
- * 
- * FOR ITERATION 2: Look into separating the OnTouchEvent override found in HandwritingView.java
- * FOR ITERATION 2: Look into possibly implementing brush/eraser size BL methods for when they are implemented
+ *
  */
 public class HandwritingBL {
 
     DataBaseHelper dataBaseHelper = null;
-    //String filePath = "placeholder";
 
     public HandwritingBL() {} // null constructor
 
@@ -35,15 +32,10 @@ public class HandwritingBL {
     }
 
     public boolean create(String noteName, String noteLabel, String noteText, String filePath, String noteType) {
-        //textNoteObj= new TextNotePL(noteName,noteLabel,note);
-
         String editedTime = DateFormat.getDateTimeInstance().format(new Date());
-
 
         boolean isInserted = dataBaseHelper.insertData(editedTime, noteName, noteLabel, noteText, filePath, noteType); // calling DataBaseHelper Method passing data
         return isInserted;
-        //textNoteObj.addData(noteName, noteLabel, note);
-        //System.out.printf("11111 %s %s %s ",notename,notelabel,noteit);
     }
 
     // Business Logic implementation of changing color
@@ -106,7 +98,6 @@ public class HandwritingBL {
                 e.printStackTrace();
             }
         }
-        //return fileLocation;
         return fileName;
     }
 
@@ -128,7 +119,8 @@ public class HandwritingBL {
             if(tempStr.contains("handwritingNote")) {
                 handwritingList.add(tempStr);
             }
-        }**/
+        }
+         **/
         handwritingList=dataBaseHelper.getData(type);
         return handwritingList;
     }

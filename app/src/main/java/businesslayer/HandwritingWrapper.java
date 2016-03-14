@@ -13,7 +13,6 @@ import java.util.List;
 import persistancelayer.NoteInterface;
 import presentationlayer.HandwritingUI;
 
-//import android.widget.Toast;
 
 /**
  * Created by Ian on 13/03/2016.
@@ -83,14 +82,6 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
         path = path + getContents();
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         Bitmap bmp = BitmapFactory.decodeFile(path, bmOptions);
-        /**
-        if(bmp == null) {
-            String popupMsg = ("NULL");
-            Toast popupWindow = Toast.makeText(getApplicationContext(),
-                    popupMsg, Toast.LENGTH_SHORT);
-            popupWindow.show();
-        }
-         **/
         imageList.add(bmp);
         return imageList;
     }
@@ -114,7 +105,6 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
     @Override
     public boolean hasContents() {
         return false;
-        //return contents != null && !contents.isEmpty();
     }
 
     // Used for retrieving File Path, hence why hasContents is false;
