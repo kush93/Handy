@@ -1,5 +1,6 @@
 package persistancelayer;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.util.List;
@@ -27,5 +28,7 @@ public interface NoteInterface
 
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();
+
+	void            openNote(Context context);
 	// end of requirements
 }

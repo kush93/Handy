@@ -35,7 +35,7 @@ public class PhotoNoteBL extends Activity {
     public static final String KEY_BITMAP = "bitmap";
     DataBaseHelper dataBaseHelper = null;
 
-   static String filePath = "boo";
+    static String filePath = "boo";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     @Override
