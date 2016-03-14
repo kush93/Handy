@@ -141,13 +141,10 @@ public class MainActivity extends AppCompatActivity {
         int listSize=textNoteData.size();
         for(int i=0; i<listSize;i++)
         {
-            noteList.add(sampleNote);
-
-
+            noteList.add(textNoteData.get(i));
         }
 
 //        noteList.addAll(SampleNote.getSampleNotes());
-
 
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
