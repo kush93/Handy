@@ -1,6 +1,8 @@
 package presentationlayer;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -16,6 +18,7 @@ import java.io.*;
 
 import com.example.kushal.rihabhbhandari.R;
 import businesslayer.HandwritingBL;
+import businesslayer.HandwritingWrapper;
 
 /**
  * Main activity for the handwriting functionality.
@@ -48,21 +51,50 @@ public class HandwritingUI extends Activity implements OnClickListener {
     ImageButton eraserBtn;
     ImageButton newBtn;
     ImageButton saveBtn;
+
     static String emptyString = "";
     final String noteType = "handwritingNote";
+
+    private String handwrittenTitle = null;
+    private String filePath = null;
+    private String tempFilePath = null;
+
+    private final static String OPEN_SAVED  = "OPEN_SAVED";
+    private final static String DATA        = "DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_writing_main);
+
         handwritingView = (HandwritingView)findViewById(R.id.handwriting);
         writingBtn = (ImageButton)findViewById(R.id.pencilBtn);
         eraserBtn = (ImageButton)findViewById(R.id.eraseBtn);
         newBtn = (ImageButton)findViewById(R.id.newBtn);
         saveBtn = (ImageButton)findViewById(R.id.saveBtn);
 
-        byte[] byteArray = getIntent().getByteArrayExtra("image");
-        if(byteArray != null) {
+        Intent intent = this.getIntent();
+        if (intent != null && intent.getBooleanExtra(OPEN_SAVED, false))
+        {
+            HandwritingWrapper wrapper = (HandwritingWrapper) intent.getSerializableExtra(DATA);
+
+            assert (wrapper != null);
+
+            if (wrapper.hasNoteTitle())
+                handwrittenTitle = wrapper.getNoteTitle();
+
+            if (wrapper.hasImages())
+                handwritingView.loadImage(wrapper.getImages().get(0));
+
+            System.out.printf("SYSOUT: HandwritingUI.onCreate(): if boolean == true\n");
+            System.out.printf("SYSOUT: wrapper.getTitle() == \n");
+            System.out.printf("SYSOUT: wrapper.getTitle() == %s\n", wrapper.getNoteTitle());
+        }
+        else
+            System.out.printf("SYSOUT: if boolean == false\n");
+
+        if (intent != null && intent.getByteArrayExtra("image") != null) {
+            byte[] byteArray = intent.getByteArrayExtra("image");
             handwritingView.loadImage(byteArray);
         }
 
@@ -99,6 +131,9 @@ public class HandwritingUI extends Activity implements OnClickListener {
             newDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     handwritingView.newNote();
+                    filePath = null;
+                    tempFilePath = null;
+                    handwrittenTitle = null;
                     dialog.dismiss();
                 }
             });
@@ -111,42 +146,100 @@ public class HandwritingUI extends Activity implements OnClickListener {
         }
         else if(view.getId()==R.id.saveBtn){
             // Save button has been clicked
-            AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
-            saveDialog.setTitle("Save Note");
-            saveDialog.setMessage("Would you like to save? Please enter a title.");
-            final EditText input = new EditText(this);
-            input.setInputType(InputType.TYPE_CLASS_TEXT);
-            saveDialog.setView(input);
-            saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // Saves
-                    String handwrittenTitle = input.getText().toString();
-                    handwritingView.setDrawingCacheEnabled(true);
-                    Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
-                    String savedLocation = handwritingView.saveImage(currentImage);
 
-                    if (savedLocation != null) {
-                        String popupMsg = ("Saved to " + savedLocation);
-                        Toast popupWindow = Toast.makeText(getApplicationContext(),
-                                popupMsg, Toast.LENGTH_SHORT);
-                        popupWindow.show();
-                        boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedLocation, noteType);
-                    } else {
-                        String popupMsg = "Note could not be saved.";
-                        Toast popupWindow = Toast.makeText(getApplicationContext(),
-                                popupMsg, Toast.LENGTH_SHORT);
-                        popupWindow.show();
+            if(filePath != null) {
+                AlertDialog.Builder overwriteDialog = new AlertDialog.Builder(this);
+
+                overwriteDialog.setTitle("Save Note");
+                overwriteDialog.setMessage("This Handwritten Note already exists, would you like to overwrite it?");
+                overwriteDialog.setPositiveButton("Overwrite File", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Can now continue with save.
+                        savePrompt();
+                        dialog.dismiss();
+                        //tempFilePath = null;
                     }
-                    handwritingView.destroyDrawingCache();
+                });
+                overwriteDialog.setNegativeButton("Save to New File", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int which) {
+                       savePrompt();
+                       tempFilePath = filePath;
+                       filePath = null;
+                       dialog.dismiss();
+                   }
+                });
+                overwriteDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Does not continue with save.
+                        dialog.cancel();
+                    }
+                });
+                overwriteDialog.show();
+            }
+            else {
+                savePrompt();
+            }
+            if(tempFilePath != null) {
+                if(filePath == null) {
+                    // Pressed Save to New File, but didn't Save
+                    filePath = tempFilePath;
+                    tempFilePath = null;
                 }
-            });
-            saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
+                else {
+                    // Pressed Save to New File, and did Save
+                    tempFilePath = null;
                 }
-            });
-            saveDialog.show();
+            }
         }
+    }
+
+    private void savePrompt() {
+        AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
+
+        saveDialog.setTitle("Save Note");
+        saveDialog.setMessage("Please enter a title and press Okay to Save.");
+        final EditText input = new EditText(this);
+        if(handwrittenTitle != null)
+            input.setText(handwrittenTitle);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        saveDialog.setView(input);
+
+        saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Saves
+                handwrittenTitle = input.getText().toString();
+                handwritingView.setDrawingCacheEnabled(true);
+                Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
+                String savedLocation = handwritingView.saveImage(currentImage, filePath);
+
+                if (savedLocation != null) {
+                    String popupMsg = ("Saved to " + savedLocation);
+                    Toast popupWindow = Toast.makeText(getApplicationContext(),
+                            popupMsg, Toast.LENGTH_SHORT);
+                    popupWindow.show();
+                    boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedLocation, noteType);
+
+                    filePath = savedLocation;
+                } else {
+                    String popupMsg = "Note could not be saved.";
+                    Toast popupWindow = Toast.makeText(getApplicationContext(),
+                            popupMsg, Toast.LENGTH_SHORT);
+                    popupWindow.show();
+                }
+                tempFilePath = null;
+                handwritingView.destroyDrawingCache();
+            }
+        });
+        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                if(tempFilePath != null) {
+                    filePath = tempFilePath;
+                    tempFilePath = null;
+                }
+                dialog.cancel();
+            }
+        });
+        saveDialog.show();
     }
 
     // When user presses one of the color buttons
@@ -163,5 +256,13 @@ public class HandwritingUI extends Activity implements OnClickListener {
             currColor.setAlpha((float) 1.00);
             currColor = (ImageButton)view;
         }
+    }
+
+    public static void openNote(Context context, HandwritingWrapper wrapper){
+        Intent intent = new Intent(context, HandwritingUI.class);
+        intent.putExtra(OPEN_SAVED, true);
+        intent.putExtra(DATA, wrapper);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
     }
 }

@@ -29,6 +29,6 @@ public interface NoteInterface
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();
 
-	//void            openNote(Context context);
+	void            openNote(Context context);
 	// end of requirements
 }

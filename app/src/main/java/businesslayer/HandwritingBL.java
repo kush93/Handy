@@ -65,7 +65,7 @@ public class HandwritingBL {
         return returnColor;
     }
 
-    public String saveImage(Bitmap sourceImage) {
+    public String saveImage(Bitmap sourceImage, String filePath) {
         // Saves to picture directory, under a subfolder called "Handy"
         String fileLocation = null;
         boolean folderExists = true;
@@ -80,7 +80,13 @@ public class HandwritingBL {
         if(folderExists) {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             sourceImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-            File destination = new File(path, System.currentTimeMillis() + ".jpg");
+            File destination;
+            if(filePath != null) {
+                destination = new File(filePath);
+            }
+            else {
+                destination = new File(path, System.currentTimeMillis() + ".jpg");
+            }
 
             FileOutputStream fo;
             try

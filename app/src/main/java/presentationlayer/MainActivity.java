@@ -140,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-	            //noteList.get(position).openNote(MainActivity.this);
-	            //((NoteInterface) parent.getSelectedItem()).openNote();
-                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
+	            noteList.get(position).openNote(MainActivity.this);
+//	            ((NoteInterface) parent.getSelectedItem()).openNote();
+//                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
 
             }
         });

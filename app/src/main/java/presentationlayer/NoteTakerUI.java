@@ -85,7 +85,6 @@ public class NoteTakerUI extends Activity {
 
     }
 
-    /**
     public static void openNote(Context context, TextNoteWrapper wrapper)
     {
 	    Intent intent = new Intent(context, NoteTakerUI.class);
@@ -94,7 +93,6 @@ public class NoteTakerUI extends Activity {
 	    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
     }
-    **/
 
     public void addData() //calls the onClick method for Save button
     {

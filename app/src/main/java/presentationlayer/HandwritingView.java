@@ -78,14 +78,24 @@ public class HandwritingView extends View {
         invalidate();
     }
 
-    public String saveImage(Bitmap savedImg) {
-        String fileLoc = handwritingBL.saveImage(savedImg);
-        return fileLoc;
+    public String saveImage(Bitmap savedImg, String filePath) {
+        String savedAt = null;
+        if(filePath == null) {
+            savedAt = handwritingBL.saveImage(savedImg, null);
+        }
+        else {
+            savedAt = handwritingBL.saveImage(savedImg, filePath);
+        }
+        return savedAt;
     }
 
     // If it has been specified that a background is to be used for note
     public void loadImage(byte[] byteArray) {
         bgBitmap = handwritingBL.processImage(byteArray);
+    }
+
+    public void loadImage(Bitmap inputImage) {
+        bgBitmap = inputImage;
     }
 
     public HandwritingBL getHandwritingBL() {

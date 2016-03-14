@@ -3,16 +3,19 @@ package businesslayer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import persistancelayer.NoteInterface;
+import presentationlayer.HandwritingUI;
 
 /**
  * Created by Ian on 13/03/2016.
  */
-public class HandwritingWrapper extends Activity implements NoteInterface {
+public class HandwritingWrapper extends Activity implements NoteInterface, Serializable {
 
     private String title;
     private String contents;
@@ -20,7 +23,6 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
     private String time;
     private boolean isPinned;
 
-    //static HandwritingBL handwritingBL;
     HandwritingBL handwritingBL;
     private static String noteType = "handwritingNote";
 
@@ -42,46 +44,27 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
     public List<HandwritingWrapper> getSampleNotes(String noteType) {
 
         List<HandwritingWrapper> handwritingWrappers = new ArrayList<>();
-        List<String> returnedNotes = new ArrayList<String>();
-
-
-		/*textNoteWrappers.add(new HandwritingWrapper("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
-		textNoteWrappers.add(new HandwritingWrapper("My Sample Note 2", "And Some Contents 2", "COMP3380", "2015", false));
-*/
-        returnedNotes=handwritingBL.getSavedData(noteType); // returns the data from the database for the textNote
+        List<String> returnedNotes = handwritingBL.getSavedData(noteType);
 
         int listSize=returnedNotes.size();
         if(listSize>0)
         {
             for(int i=0;i<listSize;i++)
             {
-                //String noteName=
-
                 String singleNote=returnedNotes.get(i);
                 String token[]=singleNote.trim().split("/");
-                handwritingWrappers.add(new HandwritingWrapper(token[2],token[4],token[3],token[1],false));
+                // contents retrieves file path, but HandwritingWrapper returns false for hasContents()
+                // This is intended
+                handwritingWrappers.add(new HandwritingWrapper(token[2],token[5],token[3],token[1],false));
             }
-
         }
 
-
-
-
-//		handwritingWrappers.add(new HandwritingWrapper(null, null, null, null, false));
-//
-//		List<String> tags = new ArrayList<>();
-//
-//
-//		tags.add("foo");
-//		textNoteWrappers.add(new HandwritingWrapper("My Sample Note 2", "And Some Contents 2", tags, "2014", true));
-//
-//		tags.add("boo");
-//		textNoteWrappers.add(new HandwritingWrapper("My Sample Note 3", "And Some Contents 3", tags, null, true));
-//
-//		tags.add("NA");
-//		textNoteWrappers.add(new HandwritingWrapper("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
-
         return handwritingWrappers;
+    }
+
+    @Override
+    public void openNote(Context context){
+        HandwritingUI.openNote(context, this);
     }
 
     @Override
@@ -91,7 +74,9 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
 
     @Override
     public List<Bitmap> getImages() {
-        return null;
+        List<Bitmap> imageList = new ArrayList<>();
+        imageList.add(BitmapFactory.decodeFile(getContents()));
+        return imageList;
     }
 
     @Override
@@ -106,22 +91,25 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
 
     @Override
     public String getNoteTitle() {
-        return null;
+        return title;
     }
 
+    // Set to false so that getContents can be used to retrieve File Path
     @Override
     public boolean hasContents() {
-        return contents != null && !contents.isEmpty();
+        return false;
+        //return contents != null && !contents.isEmpty();
     }
 
+    // Used for retrieving File Path, hence why hasContents is false;
     @Override
     public String getContents() {
-        return null;
+        return contents;
     }
 
     @Override
     public boolean hasTag() {
-        return tags != null && !tags.isEmpty();
+        return false;
     }
 
     @Override
@@ -138,7 +126,4 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
     public String getLastEditedTime() {
         return time;
     }
-
-    //@Override
-    //public void openNote(Context context){}
 }
