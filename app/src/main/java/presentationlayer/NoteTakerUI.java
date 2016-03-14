@@ -60,9 +60,9 @@ public class NoteTakerUI extends Activity {
 
 	    // for open from save
 	    Intent intent = this.getIntent();
-	    if (intent.getExtras().getBoolean(OPEN_SAVED, false))
+	    if (intent != null && intent.getBooleanExtra(OPEN_SAVED, false))
 	    {
-		    TextNoteWrapper wrapper = (TextNoteWrapper) intent.getExtras().getSerializable(DATA);
+		    TextNoteWrapper wrapper = (TextNoteWrapper) intent.getSerializableExtra(DATA);
 
 		    assert (wrapper != null);
 
