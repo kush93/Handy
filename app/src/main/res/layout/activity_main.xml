@@ -26,11 +26,10 @@
 
 
         <Button
-            android:layout_width="85dp"
+            android:layout_width="67dp"
             android:layout_height="wrap_content"
             android:text="@string/textnote"
-            android:id="@+id/button_main_open_text_note"
-            android:layout_weight="1"/>
+            android:id="@+id/button_main_open_text_note" />
 
         <Space
             android:layout_width="0dp"
@@ -38,11 +37,11 @@
             android:layout_weight="0.5"/>
 
         <Button
-            android:layout_width="85dp"
+            android:layout_width="66dp"
             android:layout_height="wrap_content"
             android:text="@string/cam"
             android:id="@+id/button_main_open_photo_note"
-            android:layout_weight="1"/>
+            android:layout_weight="1.03" />
 
         <Space
             android:layout_width="0dp"
@@ -50,19 +49,7 @@
             android:layout_weight="0.5"/>
 
         <Button
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:text="@string/handwrite"
-            android:id="@+id/button_main_open_hand_writing"
-            android:layout_weight="1"/>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
-
-        <Button
-            android:layout_width="90dp"
+            android:layout_width="72dp"
             android:layout_height="57dp"
             android:text="CHECK LIST"
             android:id="@+id/button_checklist"
@@ -73,9 +60,26 @@
             android:layout_toEndOf="@+id/button_handwrite"
             android:layout_below="@+id/listView" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:text="@string/handwrite"
+            android:id="@+id/button_main_open_hand_writing" />
 
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PDF"
+        android:id="@+id/button_pdf"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
 
