@@ -33,11 +33,11 @@ public class NoteTakerUI extends Activity {
     TextNoteBL textNoteBL = new TextNoteBL(this);
     TextNotePL textnoteObj = new TextNotePL();
     MainActivity mobj = new MainActivity();
-    ;
 
     TextView editName, editLabel, editNote;
     final String noteType = "textNote";
     final String filePath = null;
+    private String noteID;
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -52,8 +52,6 @@ public class NoteTakerUI extends Activity {
         editNote = (TextView) findViewById(R.id.editText_note);
         addNote = (Button) findViewById(R.id.button_save_note);
         //editName.setTypeface(null, Typeface.BOLD_ITALIC);
-
-        addData();
 
         // for open from save
         Intent intent = this.getIntent();
@@ -72,12 +70,12 @@ public class NoteTakerUI extends Activity {
             if (wrapper.hasTag())
                 editLabel.setText(wrapper.getTag());
 
-            System.out.printf("SYSOUT: NoteTakerUI.onCreate(): if boolean == true\n");
-            System.out.printf("SYSOUT: wrapper.getTitle() == \n");
-            System.out.printf("SYSOUT: wrapper.getTitle() == %s\n", wrapper.getNoteTitle());
+            noteID = wrapper.getNoteID();
+            modifyData();
+
         }
         else
-            System.out.printf("SYSOUT: if boolean == false\n");
+            addData();
 
 
     }
@@ -93,20 +91,25 @@ public class NoteTakerUI extends Activity {
 
     public void addData() //calls the onClick method for Save button
     {
-        addNote.setOnClickListener(new View.OnClickListener() {
+        addNote.setOnClickListener(new View.OnClickListener()
+        {
 
 
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
 
                 String editedTime = DateFormat.getDateTimeInstance().format(new Date());
                 // long representation of current time
 
-                textNoteBL.create(editedTime,editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
-                if (textnoteObj.getData("note").isEmpty()) {
+                textNoteBL.create(editedTime, editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
+                if (textnoteObj.getData("note").isEmpty())
+                {
                     Toast.makeText(NoteTakerUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
-                } else {
+                }
+                else
+                {
 
 
                     Toast.makeText(NoteTakerUI.this, editName.getText().toString() + " Note was saved", Toast.LENGTH_LONG).show();
@@ -119,6 +122,38 @@ public class NoteTakerUI extends Activity {
             }
         });
     }
+
+
+    public void modifyData() //calls the onClick method for Save button
+    {
+        addNote.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                String editedTime = DateFormat.getDateTimeInstance().format(new Date());
+                // long representation of current time
+
+                textNoteBL.updateData(noteID, editedTime, editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
+                if (textnoteObj.getData("note").isEmpty()) {
+                    Toast.makeText(NoteTakerUI.this, "Note was not modified", Toast.LENGTH_LONG).show();
+
+                } else {
+
+
+                    Toast.makeText(NoteTakerUI.this, editName.getText().toString() + " Note was modified", Toast.LENGTH_LONG).show();
+                    //mobj.dataAdded(editName);
+                    // MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
+                }
+
+                finish();
+
+            }
+        });
+    }
+
+
 
 
 }

@@ -43,34 +43,6 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
 
     }
 
-//
-//    public List<HandwritingWrapper> getNotesFromDB(String noteType) {
-//
-//        List<HandwritingWrapper> handwritingWrappers = new ArrayList<>();
-//        List<String> returnedNotes = handwritingBL.getSavedData(noteType); // returns the data from the database for the textNote
-//
-//        int listSize = returnedNotes.size();
-//        if (listSize > 0) {
-//            for (int i = 0; i < listSize; i++) {
-//                //String noteName=
-//
-//                String singleNote = returnedNotes.get(i);
-//                String token[] = singleNote.trim().split("\\?");
-//
-//                //id?time?name?label?textNote?filePath?noteType
-//                // textNote1/textNote2/textNote3...... = token[4]
-//                // filePath1^filePath2^filePath3......= token[5]
-//
-//                handwritingWrappers.add(new HandwritingWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
-//
-//
-//            }
-//
-//        }
-//
-//        return handwritingWrappers;
-//    }
-
     @Override
     public void openNote(Context context){
         HandwritingUI.openNote(context, this);
