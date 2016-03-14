@@ -140,7 +140,7 @@ public class PhotoNoteUI extends Activity {
     /*String allPath = "";*/
 
     private void onSuccessfulAddPhoto(Bitmap bitmap) {
-        allFilePath += PhotoNoteBL.filePath + "?";
+        allFilePath += PhotoNoteBL.filePath + "^";
         final ImageView ivImage = new PhotoNoteBL(this).makeImageView(this, getApplicationContext(), bitmap);
         ivImage.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
