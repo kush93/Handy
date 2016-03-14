@@ -50,7 +50,6 @@ public class PhotoNoteBL extends Activity {
     public PhotoNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
 
-
     }
 
     public boolean create(String noteName, String noteLabel, String noteText, String noteType) {
