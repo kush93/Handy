@@ -234,6 +234,9 @@ public class MainActivity extends AppCompatActivity {
                     case NoteInterface.handWritingNoteType:
                         noteInterfaces.add(new HandwritingWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
                         break;
+                    default:
+	                    noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+
                 }
             }
         }
