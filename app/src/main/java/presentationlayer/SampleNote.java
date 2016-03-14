@@ -1,6 +1,7 @@
 package presentationlayer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
@@ -19,7 +20,8 @@ public class SampleNote extends Activity implements NoteInterface {
 	private String time;
 	private boolean isPinned;
 
-	static TextNoteBL textNoteBL;
+	//static TextNoteBL textNoteBL;
+	TextNoteBL textNoteBL;
 	private static String noteType = "textNote";
 
 	public SampleNote(String title, String contents, String tags, String time, boolean isPinned) {
@@ -28,18 +30,25 @@ public class SampleNote extends Activity implements NoteInterface {
 		this.tags = tags;
 		this.time = time;
 		this.isPinned = isPinned;
-		textNoteBL = new TextNoteBL(this);
+
+	}
+	public SampleNote(Context context)
+	{
+		textNoteBL = new TextNoteBL(context);
+
 	}
 
-	static List<SampleNote> getSampleNotes() {
+
+	public List<SampleNote> getSampleNotes(String noteType) {
+
 		List<SampleNote> sampleNotes = new ArrayList<>();
-		List<String> returnedNotes = new ArrayList<>();
+		List<String> returnedNotes = new ArrayList<String>();
 
-		// Date date = new Date();
-		sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
+
+		/*sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
 		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", "COMP3380", "2015", false));
-
-		/*returnedNotes=SampleNote.textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
+*/
+		returnedNotes=textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
 
 		int listSize=returnedNotes.size();
 		if(listSize>0)
@@ -49,11 +58,11 @@ public class SampleNote extends Activity implements NoteInterface {
 				//String noteName=
 
 				String singleNote=returnedNotes.get(i);
-				String token[]=singleNote.trim().split("\\s+");
+				String token[]=singleNote.trim().split("/");
 				sampleNotes.add(new SampleNote(token[2],token[4],token[3],token[1],false));
 			}
 
-		}*/
+		}
 
 
 

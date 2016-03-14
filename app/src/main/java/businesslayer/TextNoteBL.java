@@ -18,7 +18,10 @@ public class TextNoteBL {
 
     public TextNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
+
     }
+
+    public  TextNoteBL(){}// empty constructor
 
 
     // public ArrayList<TextNotePL> noteList=new ArrayList<TextNotePL>();

@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        textNoteBL = new TextNoteBL(this);
+        //textNoteBL = new TextNoteBL(this);
 
         // request permission ... required for API 23 or above
         requestStoragePermission();
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainObj = this;
         setContentView(R.layout.activity_main);
-//        populateListView();
+       populateListView();
 
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -99,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView() {
 
-        List<String> textNoteData = new ArrayList<String>();
+        List<SampleNote> textNoteData = new ArrayList<SampleNote>();
  //       textNoteData = textNoteBL.getSavedData("textNote");
 
         listView = (ListView) findViewById(R.id.listView_main_note_list);
@@ -129,11 +128,24 @@ public class MainActivity extends AppCompatActivity {
         List<NoteInterface> noteList = new ArrayList<>();
 
         int size = 0;
-
-        for (SampleNote sampleNote : SampleNote.getSampleNotes()) {
+        /*
+        for ( SampleNote sampleNote : SampleNote.getSampleNotes("textNote"))
+        {
             System.out.println("OUTPUT: size: " + (++size));
             noteList.add(sampleNote);
+        }*/
+
+        SampleNote sampleNote=new SampleNote(this);
+
+        textNoteData=sampleNote.getSampleNotes("textNote");
+        int listSize=textNoteData.size();
+        for(int i=0; i<listSize;i++)
+        {
+            noteList.add(sampleNote);
+
+
         }
+
 //        noteList.addAll(SampleNote.getSampleNotes());
 
 
@@ -184,6 +196,8 @@ public class MainActivity extends AppCompatActivity {
                     }, MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE);
         }
     }
+
+
 
     // @Override
     /*public void onStart() {

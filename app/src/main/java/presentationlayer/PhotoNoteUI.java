@@ -38,7 +38,7 @@ public class PhotoNoteUI extends Activity {
     PhotoNoteBL photoNoteBL = new PhotoNoteBL(this);
 
     final String noteType = "photoNote";
-//    final String filePath = null;
+    final String filePath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

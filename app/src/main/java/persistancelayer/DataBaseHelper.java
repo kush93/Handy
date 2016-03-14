@@ -14,7 +14,7 @@ import java.util.List;
  * Created by rishabhbhandari on 2016-03-11.
  */
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper  {
     public static final String DATABASE_NAME = "Notes.db";
     public static final String TABLE_NAME = "note_table";
     public static final String COL_1 = "ID";
@@ -85,13 +85,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             do {
 
 
-                data.concat(cursor.getString(0)+" ");   //id
-                data.concat(cursor.getString(1)+" ");   //time
-                data.concat(cursor.getString(2)+" ");   //name
-                data.concat(cursor.getString(3)+" ");   //label
-                data.concat(cursor.getString(4)+" ");   //textNote
-                data.concat(cursor.getString(5)+" ");   //filePath
-                data.concat(cursor.getString(6)+" ");   //noteType
+                data=cursor.getString(0)+"/";   //id
+                data=data.concat(cursor.getString(1)+"/");
+                //data.concat(cursor.getString(1)+" ");   //time
+                data=data.concat(cursor.getString(2) + "/");   //name
+
+                data=data.concat(cursor.getString(3)+"/");   //label
+
+                data=data.concat(cursor.getString(4)+"/");   //textNote
+                data=data.concat(cursor.getString(5)+"/");   //filePath
+                data=data.concat(cursor.getString(6)+"/");   //noteType
 
                 // Adding contact to list
                 dataList.add(data);
