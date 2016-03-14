@@ -125,7 +125,7 @@ Kushal-> helepd rishabh a bit with debugging and wrote the test cases (intergart
 Rahul-> PDF viewing 
 Hadi-> implemented checklist, saving part left for next iteration
 Ian->Modified the handwriting feature and added saving functionality for saving handwritten notes .
-
+(Dependency injection using -: noteInterface , TextNoteWrapper and HandWritingWrapper)
  COSTS
  		 		Planned costs 			Actual costs
  opening PDF's -		 5 days 	     		  5 days
