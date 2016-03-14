@@ -35,7 +35,7 @@ public class PhotoNoteBL extends Activity {
     public static final String KEY_BITMAP = "bitmap";
     DataBaseHelper dataBaseHelper = null;
 
-    String filePath = null;
+   static String filePath = "boo";
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
 
     @Override
@@ -44,6 +44,8 @@ public class PhotoNoteBL extends Activity {
 
         callDialogBox();
     }
+
+    public PhotoNoteBL() {}     // null constructor
 
     public PhotoNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
@@ -115,7 +117,8 @@ public class PhotoNoteBL extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (resultCode == Activity.RESULT_OK && (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA)) {
+        if (resultCode == Activity.RESULT_OK && (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA))
+        {
             Bitmap bm;
 
             if (requestCode == SELECT_FILE)

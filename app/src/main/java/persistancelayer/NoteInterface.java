@@ -15,14 +15,15 @@ public interface NoteInterface
 
 	boolean         isPinned();             // pin / favourite
 
-	boolean         hasTitle();
-	String          getTitle();
+	boolean         hasNoteTitle();
+	String          getNoteTitle();
+
 
 	boolean         hasContents();
 	String          getContents();
 
 	boolean         hasTag();
-	List<String>    getTags();
+	String 			getTag();
 
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();

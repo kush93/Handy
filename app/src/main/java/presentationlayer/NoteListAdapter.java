@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.kushal.rihabhbhandari.R;
-import persistancelayer.NoteInterface;
 
-import java.util.Iterator;
+import com.example.kushal.rihabhbhandari.R;
+
 import java.util.List;
+
+import persistancelayer.NoteInterface;
 
 /**
  * Created by Matthias on 16-03-12.
@@ -59,7 +60,7 @@ public class NoteListAdapter extends BaseAdapter
 		TextView  tv_tags       = (TextView)  view.findViewById(R.id.main_list_item_tv_tag);
 		TextView  tv_tags_const = (TextView)  view.findViewById(R.id.main_list_item_tv_tag_const);
 
-		tv_title.setText(note.hasTitle() ? note.getTitle() : "Empty Title");
+		tv_title.setText(note.hasNoteTitle() ? note.getNoteTitle() : "Empty Title");
 		tv_editTime.setText(note.hasLastEditedTime() ? note.getLastEditedTime() : "Unknown Edit Time");
 
 		if (!note.hasContents())
@@ -82,17 +83,9 @@ public class NoteListAdapter extends BaseAdapter
 		}
 		else
 		{
-			Iterator<String> itr = note.getTags().iterator();
-
-			while (itr.hasNext())
-			{
-				String tag = itr.next();
-
-				tv_tags.setText(tv_tags.getText() + tag);
-
-				if (itr.hasNext())
-					tv_tags.setText(tv_tags.getText() + ", ");
-			}
+			tv_tags.setVisibility(View.VISIBLE);
+			tv_tags_const.setVisibility(View.VISIBLE);
+			tv_tags.setText(note.getTag());
 		}
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);

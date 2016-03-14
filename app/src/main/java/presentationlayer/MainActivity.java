@@ -2,6 +2,7 @@ package presentationlayer;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,16 +35,24 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     Button newNote;
     TextNotePL textNotePL = new TextNotePL();
-    TextNoteBL textNoteBL = new TextNoteBL(this);
+    TextNoteBL textNoteBL;
     int alSize = 0;// arraylist size
     ArrayAdapter<String> arrayAdapter;
     NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
 
+	private int REQUEST_NEW_NOTE = 1;
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //textNoteBL = new TextNoteBL(this);
 
         // request permission ... required for API 23 or above
         requestStoragePermission();
@@ -50,15 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
         mainObj = this;
         setContentView(R.layout.activity_main);
-        populateListView();
+       populateListView();
 
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NoteTakerUI.class);
-                startActivityForResult(intent, 0);
-
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -68,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PhotoNoteUI.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -77,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HandwritingUI.class);
-                startActivity(intent);
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -86,45 +95,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChecklistUI.class);
-                startActivity(intent);
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
 
             }
         });
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
 
-    public static MainActivity getInstance(){
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_NEW_NOTE) notifyDataSetChanged();
+	}
+
+    public static MainActivity getInstance() {
         return mainObj;
     }
 
     private void populateListView() {
 
-        //textNoteBL.getSavedData(this);
+        List<SampleNote> textNoteData = new ArrayList<SampleNote>();
 
-        listView= (ListView) findViewById(R.id.listView_main_note_list);;
-
-//        previous version
-//        alSize = textNotePL.getNoteList().size();
-//        String noteName[] = new String[alSize];
-//        for (int i = 0; i < alSize; i++) {
-//            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
-//        }
-//        ArrayList<String> noteList = new ArrayList<String>();
-//        noteList.addAll(Arrays.asList(noteName) );
-//        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
+        listView = (ListView) findViewById(R.id.listView_main_note_list);
 
         // with NoteInterface
         List<NoteInterface> noteList = new ArrayList<>();
 
-        int size = 0;
+        SampleNote sampleNote=new SampleNote(this);
 
-        for (SampleNote sampleNote : SampleNote.getSampleNotes())
+        textNoteData=sampleNote.getSampleNotes("textNote");
+        int listSize=textNoteData.size();
+        for(int i=0; i<listSize;i++)
         {
-            System.out.println("OUTPUT: size: " + (++size));
-            noteList.add(sampleNote);
+            noteList.add(textNoteData.get(i));
         }
-//        noteList.addAll(SampleNote.getSampleNotes());
-
 
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
@@ -140,16 +147,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    public void dataAdded(TextView noteName)
+    private void notifyDataSetChanged()
     {
+	    populateListView();
+    }
+
+    public void dataAdded(TextView noteName) {
         //TextView nameET=(TextView)findViewById(R.id.);
-        String name=noteName.getText().toString();
-        Log.d("my tag", name) ;
+        String name = noteName.getText().toString();
+        Log.d("my tag", name);
 //        Toast.makeText(getApplicationContext(),  name, Toast.LENGTH_SHORT).show();
 
-        if(!name.isEmpty() && name.length()>0)
-        {
+        if (!name.isEmpty() && name.length() > 0) {
             arrayAdapter.add(name);
 
             arrayAdapter.notifyDataSetChanged();
@@ -158,17 +167,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
-
     }
 
     // request permission ... required for API 23 or above
-    private void requestStoragePermission()
-    {
-        if((ContextCompat.checkSelfPermission(MainActivity.this,
-                                              Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-           || (ContextCompat.checkSelfPermission(MainActivity.this,
-                                                 Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
+    private void requestStoragePermission() {
+        if ((ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                || (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED))
 
         {
             ActivityCompat.requestPermissions

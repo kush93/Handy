@@ -14,12 +14,15 @@ import persistancelayer.TextNotePL;
 public class TextNoteBL {
 
     DataBaseHelper dataBaseHelper = null;
+    TextNotePL textNoteObj = new TextNotePL();
 
     public TextNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
+
     }
 
-    TextNotePL textNoteObj = new TextNotePL();
+    public  TextNoteBL(){}// empty constructor
+
 
     // public ArrayList<TextNotePL> noteList=new ArrayList<TextNotePL>();
 

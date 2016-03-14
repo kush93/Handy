@@ -1,5 +1,6 @@
 package persistancelayer;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by rishabhbhandari on 2016-03-11.
  */
 
-public class DataBaseHelper extends SQLiteOpenHelper {
+public class DataBaseHelper extends SQLiteOpenHelper  {
     public static final String DATABASE_NAME = "Notes.db";
     public static final String TABLE_NAME = "note_table";
     public static final String COL_1 = "ID";
@@ -25,8 +26,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String COL_7 = "NoteType";
 
 
+    Context showmsg;
+
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
+        showmsg=context;
         //SQLiteDatabase db = this.getWritableDatabase();
     }
 
@@ -53,35 +58,48 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
         long result = db.insert(TABLE_NAME, null, contentValues);
+
         if (result == -1)
             return false;
-        else
-            return true;
+
+
+
+
+
+        return true;
 
 
     }
     public List<String> getData(String noteType) {
         List<String> dataList = new ArrayList<String>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME+"WHERE " + noteType;
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME;//+"WHERE " + noteType
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        if(cursor.getCount()==0)
+        {
+            showMessage("Error", "Nothing found");
+            //return;
+        }
 
-        String data=null;
+        String data=new String() ;
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
 
 
-                data.concat(cursor.getString(0));   //id
-                data.concat(cursor.getString(1));   //time
-                data.concat(cursor.getString(2));   //name
-                data.concat(cursor.getString(3));   //label
-                data.concat(cursor.getString(4));   //textNote
-                data.concat(cursor.getString(5));   //filePath
-                data.concat(cursor.getString(6));   //noteType
+                data=cursor.getString(0)+"/";   //id
+                data=data.concat(cursor.getString(1)+"/");
+                //data.concat(cursor.getString(1)+" ");   //time
+                data=data.concat(cursor.getString(2) + "/");   //name
+
+                data=data.concat(cursor.getString(3)+"/");   //label
+
+                data=data.concat(cursor.getString(4)+"/");   //textNote
+                data=data.concat(cursor.getString(5)+"/");   //filePath
+                data=data.concat(cursor.getString(6)+"/");   //noteType
 
                 // Adding contact to list
                 dataList.add(data);
@@ -90,6 +108,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         // return contact list
         return dataList;
+    }
+    public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(showmsg);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 //    public Cursor getAllData() // cursor = This interface provides random read-write access to the result set returned by a database query.
 //    {
