@@ -24,6 +24,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.List;
 
+import businesslayer.PdfrendererUI;
 import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         mainObj = this;
         setContentView(R.layout.activity_main);
         populateListView();
-
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +85,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HandwritingUI.class);
                 startActivity(intent);
+            }
+        });
+        newNote=(Button) findViewById(R.id.button_pdf);
+        newNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PdfrendererUI.class);
+                startActivity(intent);
+
             }
         });
 
