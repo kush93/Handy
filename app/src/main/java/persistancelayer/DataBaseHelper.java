@@ -14,7 +14,7 @@ import java.util.List;
  * Created by rishabhbhandari on 2016-03-11.
  */
 
-public class DataBaseHelper extends SQLiteOpenHelper  {
+public class DataBaseHelper extends SQLiteOpenHelper implements DataInterface {
     public static final String DATABASE_NAME = "Notes.db";
     public static final String TABLE_NAME = "note_table";
     public static final String COL_1 = "ID";
@@ -31,7 +31,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
-        showmsg=context;
+        showmsg = context;
         //SQLiteDatabase db = this.getWritableDatabase();
     }
 
@@ -63,13 +63,11 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
             return false;
 
 
-
-
-
         return true;
 
 
     }
+
     public List<String> getData(String noteType) {
         List<String> dataList = new ArrayList<String>();
         // Select All Query
@@ -77,29 +75,28 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if(cursor.getCount()==0)
-        {
-            showMessage("Error", "Nothing found");
+        if (cursor.getCount() == 0) {
+            showMessage("No Notes exist", "");
             //return;
         }
 
-        String data=new String() ;
+        String data = new String();
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
 
 
-                data=cursor.getString(0)+"/";   //id
-                data=data.concat(cursor.getString(1)+"/");
+                data = cursor.getString(0) + "/";   //id
+                data = data.concat(cursor.getString(1) + "/");
                 //data.concat(cursor.getString(1)+" ");   //time
-                data=data.concat(cursor.getString(2) + "/");   //name
+                data = data.concat(cursor.getString(2) + "/");   //name
 
-                data=data.concat(cursor.getString(3)+"/");   //label
+                data = data.concat(cursor.getString(3) + "/");   //label
 
-                data=data.concat(cursor.getString(4)+"/");   //textNote
-                data=data.concat(cursor.getString(5)+"/");   //filePath
-                data=data.concat(cursor.getString(6)+"/");   //noteType
+                data = data.concat(cursor.getString(4) + "/");   //textNote
+                data = data.concat(cursor.getString(5) + "/");   //filePath
+                data = data.concat(cursor.getString(6) + "/");   //noteType
 
                 // Adding contact to list
                 dataList.add(data);
@@ -109,7 +106,27 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
         // return contact list
         return dataList;
     }
-    public void showMessage(String title, String message){
+
+    public boolean updateData(String id, String time, String noteName, String noteLabel, String textNote, String filePath, String noteType) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2, time);
+        contentValues.put(COL_3, noteName);
+        contentValues.put(COL_4, noteLabel);
+        contentValues.put(COL_5, textNote);
+        contentValues.put(COL_6, filePath);
+        contentValues.put(COL_7, noteType);
+        long result = db.update(TABLE_NAME, contentValues, "ID = ?", new String[]{id});
+
+        if (result == -1)
+            return false;
+
+
+        return true;
+    }
+
+
+    public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(showmsg);
         builder.setCancelable(true);
         builder.setTitle(title);

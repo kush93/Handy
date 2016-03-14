@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistancelayer.DataBaseHelper;
+import persistancelayer.DataInterface;
 import persistancelayer.TextNotePL;
 
 /**
@@ -14,15 +15,18 @@ import persistancelayer.TextNotePL;
 public class TextNoteBL {
 
     DataBaseHelper dataBaseHelper = null;
+    DataInterface dataInterface = null;
     TextNotePL textNoteObj = new TextNotePL();
 
     public TextNoteBL(Context context) {
         dataBaseHelper = new DataBaseHelper(context);
+        //dataInterface = new DataBaseHelper(context);
+
 
     }
 
-    public  TextNoteBL(){}// empty constructor
-
+    public TextNoteBL() {
+    }// empty constructor
 
 
     // public ArrayList<TextNotePL> noteList=new ArrayList<TextNotePL>();
@@ -33,25 +37,29 @@ public class TextNoteBL {
         // String time = "12:00";
         boolean isInserted = dataBaseHelper.insertData(time, noteName, noteLabel, noteText, null, type); // no file path needed for text note
 
-        textNoteObj.addData(noteName, noteLabel, noteText);
+        textNoteObj.insertData(time, noteName, noteLabel, noteText, null, type);
         //System.out.printf("11111 %s %s %s ",notename,notelabel,noteit);
         return isInserted;
     }
 
-    public TextNotePL getTextNoteObj() {
-        return textNoteObj;
+    public boolean updateData(String id, String time, String noteName, String noteLabel, String textNote, String filePath, String noteType) {
+        boolean result = dataBaseHelper.updateData(id, time, noteName, noteLabel, textNote, filePath, noteType);
+        return result;
     }
 
+
     public List<String> getSavedData(String type) {
-        List<String> textNoteList=new ArrayList<String>();
-        textNoteList=dataBaseHelper.getData(type);
+        List<String> textNoteList = new ArrayList<String>();
+        textNoteList = dataBaseHelper.getData(type);
 
+        textNoteObj.insertData("Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
+        textNoteObj.insertData("Mar 14/2016, 12:22PM ", "Comp 3010", "Assignment 3", "second note", "", "textNote");
 
-
-        textNoteObj.addData("Rahul", "Bhandari", "first note");
-
-        textNoteObj.addData("Itr1", "comp3350", "wiki second note");
         return textNoteList;
+    }
+
+    public TextNotePL getTextNoteObj() {
+        return textNoteObj;
     }
 
 

@@ -72,8 +72,13 @@ public class PhotoNoteUI extends Activity {
             int size = editTexts.size();
 
 //            ArrayList<String> photoNote=new ArrayList<String>();
-            String photoNoteText = null;
-            photoNoteText=(editTexts.get(0).getText().toString() + "\\" + 1);
+            String photoNoteText = new String();
+            for (int i = 0; i < editTexts.size(); i++) {
+
+                photoNoteText = photoNoteText.concat((editTexts.get(i).getText().toString() + '/'));
+            }
+
+
 //
 //            for (int i = 0; i < size; i++) {
 //                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
@@ -96,25 +101,23 @@ public class PhotoNoteUI extends Activity {
             else
                 Toast.makeText(PhotoNoteUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
-           // MainActivity.getInstance().dataAdded(editText_title);// not being used
+            // MainActivity.getInstance().dataAdded(editText_title);// not being used
             super.onBackPressed();
         }
     }
 
 
-    public void onClickCancelImageButton(View view)
-    {
+    public void onClickCancelImageButton(View view) {
         Toast.makeText(PhotoNoteUI.this, "Photo Note is deleted", Toast.LENGTH_SHORT).show();
         super.onBackPressed();
     }
 
-	final int GET_PHOTO = 0;
+    final int GET_PHOTO = 0;
 
-    public void onClickAddPhotoImageButton(View view)
-    {
-	    Intent intent = new Intent(this, PhotoNoteBL.class);
+    public void onClickAddPhotoImageButton(View view) {
+        Intent intent = new Intent(this, PhotoNoteBL.class);
 //	    intent.putExtra()
-	    startActivityForResult(intent, GET_PHOTO);
+        startActivityForResult(intent, GET_PHOTO);
     }
 
     // ================================================================
@@ -122,49 +125,40 @@ public class PhotoNoteUI extends Activity {
     // ================================================================
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK)
-        {
-            if (requestCode == GET_PHOTO)
-            {
-	            Bundle bundle = data.getExtras();
-	            Bitmap bm = bundle.getParcelable(PhotoNoteBL.KEY_BITMAP);
-	            onSuccessfulAddPhoto(bm);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == GET_PHOTO) {
+                Bundle bundle = data.getExtras();
+                Bitmap bm = bundle.getParcelable(PhotoNoteBL.KEY_BITMAP);
+                onSuccessfulAddPhoto(bm);
             }
         }
     }
 
-    private void onSuccessfulAddPhoto(Bitmap bitmap)
-    {
+    private void onSuccessfulAddPhoto(Bitmap bitmap) {
         final ImageView ivImage = new PhotoNoteBL(this).makeImageView(this, getApplicationContext(), bitmap);
-        ivImage.setOnLongClickListener(new View.OnLongClickListener()
-        {
-	        @Override
-	        public boolean onLongClick(View v)
-	        {
-		        showDialogOnLongClickImageButton(ivImage);
-		        return true;
-	        }
+        ivImage.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showDialogOnLongClickImageButton(ivImage);
+                return true;
+            }
         });
         addNewImageView(ivImage);
     }
 
-    private void addNewImageView(ImageView imageView)
-    {
+    private void addNewImageView(ImageView imageView) {
         // add new ImageView
         imageViews.add(imageView);
         root.addView(imageView);
 
         // remove last EditText if it's not used
-        if (!editTexts.isEmpty())
-        {
+        if (!editTexts.isEmpty()) {
             EditText lastOne = editTexts.get(editTexts.size() - 1);
 
-            if (lastOne.getText().length() == 0)
-            {
+            if (lastOne.getText().length() == 0) {
                 root.removeView(lastOne);
             }
         }
@@ -176,20 +170,16 @@ public class PhotoNoteUI extends Activity {
         root.addView(newEditText);
     }
 
-    private void showDialogOnLongClickImageButton(final ImageView imageView)
-    {
+    private void showDialogOnLongClickImageButton(final ImageView imageView) {
         final CharSequence[] items = {"Delete from my note", "Cancel"};
 //        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI.this);
         builder.setTitle("Options for this image");
-        builder.setItems(items, new DialogInterface.OnClickListener()
-        {
+        builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int item)
-            {
-                if (items[item].equals("Delete from my note"))
-                {
+            public void onClick(DialogInterface dialog, int item) {
+                if (items[item].equals("Delete from my note")) {
                     Toast.makeText(PhotoNoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
@@ -198,8 +188,7 @@ public class PhotoNoteUI extends Activity {
 //                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
 //                    dialog.dismiss();
 //                }
-                else if (items[item].equals("Cancel"))
-                {
+                else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }
             }
@@ -207,8 +196,7 @@ public class PhotoNoteUI extends Activity {
         builder.show();
     }
 
-    private void removeImageView(ImageView imageView)
-    {
+    private void removeImageView(ImageView imageView) {
         root.removeView(imageView);
     }
 }
