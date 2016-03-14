@@ -56,8 +56,8 @@ public class HandwritingUI extends Activity implements OnClickListener {
     final String noteType = "handwritingNote";
 
     private String handwrittenTitle = null;
-    private String filePath = null;
-    private String tempFilePath = null;
+    private String fileName = null;
+    private String tempFileName = null;
 
     private final static String OPEN_SAVED  = "OPEN_SAVED";
     private final static String DATA        = "DATA";
@@ -131,8 +131,8 @@ public class HandwritingUI extends Activity implements OnClickListener {
             newDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener(){
                 public void onClick(DialogInterface dialog, int which){
                     handwritingView.newNote();
-                    filePath = null;
-                    tempFilePath = null;
+                    fileName = null;
+                    tempFileName = null;
                     handwrittenTitle = null;
                     dialog.dismiss();
                 }
@@ -147,7 +147,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
         else if(view.getId()==R.id.saveBtn){
             // Save button has been clicked
 
-            if(filePath != null) {
+            if(fileName != null) {
                 AlertDialog.Builder overwriteDialog = new AlertDialog.Builder(this);
 
                 overwriteDialog.setTitle("Save Note");
@@ -163,8 +163,8 @@ public class HandwritingUI extends Activity implements OnClickListener {
                 overwriteDialog.setNegativeButton("Save to New File", new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int which) {
                        savePrompt();
-                       tempFilePath = filePath;
-                       filePath = null;
+                       tempFileName = fileName;
+                       fileName = null;
                        dialog.dismiss();
                    }
                 });
@@ -179,15 +179,15 @@ public class HandwritingUI extends Activity implements OnClickListener {
             else {
                 savePrompt();
             }
-            if(tempFilePath != null) {
-                if(filePath == null) {
+            if(tempFileName != null) {
+                if(fileName == null) {
                     // Pressed Save to New File, but didn't Save
-                    filePath = tempFilePath;
-                    tempFilePath = null;
+                    fileName = tempFileName;
+                    tempFileName = null;
                 }
                 else {
                     // Pressed Save to New File, and did Save
-                    tempFilePath = null;
+                    tempFileName = null;
                 }
             }
         }
@@ -210,31 +210,31 @@ public class HandwritingUI extends Activity implements OnClickListener {
                 handwrittenTitle = input.getText().toString();
                 handwritingView.setDrawingCacheEnabled(true);
                 Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
-                String savedLocation = handwritingView.saveImage(currentImage, filePath);
+                String savedFile = handwritingView.saveImage(currentImage, fileName);
 
-                if (savedLocation != null) {
-                    String popupMsg = ("Saved to " + savedLocation);
+                if (savedFile != null) {
+                    String popupMsg = ("Saved as " + savedFile);
                     Toast popupWindow = Toast.makeText(getApplicationContext(),
                             popupMsg, Toast.LENGTH_SHORT);
                     popupWindow.show();
-                    boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedLocation, noteType);
+                    boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedFile, noteType);
 
-                    filePath = savedLocation;
+                    fileName = savedFile;
                 } else {
                     String popupMsg = "Note could not be saved.";
                     Toast popupWindow = Toast.makeText(getApplicationContext(),
                             popupMsg, Toast.LENGTH_SHORT);
                     popupWindow.show();
                 }
-                tempFilePath = null;
+                tempFileName = null;
                 handwritingView.destroyDrawingCache();
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                if(tempFilePath != null) {
-                    filePath = tempFilePath;
-                    tempFilePath = null;
+                if(tempFileName != null) {
+                    fileName = tempFileName;
+                    tempFileName = null;
                 }
                 dialog.cancel();
             }

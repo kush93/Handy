@@ -65,9 +65,10 @@ public class HandwritingBL {
         return returnColor;
     }
 
-    public String saveImage(Bitmap sourceImage, String filePath) {
+    public String saveImage(Bitmap sourceImage, String existingFile) {
         // Saves to picture directory, under a subfolder called "Handy"
-        String fileLocation = null;
+        //String fileLocation = null;
+        String fileName = null;
         boolean folderExists = true;
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy";
         File outputDir = new File(path);
@@ -81,11 +82,12 @@ public class HandwritingBL {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             sourceImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             File destination;
-            if(filePath != null) {
-                destination = new File(filePath);
+            if(existingFile != null) {
+                destination = new File(path, existingFile);
             }
             else {
-                destination = new File(path, System.currentTimeMillis() + ".jpg");
+                fileName = System.currentTimeMillis() + ".jpg";
+                destination = new File(path, fileName);
             }
 
             FileOutputStream fo;
@@ -95,7 +97,7 @@ public class HandwritingBL {
                 fo = new FileOutputStream(destination);
                 fo.write(bytes.toByteArray());
                 fo.close();
-                fileLocation = destination.getCanonicalPath();
+                //fileLocation = destination.getCanonicalPath();
             } catch (FileNotFoundException e)
             {
                 e.printStackTrace();
@@ -104,7 +106,8 @@ public class HandwritingBL {
                 e.printStackTrace();
             }
         }
-        return fileLocation;
+        //return fileLocation;
+        return fileName;
     }
 
     public Bitmap processImage(byte[] byteArray) {
@@ -115,12 +118,6 @@ public class HandwritingBL {
     public List<String> getSavedData(String type) {
         List<String> handwritingList=new ArrayList<String>();
         handwritingList=dataBaseHelper.getData(type);
-
-
-
-        //textNoteObj.addData("Rahul", "Bhandari", "first note");
-
-        //textNoteObj.addData("Itr1", "comp3350", "wiki second note");
         return handwritingList;
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.List;
 
 import persistancelayer.NoteInterface;
 import presentationlayer.HandwritingUI;
+
+//import android.widget.Toast;
 
 /**
  * Created by Ian on 13/03/2016.
@@ -43,7 +46,7 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
 
     public List<HandwritingWrapper> getSampleNotes(String noteType) {
 
-        List<HandwritingWrapper> handwritingWrappers = new ArrayList<>();
+        List<HandwritingWrapper> handwritingWrappers = new ArrayList<HandwritingWrapper>();
         List<String> returnedNotes = handwritingBL.getSavedData(noteType);
 
         int listSize=returnedNotes.size();
@@ -75,7 +78,20 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
     @Override
     public List<Bitmap> getImages() {
         List<Bitmap> imageList = new ArrayList<>();
-        imageList.add(BitmapFactory.decodeFile(getContents()));
+
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy/";
+        path = path + getContents();
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bmp = BitmapFactory.decodeFile(path, bmOptions);
+        /**
+        if(bmp == null) {
+            String popupMsg = ("NULL");
+            Toast popupWindow = Toast.makeText(getApplicationContext(),
+                    popupMsg, Toast.LENGTH_SHORT);
+            popupWindow.show();
+        }
+         **/
+        imageList.add(bmp);
         return imageList;
     }
 

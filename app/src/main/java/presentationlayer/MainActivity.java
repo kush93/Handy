@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import businesslayer.TextNoteWrapper;
+import businesslayer.HandwritingWrapper;
 import com.example.kushal.rihabhbhandari.R;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateListView() {
 
         List<TextNoteWrapper> textNoteData = new ArrayList<TextNoteWrapper>();
+        List<HandwritingWrapper> handwritingData = new ArrayList<HandwritingWrapper>();
 
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
@@ -130,6 +132,15 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i<listSize;i++)
         {
             noteList.add(textNoteData.get(i));
+        }
+
+        HandwritingWrapper handwritingWrapper = new HandwritingWrapper(this);
+
+        handwritingData = handwritingWrapper.getSampleNotes("handwritingNote");
+        int listSize2 = handwritingData.size();
+        for(int i=0; i<listSize2;i++)
+        {
+            noteList.add(handwritingData.get(i));
         }
 
         noteListAdapter = new NoteListAdapter(this, noteList);

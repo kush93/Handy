@@ -73,7 +73,7 @@ public class DataBaseHelper extends SQLiteOpenHelper  {
     public List<String> getData(String noteType) {
         List<String> dataList = new ArrayList<String>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;//+"WHERE " + noteType
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME; //+"WHERE " + noteType;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

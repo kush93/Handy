@@ -78,13 +78,13 @@ public class HandwritingView extends View {
         invalidate();
     }
 
-    public String saveImage(Bitmap savedImg, String filePath) {
+    public String saveImage(Bitmap savedImg, String fileName) {
         String savedAt = null;
-        if(filePath == null) {
+        if(fileName == null) {
             savedAt = handwritingBL.saveImage(savedImg, null);
         }
         else {
-            savedAt = handwritingBL.saveImage(savedImg, filePath);
+            savedAt = handwritingBL.saveImage(savedImg, fileName);
         }
         return savedAt;
     }
@@ -96,6 +96,7 @@ public class HandwritingView extends View {
 
     public void loadImage(Bitmap inputImage) {
         bgBitmap = inputImage;
+        invalidate();
     }
 
     public HandwritingBL getHandwritingBL() {
