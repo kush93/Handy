@@ -1,59 +1,34 @@
 package presentationlayer;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-
-import android.view.View.OnClickListener;
-
-
-
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.ContentValues;
-import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-
-import android.net.Uri;
-
-import android.widget.Button;
-import android.view.View;
-import android.view.View.OnClickListener;
-
-/**
-import com.example.TodoList.db.TaskContract;
-import com.example.TodoList.db.TaskDBHelper;
- **/
-
-
-
+import java.util.ArrayList;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import com.example.kushal.rihabhbhandari.R;
 
-
-
 /**
- * Created by Abdul Hadi on 12/03/2016.
+ * Created by Abdul Hadi on 11/03/2016.
  */
+
+
+
+
 public class ChecklistUI extends Activity
 {
 
     Button button;
+    private ArrayList<String> tasks;
+    private ArrayAdapter<String> tasks_Adapter;
+    private ListView lv_tasks;
+
     final Context context = this;
+
 
 
     @Override
@@ -63,107 +38,110 @@ public class ChecklistUI extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checklist);
 
-        addListenerOnButton();
+
+
+        lv_tasks = (ListView) findViewById(R.id.list_task);
+        tasks = new ArrayList<String>();
+        tasks_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
+        lv_tasks.setAdapter(tasks_Adapter);
+
+        add_Button_Listener();
+        delete_task_Listener();
+
     }
 
 
-    public void addListenerOnButton() {
 
-        button = (Button) findViewById(R.id.button_add_task);
-
-        button.setOnClickListener(new OnClickListener() {
-
+    private void delete_task_Listener()
+    {
+        lv_tasks.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener()
+        {
             @Override
-            public void onClick(View arg0) {
+            public boolean onItemLongClick(AdapterView<?> adapter, View task, int task_no, long id)
+            {
+                tasks.remove(task_no);                  //Deleting Task
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+                tasks_Adapter.notifyDataSetChanged();   //Refreshing Adapter
 
-                // set title
-                alertDialogBuilder.setTitle("Add Task");
-
-                final EditText inputField = new EditText(context);
-                // set dialog message
-                alertDialogBuilder
-                        .setMessage("Please enter the new task")
-                        .setView(inputField)
-                        .setCancelable(false)
-                        .setPositiveButton("Save",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                Log.d("ChecklistActivity",inputField.getText().toString());
-                                // if this button is clicked, close
-                                // current activity
-                                //ChecklistUI.this.finish();
-                            }
-                        })
-                        .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                // if this button is clicked, just close
-                                // the dialog box and do nothing
-                                dialog.cancel();
-                            }
-                        });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-
-
-
-
-
+                return true;
             }
 
         });
 
-    }
+    } // End  delete_task_Listener
 
 
 
-
-
-
-
-
-
-/**
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.checklist_menu,menu);
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.checklist_menu, menu); //inflating already saved tasks
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_add_task:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Add a task");
-                builder.setMessage("What do you want to do?");
-                final EditText inputField = new EditText(this);
-                builder.setView(inputField);
-                builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.d("MainActivity",inputField.getText().toString());
+
+
+
+    public void add_Button_Listener()
+    {
+
+        lv_tasks = (ListView) findViewById(R.id.list_task);
+
+        tasks = new ArrayList<String>();
+        tasks_Adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, tasks);
+
+        lv_tasks.setAdapter(tasks_Adapter);
+
+
+        button = (Button) findViewById(R.id.button_add_task);
+
+        button.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v)
+            {
+                final EditText inputField = new EditText(context);
+
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+                alertDialogBuilder.setTitle("Add Task");        //Setting Dialog Attributes
+
+                alertDialogBuilder.setMessage("Please enter the new task");
+
+                alertDialogBuilder.setView(inputField);
+
+                alertDialogBuilder.setCancelable(false);
+
+                alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        String itemText = inputField.getText().toString();
+
+                        tasks.add(itemText);
+
+                        tasks_Adapter.notifyDataSetChanged();
+
                     }
                 });
 
-                builder.setNegativeButton("Cancel",null);
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();                               //Closing the dialog on Cancel
+                    }
+                });
 
-                builder.create().show();
-                return true;
+                AlertDialog alertDialog = alertDialogBuilder.create(); // creating alert dialog
 
-
-            default:
-                return false;
-        }
-    }
-**/
-
-}
+                alertDialog.show();                                    // showing it
 
 
+            }// End method onClick
 
+        });
 
+    }// End method add_button_listener
+
+}// End  ChecklistUI class
