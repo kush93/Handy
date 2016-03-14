@@ -139,6 +139,6 @@ public class HandwritingWrapper extends Activity implements NoteInterface {
         return time;
     }
 
-    @Override
-    public void openNote(Context context){}
+    //@Override
+    //public void openNote(Context context){}
 }
