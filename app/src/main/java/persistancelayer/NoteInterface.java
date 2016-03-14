@@ -16,7 +16,7 @@ public interface NoteInterface
 	boolean         isPinned();             // pin / favourite
 
 	boolean         hasNoteTitle();
-	String         getNoteTitle();
+	String          getNoteTitle();
 
 
 	boolean         hasContents();

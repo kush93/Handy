@@ -101,17 +101,17 @@ public class SampleNote extends Activity implements NoteInterface {
 
 	@Override
 	public boolean hasNoteTitle() {
-		return title != null;
+		return title != null && !title.isEmpty();
 	}
 
 	@Override
 	public String getNoteTitle() {
-		return null;
+		return title;
 	}
 
 	@Override
 	public boolean hasContents() {
-		return contents != null;
+		return contents != null && !contents.isEmpty();
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class SampleNote extends Activity implements NoteInterface {
 
 	@Override
 	public boolean hasLastEditedTime() {
-		return time != null;
+		return time != null && !time.isEmpty();
 	}
 
 	@Override

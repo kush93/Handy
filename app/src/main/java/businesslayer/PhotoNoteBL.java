@@ -117,7 +117,8 @@ public class PhotoNoteBL extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (resultCode == Activity.RESULT_OK && (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA)) {
+        if (resultCode == Activity.RESULT_OK && (requestCode == SELECT_FILE || requestCode == REQUEST_CAMERA))
+        {
             Bitmap bm;
 
             if (requestCode == SELECT_FILE)

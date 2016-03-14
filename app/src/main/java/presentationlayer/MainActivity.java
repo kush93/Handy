@@ -2,6 +2,7 @@ package presentationlayer;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
+
+	private int REQUEST_NEW_NOTE = 1;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NoteTakerUI.class);
-                startActivityForResult(intent, 0);
-
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), PhotoNoteUI.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HandwritingUI.class);
-                startActivity(intent);
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -92,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChecklistUI.class);
-                startActivity(intent);
+	            startActivityForResult(intent, REQUEST_NEW_NOTE);
 
             }
         });
@@ -102,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_NEW_NOTE) notifyDataSetChanged();
+	}
+
     public static MainActivity getInstance() {
         return mainObj;
     }
@@ -109,31 +118,11 @@ public class MainActivity extends AppCompatActivity {
     private void populateListView() {
 
         List<SampleNote> textNoteData = new ArrayList<SampleNote>();
- //       textNoteData = textNoteBL.getSavedData("textNote");
 
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
-////        previous version
-////        alSize = textNotePL.getNoteList().size();
-////        String noteName[] = new String[alSize];
-////        for (int i = 0; i < alSize; i++) {
-////            noteName[i] = textNotePL.getNoteList().get(i).noteName.toString();
-////        }
-////        ArrayList<String> noteList = new ArrayList<String>();
-////        noteList.addAll(Arrays.asList(noteName) );
-////        arrayAdapter = new ArrayAdapter<String>(this, R.layout.view_note_data , R.id.textView_notename,noteList );
-        // with NoteInterface
-
         // with NoteInterface
         List<NoteInterface> noteList = new ArrayList<>();
-
-        int size = 0;
-        /*
-        for ( SampleNote sampleNote : SampleNote.getSampleNotes("textNote"))
-        {
-            System.out.println("OUTPUT: size: " + (++size));
-            noteList.add(sampleNote);
-        }*/
 
         SampleNote sampleNote=new SampleNote(this);
 
@@ -143,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
         {
             noteList.add(textNoteData.get(i));
         }
-
-//        noteList.addAll(SampleNote.getSampleNotes());
 
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
@@ -160,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void notifyDataSetChanged()
+    {
+	    populateListView();
+    }
 
     public void dataAdded(TextView noteName) {
         //TextView nameET=(TextView)findViewById(R.id.);
@@ -194,45 +185,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-    // @Override
-    /*public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://presentationlayer/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://presentationlayer/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
-    }*/
 }
