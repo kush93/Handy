@@ -126,7 +126,12 @@ Rahul-> PDF viewing
 Hadi-> implemented checklist
 Ian->Modified the handwriting feature and added saving functionality for saving handwritten notes .
 
-
-
+ COSTS
+ 		 		Planned costs 			Actual costs
+ opening PDF's -		 5 days 	     		  5 days
+ Modify notes - 		 5 days 			  5 days 
+ Save to Db   -     		3-4days 			  4 days
+ Handwriting improvements-	4 days				  4 days
+ 
 
 
