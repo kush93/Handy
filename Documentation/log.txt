@@ -123,7 +123,7 @@ Matthias-> did his part of work for manipulating listview and also collaborated 
 Rishabh-> did most part for saving everything into database (photonote and textnote)
 Kushal-> helepd rishabh a bit with debugging and wrote the test cases (intergartion +unit)
 Rahul-> PDF viewing 
-Hadi-> implemented checklist
+Hadi-> implemented checklist, saving part left for next iteration
 Ian->Modified the handwriting feature and added saving functionality for saving handwritten notes .
 
  COSTS
