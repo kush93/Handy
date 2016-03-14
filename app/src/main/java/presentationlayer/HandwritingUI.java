@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.graphics.Bitmap;
 import android.widget.Toast;
 import android.text.InputType;
-import java.io.*;
 
 import com.example.kushal.rihabhbhandari.R;
 import businesslayer.HandwritingBL;
@@ -86,7 +85,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
             if (wrapper.hasImages())
                 handwritingView.loadImage(wrapper.getImages().get(0));
 
-            fileName = wrapper.getFileName();
+            fileName = wrapper.getFilePaths();
 
             System.out.printf("SYSOUT: HandwritingUI.onCreate(): if boolean == true\n");
             System.out.printf("SYSOUT: wrapper.getTitle() == \n");

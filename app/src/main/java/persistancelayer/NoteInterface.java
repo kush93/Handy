@@ -10,6 +10,9 @@ import java.util.List;
  */
 public interface NoteInterface
 {
+	String OPEN_SAVED  = "OPEN_SAVED";
+	String DATA        = "DATA";
+
 	// required for main listview
 	boolean         hasImages();         // ic_pencil, ic_drawing if null, first image in PhotoNote, or all / some drawing in Handwriting
 	List<Bitmap>    getImages();
@@ -28,6 +31,9 @@ public interface NoteInterface
 
 	boolean         hasLastEditedTime();
 	String          getLastEditedTime();
+
+	boolean         hasFilePaths();
+	String          getFilePaths();
 
 	void            openNote(Context context);
 	// end of requirements

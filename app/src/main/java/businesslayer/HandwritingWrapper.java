@@ -86,7 +86,7 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
         List<Bitmap> imageList = new ArrayList<>();
 
         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy/";
-        path = path + getFileName();
+        path = path + getFilePaths();
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
         Bitmap bmp = BitmapFactory.decodeFile(path, bmOptions);
         imageList.add(bmp);
@@ -140,7 +140,16 @@ public class HandwritingWrapper extends Activity implements NoteInterface, Seria
         return time;
     }
 
-    public String getFileName() {
+    @Override
+    public boolean hasFilePaths()
+    {
+        return filePath != null && !filePath.isEmpty();
+    }
+
+    @Override
+    public String getFilePaths()
+    {
         return filePath;
     }
+
 }

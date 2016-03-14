@@ -3,6 +3,7 @@ package presentationlayer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,11 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import businesslayer.TextNoteWrapper;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
 
 import businesslayer.PhotoNoteBL;
+import persistancelayer.NoteInterface;
 
 /**
  * UI Layer: PhotoNoteUI
@@ -37,7 +40,7 @@ public class PhotoNoteUI extends Activity {
     PhotoNoteBL photoNoteBL = new PhotoNoteBL(this);
 
     final String noteType = "photoNote";
-     String allFilePath = null;
+    String allFilePath = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +55,47 @@ public class PhotoNoteUI extends Activity {
         editTexts = new ArrayList<>();
         editTexts.add((EditText) findViewById(R.id.editText_addPhoto_first_contents));
 
-
         // Default Fields
         editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
+        editText_label = (EditText) findViewById(R.id.editText_addPhoto_label);
+
+        // for open from save
+        Intent intent = this.getIntent();
+        if (intent != null && intent.getBooleanExtra(NoteInterface.OPEN_SAVED, false))
+        {
+            TextNoteWrapper wrapper = (TextNoteWrapper) intent.getSerializableExtra(NoteInterface.DATA);
+
+            assert (wrapper != null);
+
+            if (wrapper.hasNoteTitle())
+                editText_title.setText(wrapper.getNoteTitle());
+
+            if (wrapper.hasTag())
+                editText_label.setText(wrapper.getTag());
+
+
+            // for contents ...
+
+            //	        if (wrapper.hasContents())
+            //		        editNote.setText(wrapper.getContents());
+            createViewsFromSavedData(wrapper.getContents(), wrapper.getFilePaths());
+        }
+    }
+
+    public static void openNote(Context context, TextNoteWrapper wrapper)
+    {
+        Intent intent = new Intent(context, NoteTakerUI.class);
+        intent.putExtra(NoteInterface.OPEN_SAVED, true);
+        intent.putExtra(NoteInterface.DATA, wrapper);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
+    }
+
+    private void createViewsFromSavedData(String contents, String allFilePath)
+    {
+        String substring = contents;
+
+        System.out.printf("SYSOUT: PhotoNoteUI: createViewsFromSavedData(): contents: %s\n", contents);
 
     }
 
@@ -71,7 +112,7 @@ public class PhotoNoteUI extends Activity {
             //add to blPhoto and then it passes to the persistence layer
             int size = editTexts.size();
 
-//            ArrayList<String> photoNote=new ArrayList<String>();
+            //            ArrayList<String> photoNote=new ArrayList<String>();
             String photoNoteText = new String();
             for (int i = 0; i < editTexts.size(); i++) {
 
@@ -79,15 +120,15 @@ public class PhotoNoteUI extends Activity {
             }
 
 
-//
-//            for (int i = 0; i < size; i++) {
-//                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
-//
-//                //editTexts.add();
-//                photoNoteText=(editTexts.get(i).getText().toString() + "\\" + 1);
-//
-//
-//            }
+            //
+            //            for (int i = 0; i < size; i++) {
+            //                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
+            //
+            //                //editTexts.add();
+            //                photoNoteText=(editTexts.get(i).getText().toString() + "\\" + 1);
+            //
+            //
+            //            }
 
             editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
 
@@ -116,7 +157,7 @@ public class PhotoNoteUI extends Activity {
 
     public void onClickAddPhotoImageButton(View view) {
         Intent intent = new Intent(this, PhotoNoteBL.class);
-//	    intent.putExtra()
+        //	    intent.putExtra()
         startActivityForResult(intent, GET_PHOTO);
     }
 
@@ -175,7 +216,7 @@ public class PhotoNoteUI extends Activity {
 
     private void showDialogOnLongClickImageButton(final ImageView imageView) {
         final CharSequence[] items = {"Delete from my note", "Cancel"};
-//        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
+        //        final CharSequence[] items = {"Delete from my note", "Rotate", "Cancel"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(PhotoNoteUI.this);
         builder.setTitle("Options for this image");
@@ -186,11 +227,11 @@ public class PhotoNoteUI extends Activity {
                     Toast.makeText(PhotoNoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
-//                else if (items[item].equals("Rotate"))
-//                {
-//                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
-//                    dialog.dismiss();
-//                }
+                //                else if (items[item].equals("Rotate"))
+                //                {
+                //                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
+                //                    dialog.dismiss();
+                //                }
                 else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }

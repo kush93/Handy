@@ -19,6 +19,7 @@ import java.util.Date;
 
 import businesslayer.TextNoteBL;
 import businesslayer.TextNoteWrapper;
+import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 /**
@@ -38,10 +39,6 @@ public class NoteTakerUI extends Activity {
     final String noteType = "textNote";
     final String filePath = null;
 
-	private final static String OPEN_SAVED  = "OPEN_SAVED";
-	private final static String DATA        = "DATA";
-
-
     public void onCreate(Bundle savedInstanceState) {
 
 
@@ -58,40 +55,40 @@ public class NoteTakerUI extends Activity {
 
         addData();
 
-	    // for open from save
-	    Intent intent = this.getIntent();
-	    if (intent != null && intent.getBooleanExtra(OPEN_SAVED, false))
-	    {
-		    TextNoteWrapper wrapper = (TextNoteWrapper) intent.getSerializableExtra(DATA);
+        // for open from save
+        Intent intent = this.getIntent();
+        if (intent != null && intent.getBooleanExtra(NoteInterface.OPEN_SAVED, false))
+        {
+            TextNoteWrapper wrapper = (TextNoteWrapper) intent.getSerializableExtra(NoteInterface.DATA);
 
-		    assert (wrapper != null);
+            assert (wrapper != null);
 
-		    if (wrapper.hasNoteTitle())
-		        editName.setText(wrapper.getNoteTitle());
+            if (wrapper.hasNoteTitle())
+                editName.setText(wrapper.getNoteTitle());
 
-		    if (wrapper.hasContents())
-				editNote.setText(wrapper.getContents());
+            if (wrapper.hasContents())
+                editNote.setText(wrapper.getContents());
 
-		    if (wrapper.hasTag())
-		        editLabel.setText(wrapper.getTag());
+            if (wrapper.hasTag())
+                editLabel.setText(wrapper.getTag());
 
-		    System.out.printf("SYSOUT: NoteTakerUI.onCreate(): if boolean == true\n");
-		    System.out.printf("SYSOUT: wrapper.getTitle() == \n");
-		    System.out.printf("SYSOUT: wrapper.getTitle() == %s\n", wrapper.getNoteTitle());
-	    }
-	    else
-		    System.out.printf("SYSOUT: if boolean == false\n");
+            System.out.printf("SYSOUT: NoteTakerUI.onCreate(): if boolean == true\n");
+            System.out.printf("SYSOUT: wrapper.getTitle() == \n");
+            System.out.printf("SYSOUT: wrapper.getTitle() == %s\n", wrapper.getNoteTitle());
+        }
+        else
+            System.out.printf("SYSOUT: if boolean == false\n");
 
 
     }
 
     public static void openNote(Context context, TextNoteWrapper wrapper)
     {
-	    Intent intent = new Intent(context, NoteTakerUI.class);
-	    intent.putExtra(OPEN_SAVED, true);
-	    intent.putExtra(DATA, wrapper);
-	    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-	    ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
+        Intent intent = new Intent(context, NoteTakerUI.class);
+        intent.putExtra(NoteInterface.OPEN_SAVED, true);
+        intent.putExtra(NoteInterface.DATA, wrapper);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
     }
 
     public void addData() //calls the onClick method for Save button
@@ -114,7 +111,7 @@ public class NoteTakerUI extends Activity {
 
                     Toast.makeText(NoteTakerUI.this, editName.getText().toString() + " Note was saved", Toast.LENGTH_LONG).show();
                     //mobj.dataAdded(editName);
-                   // MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
+                    // MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
                 }
 
                 finish();
