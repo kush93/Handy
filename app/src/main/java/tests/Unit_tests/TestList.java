@@ -64,7 +64,7 @@ public class TestList
             assertTrue("this is not the right size",tObj.getNoteList().size()==3);
 
         }
-
+//
     @After
     protected void tearDown()
     {
