@@ -135,7 +135,7 @@ public class ChecklistUI extends Activity
 
                 AlertDialog alertDialog = alertDialogBuilder.create(); // creating alert dialog
 
-                alertDialog.show();                                    // showing it
+                alertDialog.show();                                    // showing it.
 
 
             }// End method onClick
