@@ -29,7 +29,7 @@ public class TestIT
     PhotoNoteBL pobj;
     TextNoteWrapper Wobj;
 
-    
+
     @Before
     public void create()
     {
@@ -50,14 +50,14 @@ public class TestIT
     }
 
     @Test
-    public void testRetreval()
+    public void testRetreval() throws Exception
     {
         List<TextNoteWrapper> noteW= Wobj.getSampleNotes("noteTpe");
         assertTrue("nothing is being retrieved!",!noteW.isEmpty());//verification
     }
 
     @Test
-    public void testDBcreation()
+    public void testDBcreation() throws Exception
     {
         boolean result=obj.create("time","Nname","Nlabel","Ntext","fpath","typ");
         assertTrue("object not inserted to DB properly",!result);//verification

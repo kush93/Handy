@@ -1,15 +1,20 @@
 package tests.Unit_tests;
 
-import junit.framework.TestCase;
+import android.app.Activity;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 
 import businesslayer.TextNoteBL;
 import domain.Note;
 import persistancelayer.TextNotePL;
-
+import static junit.framework.Assert.assertTrue;
 /**
- * Created by kushal on 2016-02-21.
+ * Created by kushal on 2E016-02-21.
  */
-public class TestList extends TestCase
+public class TestList
 {
 
         TextNotePL tObj;
@@ -17,6 +22,7 @@ public class TestList extends TestCase
 
         TextNoteBL blObj;
 
+        @Before
         protected  void setUp()
         {
                 tObj = new TextNotePL();
@@ -28,8 +34,8 @@ public class TestList extends TestCase
                 tObj.clearNoteList();
         }
 
-
-        public void testcreate()
+        @Test
+        public void testcreate() throws Exception
         {
             boolean result=blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2","notetextAssign1","root/user/gallery1","textNote1");
             assertTrue("create method:list is empty", !blObj.getTextNoteObj().getNoteList().isEmpty());
@@ -38,13 +44,15 @@ public class TestList extends TestCase
             assertTrue("the size is not right", blObj.getTextNoteObj().getNoteList().size() == 3);
         }
 
-        public void testgetTextNoteObj()
+        @Test
+        public void testgetTextNoteObj() throws Exception
         {
             blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2", "notetextAssign1", "root/user/gallery1", "textNote1");
             assertTrue("Text note object is null", blObj.getTextNoteObj()!=null);
         }
 
 
+        @Test
         public void testaddData()
         {
             tObj.insertData("Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
@@ -57,7 +65,7 @@ public class TestList extends TestCase
 
         }
 
-
+    @After
     protected void tearDown()
     {
         tObj=null;
