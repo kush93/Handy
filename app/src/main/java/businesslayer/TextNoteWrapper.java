@@ -1,4 +1,4 @@
-package presentationlayer;
+package businesslayer;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,13 +7,12 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.List;
 
-import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
 
 /**
  * Created by Matthias on 16-03-12.
  */
-public class SampleNote extends Activity implements NoteInterface {
+public class TextNoteWrapper extends Activity implements NoteInterface {
 	private String title;
 	private String contents;
 	private String tags;
@@ -24,7 +23,7 @@ public class SampleNote extends Activity implements NoteInterface {
 	TextNoteBL textNoteBL;
 	private static String noteType = "textNote";
 
-	public SampleNote(String title, String contents, String tags, String time, boolean isPinned) {
+	public TextNoteWrapper(String title, String contents, String tags, String time, boolean isPinned) {
 		this.title = title;
 		this.contents = contents;
 		this.tags = tags;
@@ -32,21 +31,21 @@ public class SampleNote extends Activity implements NoteInterface {
 		this.isPinned = isPinned;
 
 	}
-	public SampleNote(Context context)
+	public TextNoteWrapper(Context context)
 	{
 		textNoteBL = new TextNoteBL(context);
 
 	}
 
 
-	public List<SampleNote> getSampleNotes(String noteType) {
+	public List<TextNoteWrapper> getSampleNotes(String noteType) {
 
-		List<SampleNote> sampleNotes = new ArrayList<>();
+		List<TextNoteWrapper> textNoteWrappers = new ArrayList<>();
 		List<String> returnedNotes = new ArrayList<String>();
 
 
-		/*sampleNotes.add(new SampleNote("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
-		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", "COMP3380", "2015", false));
+		/*textNoteWrappers.add(new TextNoteWrapper("My Sample Note 1", "And Some Contents 1", "COMP3350", "2014", false));
+		textNoteWrappers.add(new TextNoteWrapper("My Sample Note 2", "And Some Contents 2", "COMP3380", "2015", false));
 */
 		returnedNotes=textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
 
@@ -59,7 +58,7 @@ public class SampleNote extends Activity implements NoteInterface {
 
 				String singleNote=returnedNotes.get(i);
 				String token[]=singleNote.trim().split("/");
-				sampleNotes.add(new SampleNote(token[2],token[4],token[3],token[1],false));
+				textNoteWrappers.add(new TextNoteWrapper(token[2],token[4],token[3],token[1],false));
 			}
 
 		}
@@ -67,21 +66,21 @@ public class SampleNote extends Activity implements NoteInterface {
 
 
 
-//		sampleNotes.add(new SampleNote(null, null, null, null, false));
+//		textNoteWrappers.add(new TextNoteWrapper(null, null, null, null, false));
 //
 //		List<String> tags = new ArrayList<>();
 //
 //
 //		tags.add("foo");
-//		sampleNotes.add(new SampleNote("My Sample Note 2", "And Some Contents 2", tags, "2014", true));
+//		textNoteWrappers.add(new TextNoteWrapper("My Sample Note 2", "And Some Contents 2", tags, "2014", true));
 //
 //		tags.add("boo");
-//		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, null, true));
+//		textNoteWrappers.add(new TextNoteWrapper("My Sample Note 3", "And Some Contents 3", tags, null, true));
 //
 //		tags.add("NA");
-//		sampleNotes.add(new SampleNote("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
+//		textNoteWrappers.add(new TextNoteWrapper("My Sample Note 3", "And Some Contents 3", tags, "2014", false));
 
-		return sampleNotes;
+		return textNoteWrappers;
 	}
 
 	@Override
