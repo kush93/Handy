@@ -14,7 +14,7 @@ import java.util.List;
 import businesslayer.PhotoNoteBL;
 import businesslayer.TextNoteBL;
 import businesslayer.TextNoteWrapper;
-
+// just to commit
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
