@@ -3,61 +3,66 @@ package businesslayer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import persistancelayer.NoteInterface;
-import presentationlayer.NoteTakerUI;
+import presentationlayer.HandwritingUI;
+
 
 /**
- * Created by Matthias on 16-03-12.
- *
- * Wraps TextNote and PhotoNote.
+ * Created by Ian on 13/03/2016.
  */
-public class TextNoteWrapper extends Activity implements NoteInterface, Serializable {
+public class HandwritingWrapper extends Activity implements NoteInterface, Serializable {
     private String id;
     private String title;
     private String contents;
     private String tags;
     private String time;
-    private String filePaths;
+    private String filePath;
     private boolean isPinned;
 
-    //static TextNoteBL textNoteBL;
-    TextNoteBL textNoteBL;
+    HandwritingBL handwritingBL;
 
-    public TextNoteWrapper(String id, String title, String contents, String tags, String time, String filePaths, boolean isPinned) {
+    public HandwritingWrapper(String id, String title, String contents, String tags, String time, String filePath, boolean isPinned) {
         this.id = id;
         this.title = title;
         this.contents = contents;
         this.tags = tags;
         this.time = time;
+        this.filePath=filePath;
         this.isPinned = isPinned;
-        this.filePaths = filePaths;
+    }
+    public HandwritingWrapper (Context context)
+    {
+        handwritingBL = new HandwritingBL(context);
 
     }
-
-    public TextNoteWrapper(Context context) {
-        textNoteBL = new TextNoteBL(context);
-    }
-
-
 
     @Override
-    public void openNote(Context context) {
-        NoteTakerUI.openNote(context, this);
+    public void openNote(Context context){
+        HandwritingUI.openNote(context, this);
     }
 
     @Override
     public boolean hasImages() {
-        return false;
+        return true;
     }
 
     @Override
     public List<Bitmap> getImages() {
-        return null;
+        List<Bitmap> imageList = new ArrayList<>();
+
+        String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES) + "/Handy/";
+        path = path + getFilePaths();
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        Bitmap bmp = BitmapFactory.decodeFile(path, bmOptions);
+        imageList.add(bmp);
+        return imageList;
     }
 
     @Override
@@ -75,24 +80,26 @@ public class TextNoteWrapper extends Activity implements NoteInterface, Serializ
         return title;
     }
 
+    // Set to false so that getContents can be used to retrieve File Path
     @Override
     public boolean hasContents() {
-        return contents != null && !contents.isEmpty();
+        return false;
     }
 
+    // Used for retrieving File Path, hence why hasContents is false;
     @Override
     public String getContents() {
-        return contents;
+        return null;
     }
 
     @Override
     public boolean hasTag() {
-        return tags != null && !tags.isEmpty();
+        return false;
     }
 
     @Override
     public String getTag() {
-        return tags;
+        return null;
     }
 
     @Override
@@ -107,11 +114,15 @@ public class TextNoteWrapper extends Activity implements NoteInterface, Serializ
 
     @Override
     public boolean hasFilePaths()
-    { return filePaths != null && !filePaths.isEmpty(); }
+    {
+        return filePath != null && !filePath.isEmpty();
+    }
 
     @Override
     public String getFilePaths()
-    { return filePaths; }
+    {
+        return filePath;
+    }
 
     @Override
     public String getNoteID()

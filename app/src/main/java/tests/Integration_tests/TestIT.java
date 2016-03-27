@@ -13,8 +13,9 @@ import java.util.List;
 
 import businesslayer.PhotoNoteBL;
 import businesslayer.TextNoteBL;
-import businesslayer.TextNoteWrapper;
-// just to commit
+import persistancelayer.NoteInterface;
+import presentationlayer.MainActivity;
+
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -27,18 +28,18 @@ public class TestIT
     @Mock
     TextNoteBL obj;
     PhotoNoteBL pobj;
-    TextNoteWrapper Wobj;
+    MainActivity mobj;
 
-
+    
     @Before
     public void create()
     {
         obj= mock(TextNoteBL.class);
         pobj=mock(PhotoNoteBL.class);
-        Wobj= mock(TextNoteWrapper.class);
+        mobj = mock(MainActivity.class);
         // expectations
         when(obj.create("time","noteName","noteLabel","noteText","filepath","type")).thenReturn(true);
-        when(pobj.create("note","label","allpath","text","type")).thenReturn(true);
+        when(pobj.create("note","label","text","fpath","type")).thenReturn(true);
     }
 
     @After
@@ -46,22 +47,22 @@ public class TestIT
     {
         obj=null;
         pobj=null;
-        Wobj=null;
+        mobj =null;
     }
 
     @Test
-    public void testRetreval() throws Exception
+    public void testRetrieval()
     {
-        List<TextNoteWrapper> noteW= Wobj.getSampleNotes("noteTpe");
+        List<NoteInterface> noteW= mobj.getNotesFromDB("noteTpe");
         assertTrue("nothing is being retrieved!",!noteW.isEmpty());//verification
     }
 
     @Test
-    public void testDBcreation() throws Exception
+    public void testDBCreation()
     {
         boolean result=obj.create("time","Nname","Nlabel","Ntext","fpath","typ");
         assertTrue("object not inserted to DB properly",!result);//verification
-        boolean result2 = pobj.create("Time","Name","LAbel","filepath","Text") ;
+        boolean result2 = pobj.create("Nname","Nlabel","Ntext","fpath","typ") ;
         assertTrue("object for photonote not inserted",!result2);//verification
     }
 

@@ -71,14 +71,14 @@ public class DataBaseHelper extends SQLiteOpenHelper implements DataInterface {
     public List<String> getData(String noteType) {
         List<String> dataList = new ArrayList<String>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_NAME;//+"WHERE " + noteType
+        String selectQuery = "SELECT  * FROM " + TABLE_NAME; //+"WHERE " + noteType;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        if (cursor.getCount() == 0) {
+        /*if (cursor.getCount() == 0) {
             showMessage("No Notes exist", "");
             //return;
-        }
+        }*/
 
         String data = new String();
 
@@ -87,16 +87,16 @@ public class DataBaseHelper extends SQLiteOpenHelper implements DataInterface {
             do {
 
 
-                data = cursor.getString(0) + "/";   //id
-                data = data.concat(cursor.getString(1) + "/");
-                //data.concat(cursor.getString(1)+" ");   //time
-                data = data.concat(cursor.getString(2) + "/");   //name
+                data = cursor.getString(0) + "?";   //id
+                data = data.concat(cursor.getString(1) + "?"); //time
+                //data.concat(cursor.getString(1)+" ");
+                data = data.concat(cursor.getString(2) + "?");   //name
 
-                data = data.concat(cursor.getString(3) + "/");   //label
+                data = data.concat(cursor.getString(3) + "?");   //label
 
-                data = data.concat(cursor.getString(4) + "/");   //textNote
-                data = data.concat(cursor.getString(5) + "/");   //filePath
-                data = data.concat(cursor.getString(6) + "/");   //noteType
+                data = data.concat(cursor.getString(4) + "?");   //textNote
+                data = data.concat(cursor.getString(5) + "?");   //filePath
+                data = data.concat(cursor.getString(6) + "?");   //noteType
 
                 // Adding contact to list
                 dataList.add(data);

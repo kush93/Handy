@@ -15,21 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import businesslayer.TextNoteWrapper;
-import com.example.kushal.rihabhbhandari.R;
-import com.google.android.gms.common.api.GoogleApiClient;
-
+import android.net.Uri;
 import java.util.ArrayList;
 import java.util.List;
+import android.app.Activity;
+import businesslayer.TextNoteWrapper;
+import businesslayer.HandwritingWrapper;
+import com.example.kushal.rihabhbhandari.R;
 
 import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
-
+    private static final int PICKFILE_RESULT_CODE = 1;
     private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;     // is used in requestStoragePermission()
 
     ListView listView;
@@ -50,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         // request permission ... required for API 23 or above
         requestStoragePermission();
 
+        textNoteBL = new TextNoteBL(this);
+
         mainObj = this;
         setContentView(R.layout.activity_main);
        populateListView();
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), NoteTakerUI.class);
-	            startActivityForResult(intent, REQUEST_NEW_NOTE);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
 
@@ -81,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
 	            startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
+        newNote=(Button) findViewById(R.id.button_pdf);
+        newNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("file/*");
+                startActivityForResult(intent, PICKFILE_RESULT_CODE);
+            }
+        });
 
         newNote = (Button) findViewById(R.id.button_checklist);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +105,21 @@ public class MainActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE) {
 
-	@Override
+            String Fpath = data.getDataString();
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(Fpath), "application/pdf");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+
+
+        }
+    }
+
+        @Override
 	protected void onResume()
 	{
 		super.onResume();
@@ -114,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateListView() {
-
-        List<TextNoteWrapper> textNoteData = new ArrayList<TextNoteWrapper>();
-
         listView = (ListView) findViewById(R.id.listView_main_note_list);
 
         // with NoteInterface
@@ -124,13 +144,14 @@ public class MainActivity extends AppCompatActivity {
 
         TextNoteWrapper textNoteWrapper =new TextNoteWrapper(this);
 
-        textNoteData= textNoteWrapper.getSampleNotes("textNote");
+        List<NoteInterface> textNoteData= getNotesFromDB("all");
+
         int listSize=textNoteData.size();
         for(int i=0; i<listSize;i++)
         {
             noteList.add(textNoteData.get(i));
         }
-
+        
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
         noteListAdapter.notifyDataSetChanged();
@@ -185,4 +206,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+    public List<NoteInterface> getNotesFromDB(String noteType) {
+
+        List<NoteInterface> noteInterfaces = new ArrayList<>();
+        List<String> returnedNotesRawData = textNoteBL.getSavedData(noteType); // returns the data from the database for the textNote
+
+        int listSize = returnedNotesRawData.size();
+        if (listSize > 0) {
+            for (int i = 0; i < listSize; i++) {
+                //String noteName=
+
+                String singleNote = returnedNotesRawData.get(i);
+                String token[] = singleNote.trim().split("\\?");
+
+                //id?time?name?label?textNote?filePaths?noteType
+                // textNote1/textNote2/textNote3/...... = token[4]
+                // filePath1^filePath2^filePath3^......= token[5]
+
+                String currNoteType = token[6];
+
+                switch (currNoteType)
+                {
+                    case NoteInterface.textNoteType:
+                        noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        break;
+                    case NoteInterface.handWritingNoteType:
+                        noteInterfaces.add(new HandwritingWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        break;
+                    default:
+	                    noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+
+                }
+            }
+        }
+
+        return noteInterfaces;
+    }
 }

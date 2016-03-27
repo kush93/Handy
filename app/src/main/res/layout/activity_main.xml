@@ -8,6 +8,16 @@
     >
 
 
+    <TextView
+        android:layout_width="217dp"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Welcome to Handy!"
+        android:id="@+id/textView3"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.02" />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,44 +36,31 @@
 
 
         <Button
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
             android:text="@string/textnote"
-            android:id="@+id/button_main_open_text_note"
-            android:layout_weight="1"/>
+            android:id="@+id/button_main_open_text_note" />
 
         <Space
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
         <Button
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="60dp"
             android:text="@string/cam"
             android:id="@+id/button_main_open_photo_note"
-            android:layout_weight="1"/>
+            android:layout_weight="1.14" />
 
         <Space
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"/>
 
         <Button
-            android:layout_width="85dp"
-            android:layout_height="wrap_content"
-            android:text="@string/handwrite"
-            android:id="@+id/button_main_open_hand_writing"
-            android:layout_weight="1"/>
-
-        <Space
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.5"/>
-
-        <Button
-            android:layout_width="90dp"
-            android:layout_height="57dp"
             android:text="CHECK LIST"
             android:id="@+id/button_checklist"
             android:layout_alignParentBottom="true"
@@ -73,9 +70,29 @@
             android:layout_toEndOf="@+id/button_handwrite"
             android:layout_below="@+id/listView" />
 
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:text="@string/handwrite"
+            android:id="@+id/button_main_open_hand_writing"
+            android:layout_weight="0.92" />
+
+        <Space
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="PDF"
+            android:id="@+id/button_pdf" />
 
 
     </LinearLayout>
 
 </LinearLayout>
-

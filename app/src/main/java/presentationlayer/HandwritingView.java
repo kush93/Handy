@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+
 // android.graphics.* classes are used for drawing/writing functionality
 // android.view.MotionEvent is used to detect the movement of the user's touch input
 
@@ -28,7 +29,7 @@ import businesslayer.HandwritingBL;
 
 public class HandwritingView extends View {
 
-    private HandwritingBL handwritingBL = new HandwritingBL();
+    private HandwritingBL handwritingBL;
     private int selectedColor = Color.parseColor("#ff000000"); // Default initial color (black)
     private boolean eraseState=false;
     private Paint penPaint;
@@ -36,9 +37,11 @@ public class HandwritingView extends View {
     private Path penPath;
     private Canvas notepadCanvas;
     private Bitmap notepadBitmap;
+    private Bitmap bgBitmap;
 
     public HandwritingView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        handwritingBL = new HandwritingBL(context);
         notepadCreate();
     }
 
@@ -57,22 +60,47 @@ public class HandwritingView extends View {
     }
 
     // Found in HandwritingBL
-    public void changeColor(String newColor){
+    public void changeColor(String newColor) {
         invalidate();
         selectedColor = handwritingBL.changeColor(newColor);
         penPaint.setColor(selectedColor);
     }
 
     // Found in HandwritingBL
-    public void setErase(boolean isErase){
+    public void setErase(boolean isErase) {
         // Set eraseState
         eraseState=isErase;
         penPaint.setColor(handwritingBL.setErase(selectedColor, eraseState));
     }
 
-    public void newNote(){
+    public void newNote() {
         notepadCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    public String saveImage(Bitmap savedImg, String fileName) {
+        String savedAt = null;
+        if(fileName == null) {
+            savedAt = handwritingBL.saveImage(savedImg, null);
+        }
+        else {
+            savedAt = handwritingBL.saveImage(savedImg, fileName);
+        }
+        return savedAt;
+    }
+
+    // If it has been specified that a background is to be used for note
+    public void loadImage(byte[] byteArray) {
+        bgBitmap = handwritingBL.processImage(byteArray);
+    }
+
+    public void loadImage(Bitmap inputImage) {
+        bgBitmap = inputImage;
+        invalidate();
+    }
+
+    public HandwritingBL getHandwritingBL() {
+        return handwritingBL;
     }
 
     @Override
@@ -84,7 +112,10 @@ public class HandwritingView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //super.onDraw(canvas);
+        super.onDraw(canvas);
+        if(bgBitmap != null) {
+            canvas.drawBitmap(bgBitmap, 0, 0, null);
+        }
         canvas.drawBitmap(notepadBitmap, 0, 0, notepadPaint);
         canvas.drawPath(penPath, penPaint);
     }

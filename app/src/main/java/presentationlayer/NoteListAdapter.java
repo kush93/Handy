@@ -48,7 +48,7 @@ public class NoteListAdapter extends BaseAdapter
 	{
 		View view = convertView;
 		if (view == null)
-			view = inflater.inflate(R.layout.main_list_item, null);
+			view = inflater.inflate(R.layout.main_list_item, null, false);
 
 		final NoteInterface note = (NoteInterface) getItem(position);
 

@@ -92,3 +92,46 @@ Feb 19(0.5 hrs)
  it.(Expected Time: 4-5 days. Delivered in 3 days)
 -Kushal and Rahul did the testing for the "add note" feature(Expected Time: 2 days. Delivered in 1 day)
 -Rahul and Kushal wrote the architecture for the app(currently with 3 features)(Expected Time: 1 day.Delivered in 1 day)
+
+
+--------------------------Iteration2-----------------------
+
+Feb 24(1 hr) [everyone present except hadi(unwell)]
+- met after the class
+- decided about how divide the work for this iteration2
+- rishabh : "saving the actual data into DB"
+- rahul :"open PDF's"
+- kushal collaborate with rishabh : "saving the photonote into DB and handling more stuff related to DB"
+- kushal: "add testing"
+- matthias: "manipulating listview "
+- ian: "Handwriting Saving Function,Get Bitmap to use as background,Add more functionalities to HandWriting (brush types, etc)"
+
+Feb 29(0.5 hr)[everyone present]
+-met after the class
+-everyone did some work and showed each other their work and discussed how to preceed further 
+
+March 11(0.5 hr)[everyone present]
+-met after the class 
+-worked together trying to connect the Db properly for the listview feature 
+-rishabh and matthias guided each other out for the listview manipulation feature
+-rahul worked on the opening the PDF feature 
+-helped hadi a bit to get going with further work on his feature (mainly with github and some issues with android studio)
+
+
+		WORKDONE BY EACH INDIVIUAL(DEVELOPERS TASK)
+Matthias-> did his part of work for manipulating listview and also collaborated with rishabh to handle some DB stuff
+Rishabh-> did most part for saving everything into database (photonote and textnote)
+Kushal-> helepd rishabh a bit with debugging and wrote the test cases (intergartion +unit)
+Rahul-> PDF viewing 
+Hadi-> implemented checklist, saving part left for next iteration
+Ian->Modified the handwriting feature and added saving functionality for saving handwritten notes .
+(Dependency injection using -: noteInterface , TextNoteWrapper and HandWritingWrapper)
+ COSTS
+ 		 		Planned costs 			Actual costs
+ opening PDF's -		 5 days 	     		  5 days
+ Modify notes - 		 5 days 			  5 days 
+ Save to Db   -     		3-4days 			  4 days
+ Handwriting improvements-	4 days				  4 days
+ 
+
+
