@@ -102,22 +102,29 @@ public class NoteTakerUI extends Activity {
                 String editedTime = DateFormat.getDateTimeInstance().format(new Date());
                 // long representation of current time
 
-                textNoteBL.create(editedTime, editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
-                if (textnoteObj.getData("note").isEmpty())
+
+                if (editName.getText().toString().isEmpty())
                 {
-                    Toast.makeText(NoteTakerUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NoteTakerUI.this, "Title not specified", Toast.LENGTH_LONG).show();
 
                 }
                 else
                 {
 
+                    boolean isInserted= textNoteBL.create(editedTime, editName.getText().toString(), editLabel.getText().toString(), editNote.getText().toString(), filePath, noteType); //calls the business logic class for text notes
+                    if (isInserted == true)
+                        Toast.makeText(NoteTakerUI.this, "Note was saved", Toast.LENGTH_LONG).show();
+                    else
+                        Toast.makeText(NoteTakerUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
-                    Toast.makeText(NoteTakerUI.this, editName.getText().toString() + " Note was saved", Toast.LENGTH_LONG).show();
-                    //mobj.dataAdded(editName);
-                    // MainActivity.getInstance().dataAdded(editName); // calls the method dataAdded() from the mainActivity using the getInstance method
+                    // MainActivity.getInstance().dataAdded(editText_title);// not being used
+                   finish();
                 }
 
-                finish();
+
+
+
+
 
             }
         });
