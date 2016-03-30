@@ -37,7 +37,7 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
     }
     
      public PhotoNoteWrapper(Context context) {
-        photoNoteBL = new photoNoteBL(context);
+        photoNoteBL = new PhotoNoteBL(context);
     }
     @Override
     public boolean hasImages() {
