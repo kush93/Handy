@@ -35,6 +35,10 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
         this.filePath=filePath;
         this.isPinned = isPinned;
     }
+    
+     public PhotoNoteWrapper(Context context) {
+        photoNoteBL = new photoNoteBL(context);
+    }
     @Override
     public boolean hasImages() {
         return true;
