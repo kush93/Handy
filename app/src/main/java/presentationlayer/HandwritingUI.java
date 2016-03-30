@@ -208,25 +208,39 @@ public class HandwritingUI extends Activity implements OnClickListener {
         saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 // Saves
+                boolean validTitle = true;
                 handwrittenTitle = input.getText().toString();
+                if(handwrittenTitle.isEmpty() || handwrittenTitle.charAt(0) == ' ') {
+                    validTitle = false;
+                }
                 handwritingView.setDrawingCacheEnabled(true);
-                Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
-                String savedFile = handwritingView.saveImage(currentImage, fileName);
+                if(validTitle) {
+                    Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
+                    String savedFile = handwritingView.saveImage(currentImage, fileName);
 
-                if (savedFile != null) {
-                    String popupMsg = ("Saved as " + savedFile);
-                    Toast popupWindow = Toast.makeText(getApplicationContext(),
-                            popupMsg, Toast.LENGTH_SHORT);
-                    popupWindow.show();
-                    boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedFile, noteType);
+                    if (savedFile != null) {
+                        String popupMsg = ("Saved as " + savedFile);
+                        Toast popupWindow = Toast.makeText(getApplicationContext(),
+                                popupMsg, Toast.LENGTH_SHORT);
+                        popupWindow.show();
+                        boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedFile, noteType);
 
-                    fileName = savedFile;
-                } else {
-                    String popupMsg = "Note could not be saved.";
+                        fileName = savedFile;
+                    } else {
+                        String popupMsg = "Note could not be saved.";
+
+                        Toast popupWindow = Toast.makeText(getApplicationContext(),
+                                popupMsg, Toast.LENGTH_SHORT);
+                        popupWindow.show();
+                    }
+                }
+                else {
+                    String popupMsg = "Invalid title. Must be non-empty nor start with space";
                     Toast popupWindow = Toast.makeText(getApplicationContext(),
                             popupMsg, Toast.LENGTH_SHORT);
                     popupWindow.show();
                 }
+
                 tempFileName = null;
                 handwritingView.destroyDrawingCache();
             }
