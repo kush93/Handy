@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import businesslayer.TextNoteWrapper;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
 
 import businesslayer.PhotoNoteBL;
+import businesslayer.PhotoNoteWrapper;
 import persistancelayer.NoteInterface;
 
 /**
@@ -63,7 +63,7 @@ public class PhotoNoteUI extends Activity {
         Intent intent = this.getIntent();
         if (intent != null && intent.getBooleanExtra(NoteInterface.OPEN_SAVED, false))
         {
-            TextNoteWrapper wrapper = (TextNoteWrapper) intent.getSerializableExtra(NoteInterface.DATA);
+            PhotoNoteWrapper wrapper = (PhotoNoteWrapper) intent.getSerializableExtra(NoteInterface.DATA);
 
             assert (wrapper != null);
 
@@ -82,9 +82,9 @@ public class PhotoNoteUI extends Activity {
         }
     }
 
-    public static void openNote(Context context, TextNoteWrapper wrapper)
+    public static void openNote(Context context, PhotoNoteWrapper wrapper)
     {
-        Intent intent = new Intent(context, NoteTakerUI.class);
+        Intent intent = new Intent(context, PhotoNoteUI.class);
         intent.putExtra(NoteInterface.OPEN_SAVED, true);
         intent.putExtra(NoteInterface.DATA, wrapper);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
