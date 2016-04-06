@@ -1,22 +1,29 @@
 apply plugin: 'com.android.application'
 
-android {
+android{
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 
-    defaultConfig {
-        applicationId "com.example.kushal.rihabhbhandari"
-        minSdkVersion 15
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
+    defaultConfig
+            {
+                applicationId "com.example.kushal.rihabhbhandari"
+                minSdkVersion 15
+                targetSdkVersion 23
+                versionCode 1
+                versionName "1.0"
+            }
+    buildTypes
+            {
+                release
+                        {
+                            minifyEnabled false
+                            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                        }
+
+            }
 }
 
 dependencies {
@@ -26,5 +33,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
     compile 'junit:junit:4.12'
 }
