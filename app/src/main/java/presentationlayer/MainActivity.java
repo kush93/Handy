@@ -2,8 +2,10 @@ package presentationlayer;
 
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -15,15 +17,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.net.Uri;
-import java.util.ArrayList;
-import java.util.List;
-import android.app.Activity;
-import businesslayer.TextNoteWrapper;
-import businesslayer.HandwritingWrapper;
+
 import com.example.kushal.rihabhbhandari.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import businesslayer.HandwritingWrapper;
+import businesslayer.PhotoNoteWrapper;
 import businesslayer.TextNoteBL;
+import businesslayer.TextNoteWrapper;
 import persistancelayer.NoteInterface;
 import persistancelayer.TextNotePL;
 
@@ -234,6 +237,10 @@ public class MainActivity extends AppCompatActivity {
                     case NoteInterface.handWritingNoteType:
                         noteInterfaces.add(new HandwritingWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
                         break;
+                    case NoteInterface.photoNoteType:
+                        noteInterfaces.add(new PhotoNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        break;
+
                     default:
 	                    noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
 

@@ -3,8 +3,12 @@ package businesslayer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import persistancelayer.NoteInterface;
@@ -13,7 +17,6 @@ import persistancelayer.NoteInterface;
  * Created by rishabhbhandari on 2016-03-29.
  */
 public class PhotoNoteWrapper extends Activity implements NoteInterface, Serializable {
-
 
 
     private String id;
@@ -32,13 +35,15 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
         this.contents = contents;
         this.tags = tags;
         this.time = time;
-        this.filePath=filePath;
+        this.filePath = filePath;
         this.isPinned = isPinned;
     }
-    
-     public PhotoNoteWrapper(Context context) {
+
+
+    public PhotoNoteWrapper(Context context) {
         photoNoteBL = new PhotoNoteBL(context);
     }
+
     @Override
     public boolean hasImages() {
         return true;
@@ -46,7 +51,22 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
 
     @Override
     public List<Bitmap> getImages() {
-        return null;
+
+
+        List<Bitmap> imageList = new ArrayList<>();
+        String delim="^";
+        String token[] = getFilePaths().trim().split("\\^");
+        for (int i = 0; i < token.length; i++) {
+            File root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bmp = BitmapFactory.decodeFile(root+token[i], bmOptions); //issues not able to create bitmap
+            imageList.add(bmp);
+
+
+        }
+
+
+        return imageList;
     }
 
     @Override
@@ -97,14 +117,12 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
     }
 
     @Override
-    public boolean hasFilePaths()
-    {
+    public boolean hasFilePaths() {
         return filePath != null && !filePath.isEmpty();
     }
 
     @Override
-    public String getFilePaths()
-    {
+    public String getFilePaths() {
         return filePath;
     }
 
@@ -114,8 +132,7 @@ public class PhotoNoteWrapper extends Activity implements NoteInterface, Seriali
     }
 
     @Override
-    public String getNoteID()
-    {
+    public String getNoteID() {
         return id;
     }
 }

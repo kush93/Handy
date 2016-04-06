@@ -1,16 +1,25 @@
 package presentationlayer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.*;
-import java.util.ArrayList;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Abdul Hadi on 11/03/2016.
@@ -29,6 +38,8 @@ public class ChecklistUI extends Activity
 
     final Context context = this;
 
+    TextView editName;
+    Button saveCheckList;
 
 
     @Override
@@ -44,12 +55,55 @@ public class ChecklistUI extends Activity
         tasks = new ArrayList<String>();
         tasks_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
         lv_tasks.setAdapter(tasks_Adapter);
-
+        editName = (TextView) findViewById(R.id.editText_name);
+        saveCheckList=(Button) findViewById(R.id.button_save);
         add_Button_Listener();
         delete_task_Listener();
 
+        saveCheckList.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                String editedTime = DateFormat.getDateTimeInstance().format(new Date());
+                // long representation of current time
+
+
+                if (editName.getText().toString().isEmpty()) {
+                    Toast.makeText(ChecklistUI.this, "Title not specified", Toast.LENGTH_LONG).show();
+
+                } else {
+
+                    if (editName.getText().toString().isEmpty()) {
+                        Toast.makeText(ChecklistUI.this, "Please enter name for the checkList", Toast.LENGTH_LONG).show();
+                    } else {
+
+                        Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
+                    }
+                    // MainActivity.getInstance().dataAdded(editText_title);// not being used
+                    finish();
+                }
+
+
+            }
+        });
+
     }
 
+   /* private void save_button_Listner()
+    {
+        if(editName.getText().toString().isEmpty()) {
+            Toast.makeText(ChecklistUI.this, "Please enter name for the checkList", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+
+            Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
+        }
+
+
+    }*/
 
 
     private void delete_task_Listener()
@@ -142,6 +196,7 @@ public class ChecklistUI extends Activity
 
         });
 
-    }// End method add_button_listener
+
+        }// End method add_button_listener
 
 }// End  ChecklistUI class
