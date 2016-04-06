@@ -16,13 +16,11 @@ public class TextNoteAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
     private Solo solo;
     private static final String NAME1 = "Text Note 1";
     private static final String NAME2 = "Text Note 2";
-    private static final String NAME3 = "Text Note 3";
     private static final String LABEL1 = "LABEL 1";
     private static final String LABEL2 = "LABEL 2";
-    private static final String LABEL3 = "LABEL 3";
     private static final String NOTETEXT1 = "NOTETEXT 1";
     private static final String NOTETEXT2 = "NOTETEXT 2";
-    private static final String NOTETEXT3 = "NOTETEXT 3";
+    private static final String EDITTED_NOTENAME1 = "Text Note 1 edited";
 
     public TextNoteAcceptanceTest() {
         super(MainActivity.class);
@@ -95,5 +93,31 @@ public class TextNoteAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
         assertTrue("Text Note 1 and Text Note 2 are found", notesFound);
 
     }
+    public void testEditTextNote() throws Exception{
+
+        solo.unlockScreen();
+        //Click on first item of Student List
+        solo.sleep(500);
+        solo.clickInList(1);
+        solo.assertCurrentActivity("Expected NoteTakerUI Activity", NoteTakerUI.class);
+        solo.sleep(500);
+        solo.clearEditText(0);
+        solo.enterText(0, EDITTED_NOTENAME1);
+        //Click on action menu item Save
+        solo.sleep(500);
+        solo.clickOnView(solo.getView(R.id.button_save_note));
+        //Click on action menu item Add
+        solo.sleep(500);
+
+        //Assert that StudentDetail activity is opened
+        solo.assertCurrentActivity("Expected MainActivity Activity", MainActivity.class);
+        //Takes a screenshot and saves it in "/sdcard/Robotium-Screenshots/".
+        solo.takeScreenshot();
+        //Search for Student 1 and Student 2
+        boolean noteFound = solo.searchText(EDITTED_NOTENAME1);
+
+        assertTrue("Note 1 is found", noteFound);
+    }
+
 
 }
