@@ -72,6 +72,27 @@ public class TextNoteAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
         solo.sleep(500);
         solo.assertCurrentActivity("Expected MainActivity Activity", MainActivity.class);
 
+        solo.clickOnView(solo.getView(R.id.button_main_open_text_note));
+        solo.assertCurrentActivity("Expected NoteTakerUI Activity", NoteTakerUI.class);
+        //In text field 0, enter Name
+        solo.sleep(500);
+        solo.enterText(0, NAME2);
+        solo.sleep(500);
+        solo.enterText(1, LABEL1);
+        solo.clearEditText(1);
+        solo.enterText(1, LABEL2);
+        solo.sleep(500);
+        solo.enterText(2, NOTETEXT2);
+
+        solo.sleep(500);
+        solo.clickOnView(solo.getView(R.id.button_save_note));
+        solo.sleep(500);
+        solo.assertCurrentActivity("Expected MainActivity Activity", MainActivity.class);
+
+        solo.takeScreenshot();
+
+        boolean notesFound = solo.searchText(NAME1) && solo.searchText(NAME2);
+        assertTrue("Text Note 1 and Text Note 2 are found", notesFound);
 
     }
 
