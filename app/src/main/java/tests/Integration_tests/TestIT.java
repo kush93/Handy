@@ -66,4 +66,7 @@ public class TestIT
         assertTrue("object for photonote not inserted",!result2);//verification
     }
 
+
+
+
 }

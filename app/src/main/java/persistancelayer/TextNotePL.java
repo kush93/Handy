@@ -56,7 +56,6 @@ public class TextNotePL implements DataInterface {
 
         myNote = new Note(id, time, noteName, noteLabel, noteText, null, type);
         boolean result = noteList.add(myNote);
-
         id++;
         return result;
 
@@ -64,7 +63,8 @@ public class TextNotePL implements DataInterface {
     }
 
     @Override
-    public List<String> getData(String noteType) {
+    public List<String> getData(String noteType)
+    {
 
         List<String> noteData = new ArrayList<String>();
 

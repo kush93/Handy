@@ -11,6 +11,7 @@ import businesslayer.TextNoteBL;
 import domain.Note;
 import persistancelayer.TextNotePL;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
@@ -47,6 +48,28 @@ public class TestList extends Activity {
     public void testgetTextNoteObj() throws Exception {
         blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2", "notetextAssign1", "root/user/gallery1", "textNote1");
         assertTrue("Text note object is null", blObj.getTextNoteObj() != null);
+    }
+
+    @Test
+    public void testEmptyNote()
+    {
+        blObj.create("","","","","","");
+        assertTrue("Empty Note not created successfully!",!blObj.getTextNoteObj().getNoteList().isEmpty());
+    }
+
+    @Test
+    public void testUpdate()
+    {
+        blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2", "notetextAssign1", "root/user/gallery1", "textNote1");
+        boolean result=blObj.updateData("1","Mar 26/03/2016 12:12PM", "updated notename1", "Itr2", "updated notetextAssign1", "root/user/gallery1", "textNote1");
+        assertTrue("data was not updated!",!result);
+    }
+    @Test
+    public void testIdUpdate()
+    {
+        blObj.create("Mar 26/03/2016 12:08PM", "notename1", "Itr2", "notetextAssign1", "root/user/gallery1", "textNote1");
+        boolean result=blObj.updateData("61","Mar 26/03/2016 12:12PM", "updated notename1", "Itr2", "updated notetextAssign1", "root/user/gallery1", "textNote1");
+        assertTrue("this should have been updated", result);
     }
 
 

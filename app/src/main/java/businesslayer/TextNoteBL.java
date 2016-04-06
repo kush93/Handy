@@ -18,10 +18,10 @@ public class TextNoteBL {
     DataInterface dataInterface = null;
     TextNotePL textNoteObj = new TextNotePL();
 
-    public TextNoteBL(Context context) {
+    public TextNoteBL(Context context)
+    {
         dataBaseHelper = new DataBaseHelper(context);
         //dataInterface = new DataBaseHelper(context);
-
 
     }
 
