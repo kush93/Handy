@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kushal.rihabhbhandari.R;
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     NoteListAdapter noteListAdapter;
     static MainActivity mainObj;
 
-	public static final int REQUEST_NEW_NOTE = 1;
+    public static final int REQUEST_NEW_NOTE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainObj = this;
         setContentView(R.layout.activity_main);
-       populateListView();
+        populateListView();
 
         newNote = (Button) findViewById(R.id.button_main_open_text_note);
         newNote.setOnClickListener(new View.OnClickListener() {
@@ -79,18 +80,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         newNote = (Button) findViewById(R.id.button_main_open_hand_writing);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), HandwritingUI.class);
-	            startActivityForResult(intent, REQUEST_NEW_NOTE);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
             }
         });
-        newNote=(Button) findViewById(R.id.button_pdf);
-        newNote.setOnClickListener(new View.OnClickListener(){
+        newNote = (Button) findViewById(R.id.button_pdf);
+        newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -104,28 +103,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ChecklistUI.class);
-	            startActivityForResult(intent, REQUEST_NEW_NOTE);
+                startActivityForResult(intent, REQUEST_NEW_NOTE);
 
             }
         });
 
-        newNote = (Button) findViewById(R.id.button_dnd);
-        newNote.setOnClickListener(new View.OnClickListener(){
+        newNote = (Button) findViewById(R.id.btn_dnd);
+        newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AudioManager audiomanage = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-                if(audiomanage.getRingerMode()==AudioManager.RINGER_MODE_NORMAL){
-                    audiomanage.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                if (audioManager.getRingerMode() == AudioManager.RINGER_MODE_NORMAL) {
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                    Toast.makeText(MainActivity.this, "Do Not Disturb Mode is ON", Toast.LENGTH_LONG).show();
+                } else {
+
+                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                    Toast.makeText(MainActivity.this, "Do Not Disturb Mode is OFF", Toast.LENGTH_LONG).show();
                 }
-                else{
-                    audiomanage.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                }
-            };
+
+            }
+        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    });
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == PICKFILE_RESULT_CODE) {
@@ -140,12 +143,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-        @Override
-	protected void onResume()
-	{
-		super.onResume();
-		notifyDataSetChanged();
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notifyDataSetChanged();
+    }
 //
 //	@Override
 //	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -163,16 +165,15 @@ public class MainActivity extends AppCompatActivity {
         // with NoteInterface
         final List<NoteInterface> noteList = new ArrayList<>();
 
-        TextNoteWrapper textNoteWrapper =new TextNoteWrapper(this);
+        TextNoteWrapper textNoteWrapper = new TextNoteWrapper(this);
 
-        List<NoteInterface> textNoteData= getNotesFromDB("all");
+        List<NoteInterface> textNoteData = getNotesFromDB("all");
 
-        int listSize=textNoteData.size();
-        for(int i=0; i<listSize;i++)
-        {
+        int listSize = textNoteData.size();
+        for (int i = 0; i < listSize; i++) {
             noteList.add(textNoteData.get(i));
         }
-        
+
         noteListAdapter = new NoteListAdapter(this, noteList);
         listView.setAdapter(noteListAdapter);
         noteListAdapter.notifyDataSetChanged();
@@ -181,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-	            noteList.get(position).openNote(MainActivity.this);
+                noteList.get(position).openNote(MainActivity.this);
 //	            ((NoteInterface) parent.getSelectedItem()).openNote();
 //                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
 
@@ -189,9 +190,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void notifyDataSetChanged()
-    {
-	    populateListView();
+    private void notifyDataSetChanged() {
+        populateListView();
     }
 
     public void dataAdded(TextView noteName) {
@@ -247,8 +247,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String currNoteType = token[6];
 
-                switch (currNoteType)
-                {
+                switch (currNoteType) {
                     case NoteInterface.textNoteType:
                         noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
                         break;
@@ -260,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     default:
-	                    noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                        noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
 
                 }
             }
