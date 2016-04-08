@@ -126,6 +126,24 @@ public class DataBaseHelper extends SQLiteOpenHelper implements DataInterface {
     }
 
 
+    public boolean delete(String id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        // It's a good practice to use parameter ?, instead of concatenate string
+        boolean result = false;
+
+
+        if (db.delete(TABLE_NAME, "ID=?", new String[]{id}) > 0) {
+            result = true;
+
+        }
+
+        db.close(); // Closing database connection
+        return result;
+
+
+    }
+
     public void showMessage(String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(showmsg);
         builder.setCancelable(true);
