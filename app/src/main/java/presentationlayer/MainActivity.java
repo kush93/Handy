@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        newNote = (Button) findViewById(R.id.btn_dnd);
+        newNote = (Button) findViewById(R.id.button_dnd);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
