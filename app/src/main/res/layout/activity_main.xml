@@ -70,6 +70,12 @@
             android:layout_toEndOf="@+id/button_handwrite"
             android:layout_below="@+id/listView" />
 
+        <Button
+            android:layout_width="82dp"
+            android:layout_height="wrap_content"
+            android:text="@string/donotdisturb"
+            android:id="@+id/button_dnd" />
+
         <Space
             android:layout_width="10dp"
             android:layout_height="match_parent"

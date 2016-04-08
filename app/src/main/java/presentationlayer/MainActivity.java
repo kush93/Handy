@@ -3,8 +3,10 @@ package presentationlayer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -77,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         newNote = (Button) findViewById(R.id.button_main_open_hand_writing);
         newNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,9 +108,23 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        newNote = (Button) findViewById(R.id.button_dnd);
+        newNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                AudioManager audiomanage = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+                if(audiomanage.getRingerMode()==AudioManager.RINGER_MODE_NORMAL){
+                    audiomanage.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                }
+                else{
+                    audiomanage.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                }
+            };
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    });
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

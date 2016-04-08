@@ -62,10 +62,16 @@ public class TestIT
     {
         boolean result=obj.create("time","Nname","Nlabel","Ntext","fpath","typ");
         assertTrue("object not inserted to DB properly",!result);//verification
-        boolean result2 = pobj.create("Nname","Nlabel","Ntext","fpath","typ") ;
+        boolean result2 = pobj.create("Nname", "Nlabel", "Ntext", "fpath", "typ") ;
         assertTrue("object for photonote not inserted",!result2);//verification
     }
 
+    @Test
+    public void testUpdate()
+    {
+        boolean result=obj.create("time1","Nname1","Nlabel1","Ntext1","fpath1","typ1");
+
+    }
 
 
 
