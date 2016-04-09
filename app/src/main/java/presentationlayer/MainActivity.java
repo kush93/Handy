@@ -3,7 +3,9 @@ package presentationlayer;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -16,12 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.example.kushal.rihabhbhandari.R;
 
@@ -38,6 +35,7 @@ import persistancelayer.TextNotePL;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PICKFILE_RESULT_CODE = 1;
+    private static final int LONG_DIALOG_REMOVE_RESULT_CODE = 2;
     private int MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE;     // is used in requestStoragePermission()
 
     ListView listView;
@@ -166,9 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -180,8 +175,6 @@ public class MainActivity extends AppCompatActivity {
             intent.setDataAndType(Uri.parse(Fpath), "application/pdf");
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-
-
         }
     }
 
@@ -190,12 +183,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         notifyDataSetChanged();
     }
-//
-//	@Override
-//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		super.onActivityResult(requestCode, resultCode, data);
-//		if (requestCode == REQUEST_NEW_NOTE) notifyDataSetChanged();
-//	}
 
     public static MainActivity getInstance() {
         return mainObj;
@@ -220,16 +207,28 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(noteListAdapter);
         noteListAdapter.notifyDataSetChanged();
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+	        @Override
+	        public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+	        {
 
-                noteList.get(position).openNote(MainActivity.this);
-//	            ((NoteInterface) parent.getSelectedItem()).openNote();
-//                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
+		        noteList.get(position).openNote(MainActivity.this);
+		        //	            ((NoteInterface) parent.getSelectedItem()).openNote();
+		        //                Toast.makeText(MainActivity.this, "Opening a note is not yet implemented", Toast.LENGTH_SHORT).show();
 
-            }
+	        }
         });
+
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+		{
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				showDialogOnLongClickListItem(noteList.get(position), noteList);
+				return true;
+			}
+		});
     }
 
     private void notifyDataSetChanged() {
@@ -262,10 +261,10 @@ public class MainActivity extends AppCompatActivity {
 
         {
             ActivityCompat.requestPermissions
-                    (MainActivity.this, new String[]{
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    }, MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE);
+		            (MainActivity.this, new String[]{
+				            Manifest.permission.READ_EXTERNAL_STORAGE,
+				            Manifest.permission.WRITE_EXTERNAL_STORAGE
+		            }, MY_PERMISSIONS_REQUEST_READ_AND_WRITE_EXTERNAL_STORAGE);
         }
     }
 
@@ -309,4 +308,36 @@ public class MainActivity extends AppCompatActivity {
 
         return noteInterfaces;
     }
+
+	private void showDialogOnLongClickListItem(final NoteInterface iNote, final List<NoteInterface> noteList)
+	{
+		final int[] result = new int[1];
+
+		final CharSequence[] items = {"Remove", "Cancel"};
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+		builder.setTitle("Options for this note");
+		builder.setItems(items, new DialogInterface.OnClickListener()
+		{
+			@Override
+			public void onClick(DialogInterface dialog, int item)
+			{
+				if (items[item].equals("Remove"))
+				{
+					Toast.makeText(MainActivity.this, "Removed", Toast.LENGTH_SHORT).show();
+					String noteID = iNote.getNoteID();
+					textNoteBL.delete(noteID);
+					noteList.remove(iNote);
+					noteListAdapter.notifyDataSetChanged();
+				}
+				else if (items[item].equals("Cancel"))
+				{
+					result[0] = -1;
+					dialog.dismiss();
+				}
+			}
+		});
+		builder.show();
+	}
 }
+
