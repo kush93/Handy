@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.example.kushal.rihabhbhandari.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import businesslayer.HandwritingWrapper;
@@ -107,6 +110,45 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+        newNote = (Button) findViewById(R.id.button_calendar);
+        //newNote.setOnClickListener(onClickListener();
+        newNote.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= 14) {
+                    Intent intent = new Intent(Intent.ACTION_INSERT)
+                            .setData(CalendarContract.Events.CONTENT_URI)
+                            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, 60 * 000)
+                            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, 0)
+//                                .putExtra(CalendarContract.Events.TITLE, "Yoga")
+//                                .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+//                                .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+                            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+//                                .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
+                    startActivity(intent);
+                } else {
+                    Calendar cal = Calendar.getInstance();
+                    Intent intent = new Intent(Intent.ACTION_EDIT);
+                    intent.setType("vnd.android.cursor.item/event");
+                    intent.putExtra("beginTime", cal.getTimeInMillis());
+//                        intent.putExtra("allDay", true);
+//                        intent.putExtra("rrule", "FREQ=YEARLY");
+//                        intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
+//                        intent.putExtra("title", "A Test Event from android app");
+                    startActivity(intent);
+                }
+
+
+            }
+
+    });
+
+
+
+
+
 
         newNote = (Button) findViewById(R.id.button_dnd);
         newNote.setOnClickListener(new View.OnClickListener() {

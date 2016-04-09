@@ -47,6 +47,13 @@
             android:layout_weight="0.5"/>
 
         <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            android:id="@+id/button_calendar" />
+
+        <Button
             android:layout_width="70dp"
             android:layout_height="60dp"
             android:text="@string/cam"
