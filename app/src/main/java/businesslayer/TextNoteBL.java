@@ -31,6 +31,10 @@ public class TextNoteBL {
 
     // public ArrayList<TextNotePL> noteList=new ArrayList<TextNotePL>();
 
+	public boolean delete(String id)
+	{
+		return dataBaseHelper.delete(id);
+	}
 
     public boolean create(String time, String noteName, String noteLabel, String noteText, String filePath, String type) {
         //textNoteObj= new TextNotePL(noteName,noteLabel,note);
