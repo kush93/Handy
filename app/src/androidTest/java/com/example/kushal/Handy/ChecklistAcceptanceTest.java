@@ -18,7 +18,7 @@ public class ChecklistAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 {
     private Solo solo;
 
-    private static final String CHECKIST_NAME = "Check List Name";
+    private static final String CHECKIST_NAME = "SAMPLE CHECKLIST";
     private static final String TASK1 = "Task 1";
     private static final String TASK2 = "Task 2";
 
@@ -70,5 +70,16 @@ public class ChecklistAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
         solo.sleep(500);
         solo.enterText(0, CHECKIST_NAME);
+
+        solo.clickOnView(solo.getView(R.id.button_add_task));
+        solo.assertCurrentActivity("Expected ChecklistUI Activity", ChecklistUI.class);
+
+        solo.sleep(500);
+        solo.enterText(0, TASK1);
+
+
+        solo.clickOnView(solo.getView(R.id.button_save));
+        solo.assertCurrentActivity("Expected ChecklistUI Activity", ChecklistUI.class);
+
     }
 }

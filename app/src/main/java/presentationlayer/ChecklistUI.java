@@ -175,7 +175,7 @@ public class ChecklistUI extends Activity
                 alertDialogBuilder.setCancelable(false);
 
                 alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(DialogInterface dialog, int saveID) {
                         String itemText = inputField.getText().toString();
 
                         tasks.add(itemText);
