@@ -2,13 +2,10 @@ package presentationlayer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +22,9 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import businesslayer.CheckListWrapper;
 import businesslayer.ChecklistBL;
+import persistancelayer.NoteInterface;
 
 /**
  * Created by Abdul Hadi on 11/03/2016.
@@ -159,12 +157,10 @@ public class ChecklistUI extends Activity
 
         button = (Button) findViewById(R.id.button_add_task);
 
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 final EditText inputField = new EditText(context);
 
 
@@ -178,10 +174,8 @@ public class ChecklistUI extends Activity
 
                 alertDialogBuilder.setCancelable(false);
 
-                alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int id)
-                    {
+                alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         String itemText = inputField.getText().toString();
 
                         tasks.add(itemText);
@@ -208,5 +202,15 @@ public class ChecklistUI extends Activity
 
 
         }// End method add_button_listener
+
+
+    public static void openNote(Context context, CheckListWrapper wrapper)
+    {
+        Intent intent = new Intent(context, ChecklistUI.class);
+        intent.putExtra(NoteInterface.OPEN_SAVED, true);
+        intent.putExtra(NoteInterface.DATA, wrapper);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ((Activity) context).startActivityForResult(intent, MainActivity.REQUEST_NEW_NOTE);
+    }
 
 }// End  ChecklistUI class
