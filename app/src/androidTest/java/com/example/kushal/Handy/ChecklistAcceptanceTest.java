@@ -78,6 +78,9 @@ public class ChecklistAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
         solo.enterText(0, TASK1);
 
 
+        solo.sleep(500);
+        solo.enterText(0, TASK2);
+
         solo.clickOnView(solo.getView(R.id.button_save));
         solo.assertCurrentActivity("Expected ChecklistUI Activity", ChecklistUI.class);
 
