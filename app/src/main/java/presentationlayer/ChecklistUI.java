@@ -2,9 +2,13 @@ package presentationlayer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +25,8 @@ import com.example.kushal.rihabhbhandari.R;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import businesslayer.ChecklistBL;
 
 /**
  * Created by Abdul Hadi on 11/03/2016.
@@ -30,6 +37,9 @@ import java.util.Date;
 
 public class ChecklistUI extends Activity
 {
+
+    ChecklistBL checkListBL = new ChecklistBL(this);
+
 
     Button button;
     private ArrayList<String> tasks;
@@ -50,7 +60,6 @@ public class ChecklistUI extends Activity
         setContentView(R.layout.activity_checklist);
 
 
-
         lv_tasks = (ListView) findViewById(R.id.list_task);
         tasks = new ArrayList<String>();
         tasks_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
@@ -69,18 +78,16 @@ public class ChecklistUI extends Activity
                 String editedTime = DateFormat.getDateTimeInstance().format(new Date());
                 // long representation of current time
 
+                String checklistName = editName.getText().toString();
 
                 if (editName.getText().toString().isEmpty()) {
                     Toast.makeText(ChecklistUI.this, "Title not specified", Toast.LENGTH_LONG).show();
 
-                } else {
-
-                    if (editName.getText().toString().isEmpty()) {
-                        Toast.makeText(ChecklistUI.this, "Please enter name for the checkList", Toast.LENGTH_LONG).show();
-                    } else {
-
-                        Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
-                    }
+                }
+                else
+                {
+                    checkListBL.create(editedTime, checklistName, tasks, "CheckList");
+                    Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
                     // MainActivity.getInstance().dataAdded(editText_title);// not being used
                     finish();
                 }
@@ -90,6 +97,9 @@ public class ChecklistUI extends Activity
         });
 
     }
+
+
+
 
    /* private void save_button_Listner()
     {
