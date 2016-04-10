@@ -298,6 +298,9 @@ public class MainActivity extends AppCompatActivity {
                     case NoteInterface.photoNoteType:
                         noteInterfaces.add(new PhotoNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
                         break;
+                   case NoteInterface.checkListType:
+                   	noteInterfaces.add(new CheckListWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
+                   	break;
 
                     default:
                         noteInterfaces.add(new TextNoteWrapper(token[0], token[2], token[4], token[3], token[1], token[5], false));
