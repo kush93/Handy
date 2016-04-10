@@ -15,6 +15,7 @@ public interface NoteInterface {
     String textNoteType = "textNote";
     String handWritingNoteType = "handwritingNote";
     String photoNoteType = "photoNote";
+    String checkList ="checkList";
 
 
     // required for main listview
