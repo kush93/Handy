@@ -28,6 +28,7 @@ import java.util.List;
 
 import businesslayer.HandwritingWrapper;
 import businesslayer.PhotoNoteWrapper;
+import businesslayer.CheckListWrapper;
 import businesslayer.TextNoteBL;
 import businesslayer.TextNoteWrapper;
 import persistancelayer.NoteInterface;
