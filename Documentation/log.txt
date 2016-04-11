@@ -139,3 +139,12 @@ Apr 5(1 hr) [present: Matthias, Rishabh, Ian. except hadi(unknown reason), Rahul
 - met after the class
 - discussed itr 3 requirements: new features to add, Robotium Tests, Refactoring
 - reviewed proposed user stories to determine features mentioned were worth implementing considering time contstraints
+
+		WORKDONE BY EACH INDIVIUAL(DEVELOPERS TASK)
+Matthias-> 
+- Worked with Rishabh to use DB.delete() from ListView of MainActivity, 
+- created acceptance testing for PhotoNote,
+- Helped Ian to fix a bug 
+    - bug fixed: [modifying an existing HandWritingNote creates a new file], 
+- and helped Hadi and Rishabh to fix a bug 
+    - bug fixed: [When CheckList is saved, it's shown as (and opens up) a TextNote in the ListView]
