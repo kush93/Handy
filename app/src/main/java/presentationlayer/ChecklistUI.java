@@ -98,7 +98,7 @@ public class ChecklistUI extends Activity
                 }
                 else
                 {
-                    checkListBL.create(editedTime, checklistName, tasks, "CheckList");
+                    checkListBL.create(editedTime, checklistName, tasks, "checkList");
                     Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
                     // MainActivity.getInstance().dataAdded(editText_title);// not being used
                     finish();
@@ -108,6 +108,18 @@ public class ChecklistUI extends Activity
             }
         });
 
+
+	    // for open from save
+	    Intent intent = this.getIntent();
+	    if (intent != null && intent.getBooleanExtra(NoteInterface.OPEN_SAVED, false))
+	    {
+		    CheckListWrapper wrapper = (CheckListWrapper) intent.getSerializableExtra(NoteInterface.DATA);
+
+		    assert (wrapper != null);
+
+		    if (wrapper.hasNoteTitle())
+			    editName.setText(wrapper.getNoteTitle());
+	    }
     }
 
 

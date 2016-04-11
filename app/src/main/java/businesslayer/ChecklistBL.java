@@ -25,6 +25,8 @@ public class ChecklistBL {
 
     }
 
+
+
 public boolean create(String time, String checklistName, ArrayList<String> arrayTask, String type )
 {
     String strTask = "";
