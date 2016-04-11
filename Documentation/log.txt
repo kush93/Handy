@@ -126,7 +126,8 @@ Rahul-> PDF viewing
 Hadi-> implemented checklist, saving part left for next iteration
 Ian->Modified the handwriting feature and added saving functionality for saving handwritten notes .
 (Dependency injection using -: noteInterface , TextNoteWrapper and HandWritingWrapper)
- COSTS
+
+                                 COSTS
  		 		Planned costs 			Actual costs
  opening PDF's -		 5 days 	     		  5 days
  Modify notes - 		 5 days 			        5 days
@@ -179,3 +180,12 @@ Kushal
 Rahul
 - worked on calendar/reminder feature and it's  acceptance testing
 - handled all the documentation
+
+                                COSTS
+ 		 		        Planned costs 			Actual costs
+ DND -		             5 days 	     		  2 days
+ Calendar+reminder - 	  12 days 			       4 days
+ checklist  -     		   6 days 			        7 days
+ Handwriting improvements-	4 days				  4 days
+ Photo note improvements -  3 days                  3 days
+ Listview improvements -    2 days                  2 days
