@@ -23,8 +23,7 @@ import businesslayer.HandwritingBL;
  * changeColor(String newColor) -- For when a different color is selected.
  * setErase(boolean isErase) -- For when Erase button has been pressed.
  * newNote() -- For when New Note button has been pressed.
- * 
- * FOR ITERATION 2: Implement functionality of changing brush and pen sizes.
+ *
  */
 
 public class HandwritingView extends View {
