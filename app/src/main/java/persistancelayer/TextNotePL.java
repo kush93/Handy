@@ -80,7 +80,6 @@ public class TextNotePL implements DataInterface {
     @Override
     public boolean updateData(String id, String time, String noteName, String noteLabel, String textNote, String filePath, String noteType) {
 
-
         return false;
     }
 }
