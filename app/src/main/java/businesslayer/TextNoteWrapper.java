@@ -3,11 +3,9 @@ package businesslayer;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import persistancelayer.NoteInterface;
 import presentationlayer.NoteTakerUI;
 

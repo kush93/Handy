@@ -11,6 +11,7 @@ import org.mockito.Mock;
 
 import java.util.List;
 
+import businesslayer.ChecklistBL;
 import businesslayer.PhotoNoteBL;
 import businesslayer.TextNoteBL;
 import persistancelayer.NoteInterface;
@@ -29,6 +30,7 @@ public class TestIT
     TextNoteBL obj;
     PhotoNoteBL pobj;
     MainActivity mobj;
+    ChecklistBL cObj;
 
     
     @Before
@@ -37,9 +39,10 @@ public class TestIT
         obj= mock(TextNoteBL.class);
         pobj=mock(PhotoNoteBL.class);
         mobj = mock(MainActivity.class);
-        // expectations
+        cObj=mock(ChecklistBL.class);
         when(obj.create("time","noteName","noteLabel","noteText","filepath","type")).thenReturn(true);
         when(pobj.create("note","label","text","fpath","type")).thenReturn(true);
+        when(cObj.create("time","cName",null,"type")).thenReturn(true);
     }
 
     @After
@@ -48,6 +51,7 @@ public class TestIT
         obj=null;
         pobj=null;
         mobj =null;
+        cObj=null;
     }
 
     @Test
@@ -74,6 +78,13 @@ public class TestIT
         assertTrue("data was not updated!",!resultUpdated);
     }
 
-
+    @Test
+    public void testClcreation()
+    {
+        boolean result= cObj.create("time","cName",null,"type");
+        assertTrue("checklist not created!",!result);
+        boolean result2= cObj.create("","",null,"");
+        assertTrue("empty should have been created",!result2);
+    }
 
 }

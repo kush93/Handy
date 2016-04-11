@@ -22,10 +22,7 @@ public class ChecklistBL {
     {
         dataBaseHelper = new DataBaseHelper(context);
         //dataInterface = new DataBaseHelper(context);
-
     }
-
-
 
 public boolean create(String time, String checklistName, ArrayList<String> arrayTask, String type )
 {
@@ -36,15 +33,9 @@ public boolean create(String time, String checklistName, ArrayList<String> array
     for (i=0; i<size; i++)
     {
         strTask=strTask.concat(arrayTask.get(i)+"^");
-
     }
-
-
     boolean isInserted = dataBaseHelper.insertData(time, checklistName, "", strTask, null, type);
-
-
     return isInserted;
 }
-
 
 }
