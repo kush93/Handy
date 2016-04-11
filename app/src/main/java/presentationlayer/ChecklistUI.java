@@ -48,6 +48,7 @@ public class ChecklistUI extends Activity
 
     TextView editName;
     Button saveCheckList;
+    Button button_back;
 
 
     @Override
@@ -64,8 +65,21 @@ public class ChecklistUI extends Activity
         lv_tasks.setAdapter(tasks_Adapter);
         editName = (TextView) findViewById(R.id.editText_name);
         saveCheckList=(Button) findViewById(R.id.button_save);
+        button_back = (Button) findViewById(R.id.button_back);
         add_Button_Listener();
         delete_task_Listener();
+
+        button_back.setOnClickListener(new View.OnClickListener() {
+
+
+            @Override
+            public void onClick(View v) {
+
+                //setContentView(R.layout.activity_main);
+                finish();
+            }
+        });
+
 
         saveCheckList.setOnClickListener(new View.OnClickListener() {
 
