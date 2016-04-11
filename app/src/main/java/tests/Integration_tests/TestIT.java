@@ -70,7 +70,8 @@ public class TestIT
     public void testUpdate()
     {
         boolean result=obj.create("time1","Nname1","Nlabel1","Ntext1","fpath1","typ1");
-
+        boolean resultUpdated=obj.updateData("1", "Mar 26/03/2016 12:12PM", "updated notename1", "Itr2", "updated notetextAssign1", "root/user/gallery1", "textNote1");
+        assertTrue("data was not updated!",!resultUpdated);
     }
 
 

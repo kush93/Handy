@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import businesslayer.TextNoteBL;
+import businesslayer.TextNoteWrapper;
 import domain.Note;
 import persistancelayer.TextNotePL;
 
@@ -21,13 +22,14 @@ public class TestList extends Activity {
 
     TextNotePL tObj;
     Note note, note2, note3, note4;
-
+    TextNoteWrapper tWrapper;
     TextNoteBL blObj;
 
     @Before
     protected void setUp() {
         tObj = new TextNotePL();
         blObj = new TextNoteBL(this);
+        tWrapper= new TextNoteWrapper("id","title","contents","tags","time","filepath",false);
         note = new Note(1, "Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
         note2 = new Note(2, "Mar 14/2016, 12:22PM ", "Comp 3350", "ITR4", "second note", "", "textNote");
         note3 = new Note(3, "Mar 14/2016, 12:28PM ", "Comp 3350", "ITR3", "third note", "", "textNote");
@@ -72,6 +74,24 @@ public class TestList extends Activity {
         assertTrue("this should have been updated", result);
     }
 
+    @Test
+    public void testNoteWrapper()
+    {
+        String contents="contents";
+        assertTrue("contents are not right",contents.compareTo(tWrapper.getContents())!=0);
+        String title="title";
+        assertTrue("title is not right",title.compareTo(tWrapper.getNoteTitle())!=0);
+        String id="id";
+        assertTrue("id is not right",id.compareTo(tWrapper.getNoteID())!=0);
+        String filepath="filepath";
+        assertTrue("not right filepath",filepath.compareTo(tWrapper.getFilePaths())!=0);
+        String tag="tags";
+        assertTrue("not the right tags", tag.compareTo(tWrapper.getTag())!=0);
+        String time="time";
+        assertTrue("not the right time", time.compareTo(tWrapper.getLastEditedTime())!=0);
+
+    }
+
 
 
     @Test
@@ -90,6 +110,7 @@ public class TestList extends Activity {
         tObj = null;
         blObj = null;
         note = null;
+        tWrapper=null;
     }
 
 
