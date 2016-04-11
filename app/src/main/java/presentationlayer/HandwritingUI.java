@@ -198,7 +198,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
 
         saveDialog.setTitle("Save Note");
-        saveDialog.setMessage("Please enter a title and press Okay to Save.");
+        saveDialog.setMessage("Please enter a title.");
         final EditText input = new EditText(this);
         if(handwrittenTitle != null)
             input.setText(handwrittenTitle);
