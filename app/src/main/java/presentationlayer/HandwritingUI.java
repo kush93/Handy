@@ -57,6 +57,7 @@ public class HandwritingUI extends Activity implements OnClickListener {
     private String handwrittenTitle = null;
     private String fileName = null;
     private String tempFileName = null;
+	private String noteID = null;
 
     private final static String OPEN_SAVED  = "OPEN_SAVED";
     private final static String DATA        = "DATA";
@@ -79,7 +80,9 @@ public class HandwritingUI extends Activity implements OnClickListener {
 
             assert (wrapper != null);
 
-            if (wrapper.hasNoteTitle())
+	        noteID = wrapper.getNoteID();
+
+	        if (wrapper.hasNoteTitle())
                 handwrittenTitle = wrapper.getNoteTitle();
 
             if (wrapper.hasImages())
@@ -205,54 +208,71 @@ public class HandwritingUI extends Activity implements OnClickListener {
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         saveDialog.setView(input);
 
-        saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                // Saves
-                boolean validTitle = true;
-                handwrittenTitle = input.getText().toString();
-                if(handwrittenTitle.isEmpty() || handwrittenTitle.charAt(0) == ' ') {
-                    validTitle = false;
-                }
-                handwritingView.setDrawingCacheEnabled(true);
-                if(validTitle) {
-                    Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
-                    String savedFile = handwritingView.saveImage(currentImage, fileName);
+        saveDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener()
+        {
+	        public void onClick(DialogInterface dialog, int which)
+	        {
+		        // Saves
+		        boolean validTitle = true;
+		        handwrittenTitle = input.getText().toString();
+		        if (handwrittenTitle.isEmpty() || handwrittenTitle.charAt(0) == ' ')
+		        {
+			        validTitle = false;
+		        }
+		        handwritingView.setDrawingCacheEnabled(true);
+		        if (validTitle)
+		        {
+			        Bitmap currentImage = Bitmap.createBitmap(handwritingView.getDrawingCache());
+			        String savedFile = handwritingView.saveImage(currentImage, fileName);
 
-                    if (savedFile != null) {
-                        String popupMsg = ("Saved as " + savedFile);
-                        Toast popupWindow = Toast.makeText(getApplicationContext(),
-                                popupMsg, Toast.LENGTH_SHORT);
-                        popupWindow.show();
-                        boolean isInserted = handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedFile, noteType);
+			        if (savedFile != null)
+			        {
+				        String popupMsg = ("Saved as " + handwrittenTitle);
+				        Toast popupWindow = Toast.makeText(getApplicationContext(),
+				                                           popupMsg, Toast.LENGTH_SHORT);
+				        popupWindow.show();
 
-                        fileName = savedFile;
-                    } else {
-                        String popupMsg = "Note could not be saved.";
+				        if (noteID == null || fileName == null)
+					        handwritingBL.create(handwrittenTitle, emptyString, emptyString, savedFile, noteType);
+				        else
+					        handwritingBL.updateData(noteID, handwrittenTitle, emptyString, emptyString, savedFile, noteType);
 
-                        Toast popupWindow = Toast.makeText(getApplicationContext(),
-                                popupMsg, Toast.LENGTH_SHORT);
-                        popupWindow.show();
-                    }
-                }
-                else {
-                    String popupMsg = "Invalid title. Must be non-empty nor start with space";
-                    Toast popupWindow = Toast.makeText(getApplicationContext(),
-                            popupMsg, Toast.LENGTH_SHORT);
-                    popupWindow.show();
-                }
+				        fileName = savedFile;
 
-                tempFileName = null;
-                handwritingView.destroyDrawingCache();
-            }
+				        finish();
+			        }
+			        else
+			        {
+				        String popupMsg = "Note could not be saved.";
+
+				        Toast popupWindow = Toast.makeText(getApplicationContext(),
+				                                           popupMsg, Toast.LENGTH_SHORT);
+				        popupWindow.show();
+			        }
+		        }
+		        else
+		        {
+			        String popupMsg = "Invalid title. Must be non-empty nor start with space";
+			        Toast popupWindow = Toast.makeText(getApplicationContext(),
+			                                           popupMsg, Toast.LENGTH_SHORT);
+			        popupWindow.show();
+		        }
+
+		        tempFileName = null;
+		        handwritingView.destroyDrawingCache();
+	        }
         });
-        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                if(tempFileName != null) {
-                    fileName = tempFileName;
-                    tempFileName = null;
-                }
-                dialog.cancel();
-            }
+        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+	        public void onClick(DialogInterface dialog, int which)
+	        {
+		        if (tempFileName != null)
+		        {
+			        fileName = tempFileName;
+			        tempFileName = null;
+		        }
+		        dialog.cancel();
+	        }
         });
         saveDialog.show();
     }

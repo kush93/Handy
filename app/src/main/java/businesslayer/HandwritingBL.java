@@ -38,7 +38,13 @@ public class HandwritingBL {
         return isInserted;
     }
 
-    // Business Logic implementation of changing color
+	public boolean updateData(String id, String noteName, String noteLabel, String textNote, String filePath, String noteType) {
+		String editedTime = DateFormat.getDateTimeInstance().format(new Date());
+		boolean result = dataBaseHelper.updateData(id, editedTime, noteName, noteLabel, textNote, filePath, noteType);
+		return result;
+	}
+
+	// Business Logic implementation of changing color
     // Returns int of color that has been parsed from the string newColor
     public int changeColor(String newColor) {
         return Color.parseColor(newColor);
