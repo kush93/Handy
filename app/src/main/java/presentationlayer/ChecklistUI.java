@@ -50,15 +50,11 @@ public class ChecklistUI extends Activity
     Button saveCheckList;
     Button button_back;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checklist);
-
-
         lv_tasks = (ListView) findViewById(R.id.list_task);
         tasks = new ArrayList<String>();
         tasks_Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, tasks);
@@ -88,26 +84,18 @@ public class ChecklistUI extends Activity
             public void onClick(View v) {
 
                 String editedTime = DateFormat.getDateTimeInstance().format(new Date());
-                // long representation of current time
-
                 String checklistName = editName.getText().toString();
-
                 if (editName.getText().toString().isEmpty()) {
                     Toast.makeText(ChecklistUI.this, "Title not specified", Toast.LENGTH_LONG).show();
-
                 }
                 else
                 {
                     checkListBL.create(editedTime, checklistName, tasks, "checkList");
                     Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
-                    // MainActivity.getInstance().dataAdded(editText_title);// not being used
                     finish();
                 }
-
-
             }
         });
-
 
 	    // for open from save
 	    Intent intent = this.getIntent();
@@ -122,24 +110,6 @@ public class ChecklistUI extends Activity
 	    }
     }
 
-
-
-
-   /* private void save_button_Listner()
-    {
-        if(editName.getText().toString().isEmpty()) {
-            Toast.makeText(ChecklistUI.this, "Please enter name for the checkList", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-
-            Toast.makeText(ChecklistUI.this, "CheckList was saved", Toast.LENGTH_LONG).show();
-        }
-
-
-    }*/
-
-
     private void delete_task_Listener()
     {
         lv_tasks.setOnItemLongClickListener( new AdapterView.OnItemLongClickListener()
@@ -147,40 +117,31 @@ public class ChecklistUI extends Activity
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View task, int task_no, long id)
             {
-                tasks.remove(task_no);                  //Deleting Task
+                tasks.remove(task_no);
 
-                tasks_Adapter.notifyDataSetChanged();   //Refreshing Adapter
-
+                tasks_Adapter.notifyDataSetChanged();
                 return true;
             }
 
         });
 
-    } // End  delete_task_Listener
-
-
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.checklist_menu, menu); //inflating already saved tasks
+        getMenuInflater().inflate(R.menu.checklist_menu, menu);
         return true;
     }
-
-
 
 
     public void add_Button_Listener()
     {
 
         lv_tasks = (ListView) findViewById(R.id.list_task);
-
         tasks = new ArrayList<String>();
         tasks_Adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, tasks);
-
         lv_tasks.setAdapter(tasks_Adapter);
-
-
         button = (Button) findViewById(R.id.button_add_task);
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -188,29 +149,18 @@ public class ChecklistUI extends Activity
             @Override
             public void onClick(View v) {
                 final EditText inputField = new EditText(context);
-
-
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
                 alertDialogBuilder.setTitle("Add Task");        //Setting Dialog Attributes
-
                 alertDialogBuilder.setMessage("Please enter the new task");
-
                 alertDialogBuilder.setView(inputField);
-
                 alertDialogBuilder.setCancelable(false);
-
                 alertDialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int saveID) {
                         String itemText = inputField.getText().toString();
-
                         tasks.add(itemText);
-
                         tasks_Adapter.notifyDataSetChanged();
-
                     }
                 });
-
                 alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();                               //Closing the dialog on Cancel
@@ -218,15 +168,10 @@ public class ChecklistUI extends Activity
                 });
 
                 AlertDialog alertDialog = alertDialogBuilder.create(); // creating alert dialog
-
                 alertDialog.show();                                    // showing it.
-
-
             }// End method onClick
 
         });
-
-
         }// End method add_button_listener
 
 

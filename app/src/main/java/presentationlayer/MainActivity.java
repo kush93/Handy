@@ -277,16 +277,10 @@ public class MainActivity extends AppCompatActivity {
 
         int listSize = returnedNotesRawData.size();
         if (listSize > 0) {
-            for (int i = 0; i < listSize; i++) {
-                //String noteName=
-
+            for (int i = 0; i < listSize; i++)
+            {
                 String singleNote = returnedNotesRawData.get(i);
                 String token[] = singleNote.trim().split("\\?");
-
-                //id?time?name?label?textNote?filePaths?noteType
-                // textNote1/textNote2/textNote3/...... = token[4]
-                // filePath1^filePath2^filePath3^......= token[5]
-
                 String currNoteType = token[6];
 
                 switch (currNoteType) {

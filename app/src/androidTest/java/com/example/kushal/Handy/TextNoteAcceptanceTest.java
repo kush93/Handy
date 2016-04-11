@@ -25,34 +25,21 @@ public class TextNoteAcceptanceTest extends ActivityInstrumentationTestCase2<Mai
     public TextNoteAcceptanceTest() {
         super(MainActivity.class);
     }
-    //override setUp and do all the stuff you are supposed to do in the beginning of an app, like creating DB if not present etc.
     @Override
     public void setUp() throws Exception {
-        //setUp() is run before a test case is started.
-        //This is where the solo object is created.
+
         solo = new Solo(getInstrumentation());
-        //Getting activity reference to perform operation in the test cases below
+
         getActivity();
     }
 
-
-
-
-    //override tearDown and do all the stuff you are supposed to do in the end, delete temp files etc
     @Override
     public void tearDown() throws Exception {
-        //tearDown() is run after a test case has finished.
-        //finishOpenedActivities() will finish all the activities that have been opened during the test execution.
         solo.finishOpenedActivities();
     }
 
     public void testAddTextNote() throws Exception{
-
-
-        //Unlock the lock screen
         solo.unlockScreen();
-        //solo.sleep(1000) inserts a delay of 1000ms. I have put it here so you can see what's happening.
-        //You probably only going to need this if you wait for some execution in your app.
         solo.sleep(500);
 
         solo.clickOnView(solo.getView(R.id.button_main_open_text_note));

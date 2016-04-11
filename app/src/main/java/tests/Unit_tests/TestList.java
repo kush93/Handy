@@ -30,10 +30,6 @@ public class TestList extends Activity {
         tObj = new TextNotePL();
         blObj = new TextNoteBL(this);
         tWrapper= new TextNoteWrapper("id","title","contents","tags","time","filepath",false);
-        note = new Note(1, "Mar 14/2016, 12:08PM ", "Comp 3350", "ITR2", "first note", "", "textNote");
-        note2 = new Note(2, "Mar 14/2016, 12:22PM ", "Comp 3350", "ITR4", "second note", "", "textNote");
-        note3 = new Note(3, "Mar 14/2016, 12:28PM ", "Comp 3350", "ITR3", "third note", "", "textNote");
-        note4 = new Note(4, "Mar 14/2016, 12:38PM ", "Comp 3350", "ITR0", "fourth note", "", "textNote");
         tObj.clearNoteList();
     }
 

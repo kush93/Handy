@@ -23,7 +23,7 @@ public class NoteListAdapter extends BaseAdapter
 	private List<NoteInterface>     noteList;
 	private static LayoutInflater   inflater = null;
 
-	// pin - sorted must be done before noteList is passed to here
+
 	public NoteListAdapter(Context context, List<NoteInterface> noteList)
 	{
 		this.context = context;
@@ -89,16 +89,6 @@ public class NoteListAdapter extends BaseAdapter
 		}
 
 		iv_pin.setVisibility(note.isPinned() ? View.VISIBLE : View.INVISIBLE);
-
-//		view.setOnClickListener(new View.OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View v)
-//			{
-//				System.out.printf("view is clicked but openNote() is not working!");
-//				note.openNote();
-//			}
-//		});
 
 		return view;
 	}

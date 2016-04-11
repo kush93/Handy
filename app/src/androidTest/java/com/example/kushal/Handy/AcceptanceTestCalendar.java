@@ -16,8 +16,6 @@ public class AcceptanceTestCalendar extends ActivityInstrumentationTestCase2<Mai
         super(MainActivity.class);
     }
     public void setUp() throws Exception {
-        //setUp() is run before a test case is started.
-        //This is where the solo object is created.
         solo = new Solo(getInstrumentation());
         //Getting activity reference to perform operation in the test cases below
         getActivity();
@@ -26,8 +24,6 @@ public class AcceptanceTestCalendar extends ActivityInstrumentationTestCase2<Mai
     //override tearDown and do all the stuff you are supposed to do in the end, delete temp files etc
     @Override
     public void tearDown() throws Exception {
-        //tearDown() is run after a test case has finished.
-        //finishOpenedActivities() will finish all the activities that have been opened during the test execution.
         solo.finishOpenedActivities();
     }
 

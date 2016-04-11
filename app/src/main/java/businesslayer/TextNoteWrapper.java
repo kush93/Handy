@@ -24,8 +24,6 @@ public class TextNoteWrapper extends Activity implements NoteInterface, Serializ
     private String time;
     private String filePaths;
     private boolean isPinned;
-
-    //static TextNoteBL textNoteBL;
     TextNoteBL textNoteBL;
 
     public TextNoteWrapper(String id, String title, String contents, String tags, String time, String filePaths, boolean isPinned) {

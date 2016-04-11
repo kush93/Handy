@@ -22,11 +22,7 @@ import businesslayer.PhotoNoteBL;
 import businesslayer.PhotoNoteWrapper;
 import persistancelayer.NoteInterface;
 
-/**
- * UI Layer: PhotoNoteUI
- * BL: ClickableImageBL, PhotoNoteBL
- * PL: Android Library Functions
- */
+
 
 public class PhotoNoteUI extends Activity {
     private LinearLayout root;
@@ -72,12 +68,6 @@ public class PhotoNoteUI extends Activity {
 
             if (wrapper.hasTag())
                 editText_label.setText(wrapper.getTag());
-
-
-            // for contents ...
-
-            //	        if (wrapper.hasContents())
-            //		        editNote.setText(wrapper.getContents());
             createViewsFromSavedData(wrapper.getContents(), wrapper.getFilePaths());
         }
     }
@@ -108,41 +98,20 @@ public class PhotoNoteUI extends Activity {
             Toast.makeText(PhotoNoteUI.this, "Title is not specified", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(PhotoNoteUI.this, "Photo Note is saved", Toast.LENGTH_SHORT).show();
-
-            //add to blPhoto and then it passes to the persistence layer
             int size = editTexts.size();
-
-            //            ArrayList<String> photoNote=new ArrayList<String>();
             String photoNoteText = new String();
             for (int i = 0; i < editTexts.size(); i++) {
 
                 photoNoteText = photoNoteText.concat((editTexts.get(i).getText().toString() + '/'));
             }
-
-
-            //
-            //            for (int i = 0; i < size; i++) {
-            //                //editText_textNote = (EditText) findViewById(R.id.editText_addPhoto_first_contents);
-            //
-            //                //editTexts.add();
-            //                photoNoteText=(editTexts.get(i).getText().toString() + "\\" + 1);
-            //
-            //
-            //            }
-
             editText_title = (EditText) findViewById(R.id.editText_addPhoto_title);
-
             editText_label = (EditText) findViewById(R.id.editText_addPhoto_label);
-            // passing data to PhotoNoteBL
             boolean isInserted = photoNoteBL.create(editText_title.getText().toString(), editText_label.getText().toString(), photoNoteText,allFilePath, noteType);
-
-
             if (isInserted == true)
                 Toast.makeText(PhotoNoteUI.this, "Note was saved", Toast.LENGTH_LONG).show();
             else
                 Toast.makeText(PhotoNoteUI.this, "Note was not saved", Toast.LENGTH_LONG).show();
 
-            // MainActivity.getInstance().dataAdded(editText_title);// not being used
             super.onBackPressed();
         }
     }
@@ -157,7 +126,6 @@ public class PhotoNoteUI extends Activity {
 
     public void onClickAddPhotoImageButton(View view) {
         Intent intent = new Intent(this, PhotoNoteBL.class);
-        //	    intent.putExtra()
         startActivityForResult(intent, GET_PHOTO);
     }
 
@@ -194,11 +162,10 @@ public class PhotoNoteUI extends Activity {
     }
 
     private void addNewImageView(ImageView imageView) {
-        // add new ImageView
+
         imageViews.add(imageView);
         root.addView(imageView);
 
-        // remove last EditText if it's not used
         if (!editTexts.isEmpty()) {
             EditText lastOne = editTexts.get(editTexts.size() - 1);
 
@@ -207,7 +174,6 @@ public class PhotoNoteUI extends Activity {
             }
         }
 
-        // add EditText
         EditText newEditText = new EditText(this);
         newEditText.setHint("Continue Your Notes Here");
         editTexts.add(newEditText);
@@ -227,11 +193,6 @@ public class PhotoNoteUI extends Activity {
                     Toast.makeText(PhotoNoteUI.this, "Deleted", Toast.LENGTH_SHORT).show();
                     removeImageView(imageView);
                 }
-                //                else if (items[item].equals("Rotate"))
-                //                {
-                //                    Toast.makeText(PhotoNoteUI.this, "Not yet implemented", Toast.LENGTH_SHORT).show();
-                //                    dialog.dismiss();
-                //                }
                 else if (items[item].equals("Cancel")) {
                     dialog.dismiss();
                 }

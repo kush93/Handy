@@ -13,14 +13,7 @@ import java.util.List;
 
 import persistancelayer.DataBaseHelper;
 
-/**
- * Created by Ian on 21/02/2016.
- * 
- * Business Layer for Handwriting functionality
- * Implements the "Business Logic" of the Handwriting functionality
- * HandwritingView.java calls these methods
- *
- */
+
 public class HandwritingBL {
 
     DataBaseHelper dataBaseHelper = null;
@@ -44,15 +37,12 @@ public class HandwritingBL {
 		return result;
 	}
 
-	// Business Logic implementation of changing color
-    // Returns int of color that has been parsed from the string newColor
+
     public int changeColor(String newColor) {
         return Color.parseColor(newColor);
     }
 
-    // Business Logic implementation of determining whether user is in "eraser" mode or "pen" mode
-    // If in eraser mode, eraseState is true, thus set color to white (as background as white)
-    // Else, return previously set color (which was passed from HandwritingView.java)
+
     public int setErase(int selectedColor, boolean eraseState) {
         int returnColor = selectedColor;
 
@@ -95,7 +85,7 @@ public class HandwritingBL {
                 fo = new FileOutputStream(destination);
                 fo.write(bytes.toByteArray());
                 fo.close();
-                //fileLocation = destination.getCanonicalPath();
+
             } catch (FileNotFoundException e)
             {
                 e.printStackTrace();
@@ -114,19 +104,6 @@ public class HandwritingBL {
 
     public List<String> getSavedData(String type) {
         List<String> handwritingList;
-        /**
-        List<String> tempList = new ArrayList<String>();
-        tempList = dataBaseHelper.getData(type);
-        int listSize = tempList.size();
-        String tempStr;
-
-        for(int i=0; i<listSize;i++) {
-            tempStr = tempList.get(i);
-            if(tempStr.contains("handwritingNote")) {
-                handwritingList.add(tempStr);
-            }
-        }
-         **/
         handwritingList=dataBaseHelper.getData(type);
         return handwritingList;
     }

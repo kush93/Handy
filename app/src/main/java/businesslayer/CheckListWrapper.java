@@ -23,8 +23,6 @@ public class CheckListWrapper extends Activity implements NoteInterface, Seriali
     private String time;
     private String filePaths;
     private boolean isPinned;
-
-    //static TextNoteBL textNoteBL;
     ChecklistBL checklistBL;
 
     public CheckListWrapper(String id, String title, String contents, String tags, String time, String filePaths, boolean isPinned) {

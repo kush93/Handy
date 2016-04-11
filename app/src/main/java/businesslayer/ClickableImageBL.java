@@ -36,8 +36,6 @@ public class ClickableImageBL
         this.bigVersion = makeScaledBitmap(source, reqWidth, reqHeight);
     }
 
-    // http://stackoverflow.com/questions/24961797/android-resize-bitmap-keeping-aspect-ratio
-    // http://stackoverflow.com/questions/12778806/android-get-bitmap-width-and-height-after-scaled-by-matrix
     private Bitmap makeScaledBitmap(Bitmap b, int reqWidth, int reqHeight)
     {
         Matrix m = new Matrix();
