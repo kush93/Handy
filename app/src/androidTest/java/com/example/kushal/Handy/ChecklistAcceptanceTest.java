@@ -21,16 +21,7 @@ public class ChecklistAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
     private static final String CHECKIST_NAME = "SAMPLE CHECKLIST";
     private static final String TASK1 = "Task 1";
     private static final String TASK2 = "Task 2";
-
-
-
-    private static final String NAME1 = "Text Note 1";
-    private static final String NAME2 = "Text Note 2";
-    private static final String LABEL1 = "LABEL 1";
-    private static final String LABEL2 = "LABEL 2";
-    private static final String NOTETEXT1 = "NOTETEXT 1";
-    private static final String NOTETEXT2 = "NOTETEXT 2";
-    private static final String EDITTED_NOTENAME1 = "Text Note 1 edited";
+    
 
 
     public ChecklistAcceptanceTest()
