@@ -74,5 +74,13 @@ public class ChecklistAcceptanceTest extends ActivityInstrumentationTestCase2<Ma
 
     }
 
+    public void testBackButton() throws Exception
+    {
+        solo.sleep(500);
+
+        solo.clickOnView(solo.getView(R.id.button_back));
+        solo.assertCurrentActivity("Expected ChecklistUI Activity", ChecklistUI.class);
+    }
+
 
 }
