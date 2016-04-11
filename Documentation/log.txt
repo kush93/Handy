@@ -129,16 +129,28 @@ Ian->Modified the handwriting feature and added saving functionality for saving 
  COSTS
  		 		Planned costs 			Actual costs
  opening PDF's -		 5 days 	     		  5 days
- Modify notes - 		 5 days 			  5 days 
+ Modify notes - 		 5 days 			        5 days
  Save to Db   -     		3-4days 			  4 days
  Handwriting improvements-	4 days				  4 days
  
 --------------------------Iteration3-----------------------
 
+March 25(1 hr) [hadi , kushal , rishabh ,rahul  ] other members not required
+- just met the client to show him the app and get some feedback
+- discussed some stuff regarding the UI part of the app
+
+March 27(1 hr) [hadi , kushal , rishabh and rahul ]
+-interviewed the client
+-prepared for the presentation
+-discussed a few more things about the app
+
 Apr 5(1 hr) [present: Matthias, Rishabh, Ian. except hadi(unknown reason), Rahul(missed bus), Kushal(missed bus)]
 - met after the class
 - discussed itr 3 requirements: new features to add, Robotium Tests, Refactoring
 - reviewed proposed user stories to determine features mentioned were worth implementing considering time contstraints
+
+Apr 7(20 min.)
+-Everyone just met briefly for while to discuss the progress and acceptance testing
 
 		WORKDONE BY EACH INDIVIUAL(DEVELOPERS TASK)
 Matthias-> 
@@ -148,3 +160,22 @@ Matthias->
     - bug fixed: [modifying an existing HandWritingNote creates a new file], 
 - and helped Hadi and Rishabh to fix a bug 
     - bug fixed: [When CheckList is saved, it's shown as (and opens up) a TextNote in the ListView]
+
+Rishabh
+-Worked on Listview feature and wrote the code for photonote feature
+-created acceptance tests for textnote related stuff.
+
+Hadi->
+- Worked on checklist feature and it's acceptance testing
+
+Ian->
+- Made improvements in handwriting feature and added it's acceptance tests
+
+Kushal
+- worked on do not disturb mode and it's acceptance testing
+- added a few more unit tests and integration tests
+- helped hadi out with writing his part of test cases as well
+
+Rahul
+- worked on calendar/reminder feature and it's  acceptance testing
+- handled all the documentation
